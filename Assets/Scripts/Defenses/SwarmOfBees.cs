@@ -1,3 +1,4 @@
+using Bee.Controllers;
 using UnityEngine;
 
 namespace Bee.Defenses
@@ -5,18 +6,27 @@ namespace Bee.Defenses
     public class SwarmOfBees : MonoBehaviour
     {
         public float InitialPosition;
+
         public float FinalPosition = 0f;
+
         private float Time = 0.0f;
+
         private Vector3 TargetPosition;
+
+        private bool IsSelected;
+
+        private GameController GameController;
 
         void Awake()
         {
             InitialPosition = gameObject.transform.position.x;
+            GameController = GameObject.FindGameObjectWithTag("GameController")
+                .GetComponent<GameController>();
         }
 
-        void Update()
+        public void Attack()
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && Time == 0f)
             {
                 Vector3 mousePos = Input.mousePosition;
                 mousePos.z = Camera.main.nearClipPlane;
@@ -44,12 +54,28 @@ namespace Bee.Defenses
             if (Time > 1.0f)
             {
                 Debug.Log("Destination!");
-                Destroy(gameObject);
+                // Destroy(gameObject);
+                InitialPosition = FinalPosition;
+                FinalPosition = 0f;
+                Time = 0f;
                 // float temp = FinalPosition;
                 // FinalPosition = InitialPosition;
                 // InitialPosition = temp;
                 // Time = 0f;
             }
+        }
+
+        private void OnMouseDown()
+        {
+            var color = Color.white;
+
+            IsSelected = !IsSelected;
+
+            if (IsSelected)
+                color = Color.grey;
+
+            GetComponent<SpriteRenderer>().color = color;
+            GameController.SetSwarmOfBees(gameObject);
         }
     }
 }
