@@ -1,3 +1,4 @@
+using Bee.Defenses;
 using Bee.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,27 +12,23 @@ namespace Bee.Spawners
         private GameObject Parent;
 
         [SerializeField]
-        private List<Transform> PositionsToSpawn;
-
-        [SerializeField]
         private GameObject SwarmOfBees;
-
-        private void Start()
-        {
-            Spawn(0);
-            Spawn(1);
-            Spawn(2);
-        }
-
-        public void Spawn(int index)
-        {
-            Instantiate(SwarmOfBees, position: PositionsToSpawn[index].position, rotation: Quaternion.identity, Parent.transform);
-        }
 
         public void Spawn()
         {
-            throw new System.NotImplementedException();
+            Instantiate(SwarmOfBees, position: new Vector3(), rotation: Quaternion.identity, Parent.transform);
+        }
+
+        public void Spawn(Transform transform)
+        {
+            Instantiate(SwarmOfBees, position: transform.position, rotation: Quaternion.identity, Parent.transform);
+        }
+
+        public void Spawn(Transform[] transforms)
+        {
+            var createdSwarm = Instantiate(SwarmOfBees, position: new Vector3(), rotation: Quaternion.identity, Parent.transform);
+
+            createdSwarm.GetComponent<SwarmOfBees>().SetPathToEnemy(transforms);
         }
     }
-
 }

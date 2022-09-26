@@ -1,9 +1,10 @@
 using Bee.Enums;
+using Bee.Interfaces;
 using UnityEngine;
 
 namespace Bee.Enemies
 {
-    public class Person : MonoBehaviour
+    public class Person : MonoBehaviour, IEnemy
     {
         [SerializeField]
         private float Velocity = 5f;
@@ -32,6 +33,11 @@ namespace Bee.Enemies
                 Destroy(gameObject);
                 return;
             }
+        }
+
+        public Transform[] GetPaths()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
