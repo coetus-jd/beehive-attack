@@ -1,22 +1,14 @@
+using Bee.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Bee.Enemies
 {
-    public class NormalPerson : AI
+    public class NormalPerson : PathFinderAi, IEnemy
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+        public Transform[] GetPaths()
+            => PathChoosed;
     }
 
 }

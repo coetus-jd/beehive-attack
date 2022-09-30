@@ -8,6 +8,9 @@ TagManager:
   - Defense
   - Enemy
   - SwarmOfBeesController
+  - EnemyPathPoint
+  - EnemyPath
+  - DefenseController
   layers:
   - Default
   - TransparentFX
