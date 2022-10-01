@@ -11,6 +11,9 @@ TagManager:
   - EnemyPathPoint
   - EnemyPath
   - DefenseController
+  - Honeycomb
+  - Hive
+  - Defenses
   layers:
   - Default
   - TransparentFX

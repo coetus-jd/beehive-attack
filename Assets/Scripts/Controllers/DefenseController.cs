@@ -8,14 +8,21 @@ namespace Bee.Controllers
 {
     public class DefenseController : MonoBehaviour
     {
+        [SerializeField]
+        private GameObject SwarmOfBeesSpawner;
+
+        /// <summary>
+        /// Define the defense spawner, currently it will be an SwarmOfBeesSpawner, but can be another
+        /// type of the defense that implements ISpawner
+        /// </summary>
         private ISpawner DefenseSpawner;
 
         void Awake()
         {
-            DefenseSpawner = new SwarmOfBeesSpawner();
+            DefenseSpawner = SwarmOfBeesSpawner.GetComponent<SwarmOfBeesSpawner>();
         }
 
-        public void CreateSwarmOfBess(Transform[] Positions)
+        public void CreateDefenses(Transform[] Positions)
         {
             DefenseSpawner.Spawn(Positions);
         }

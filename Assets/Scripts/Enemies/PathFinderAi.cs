@@ -18,7 +18,7 @@ namespace Bee.Enemies
         [SerializeField]
         protected float SpeedMove;
 
-        protected Transform[] PathChoosed { get { return PossiblePaths[ChoosenWay].PointsToWalk; } }
+        protected Transform[] PathChosen { get { return PossiblePaths[ChoosenWay].PointsToWalk; } }
 
         [Tooltip("The choosen way")]
         [SerializeField]
