@@ -44,5 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d27601d5f981a4ca6796ab57b186ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent: {fileID: 0}
   SwarmOfBees: {fileID: 4291594202747303536, guid: 76c6c83135563734282bb98dbab59c82, type: 3}

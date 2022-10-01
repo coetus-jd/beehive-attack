@@ -67,13 +67,15 @@ namespace Bee.Controllers
         {
             SelectedEnemy = enemy;
         }
-        
+
         private void CreateDefense()
         {
             if (SelectedEnemy == null)
                 return;
 
             DefenseController.CreateDefenses(SelectedEnemy.GetPaths());
+
+            SelectedEnemy = null;
         }
     }
 }
