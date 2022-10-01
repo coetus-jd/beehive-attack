@@ -1,4 +1,5 @@
 using Bee.Defenses;
+using Bee.Enums;
 using Bee.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,11 +20,12 @@ namespace Bee.Controllers
         private DefenseController DefenseController;
 
         [Header("Enemy")]
+        [SerializeField]
         private IEnemy SelectedEnemy;
 
         void Awake()
         {
-            DefenseController = GameObject.FindGameObjectWithTag("DefenseController")
+            DefenseController = GameObject.FindGameObjectWithTag(Tags.DefenseController)
                .GetComponent<DefenseController>();
         }
 
@@ -53,14 +55,25 @@ namespace Bee.Controllers
             var createdPin = Instantiate(Pin, PinParent.transform);
 
             createdPin.transform.localPosition = position;
+
+            Destroy(createdPin, 5f);
         }
 
+        /// <summary>
+        /// Define the current enemy selected by the player that will be attacked by the defenses
+        /// </summary>
+        /// <param name="enemy"></param>
+        public void SetSelectedEnemy(IEnemy enemy)
+        {
+            SelectedEnemy = enemy;
+        }
+        
         private void CreateDefense()
         {
             if (SelectedEnemy == null)
                 return;
 
-            DefenseController.CreateSwarmOfBess(SelectedEnemy.GetPaths());
+            DefenseController.CreateDefenses(SelectedEnemy.GetPaths());
         }
     }
 }

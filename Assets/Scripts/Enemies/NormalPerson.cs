@@ -1,21 +1,28 @@
+using Bee.Controllers;
+using Bee.Enums;
+using Bee.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Bee.Enemies
 {
-    public class NormalPerson : AI
+    public class NormalPerson : PathFinderAi, IEnemy
     {
-        // Start is called before the first frame update
-        void Start()
+        [Header("Controllers")]
+        private GameController GameController;
+
+        void Awake()
         {
-        
+            GameController = GameObject.FindGameObjectWithTag(Tags.GameController)
+               .GetComponent<GameController>();
         }
 
-        // Update is called once per frame
-        void Update()
+        public Transform[] GetPaths() => PathChosen;
+
+        void OnMouseDown()
         {
-        
+            GameController.SetSelectedEnemy(gameObject.GetComponent<NormalPerson>());
         }
     }
 
