@@ -54,9 +54,6 @@ namespace Bee.Controllers
 
         private void CreatePin()
         {
-            if (PinParent.transform.childCount > 0)
-                Destroy(PinParent.transform.GetChild(0).gameObject);
-
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = Camera.main.nearClipPlane;
             var position = Camera.main.ScreenToWorldPoint(mousePos);

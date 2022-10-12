@@ -205,7 +205,7 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
   SpeedMove: 1
-  ChoosenWay: 10
+  ChoosenWay: 5
 --- !u!61 &-2807636723836632963
 BoxCollider2D:
   m_ObjectHideFlags: 0

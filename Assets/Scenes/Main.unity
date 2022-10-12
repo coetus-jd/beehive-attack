@@ -11132,6 +11132,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6314633993501924407, guid: 0ee8976c90ba136458cf780cf37367b1, type: 3}
+      propertyPath: ChoosenWay
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314633993501924407, guid: 0ee8976c90ba136458cf780cf37367b1, type: 3}
       propertyPath: PossiblePaths.Array.data[0].PointsToWalk.Array.data[0]
       value: 
       objectReference: {fileID: 1456887193}
