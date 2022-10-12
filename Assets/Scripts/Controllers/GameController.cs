@@ -3,6 +3,7 @@ using Bee.Enums;
 using Bee.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace Bee.Controllers
@@ -16,17 +17,25 @@ namespace Bee.Controllers
         [SerializeField]
         private GameObject Pin;
 
+        [SerializeField]
+        private TMP_Text BeesCounter;
+
         [Header("Controllers")]
         private DefenseController DefenseController;
 
+        [SerializeField]
+        private int QuantityOfBees = 50_000;
+
         [Header("Enemy")]
         [SerializeField]
-        private IEnemy SelectedEnemy;
+        private GameObject SelectedEnemy;
 
         void Awake()
         {
             DefenseController = GameObject.FindGameObjectWithTag(Tags.DefenseController)
                .GetComponent<DefenseController>();
+
+            BeesCounter.text = QuantityOfBees.ToString();
         }
 
         void Update()
@@ -56,14 +65,14 @@ namespace Bee.Controllers
 
             createdPin.transform.localPosition = position;
 
-            Destroy(createdPin, 5f);
+            SetSelectedEnemy(createdPin);
         }
 
         /// <summary>
         /// Define the current enemy selected by the player that will be attacked by the defenses
         /// </summary>
         /// <param name="enemy"></param>
-        public void SetSelectedEnemy(IEnemy enemy)
+        public void SetSelectedEnemy(GameObject enemy)
         {
             SelectedEnemy = enemy;
         }
@@ -73,7 +82,7 @@ namespace Bee.Controllers
             if (SelectedEnemy == null)
                 return;
 
-            DefenseController.CreateDefenses(SelectedEnemy.GetPaths());
+            DefenseController.CreateDefenses(SelectedEnemy);
 
             SelectedEnemy = null;
         }

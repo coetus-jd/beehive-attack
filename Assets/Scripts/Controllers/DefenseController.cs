@@ -22,9 +22,9 @@ namespace Bee.Controllers
             DefenseSpawner = SwarmOfBeesSpawner.GetComponent<SwarmOfBeesSpawner>();
         }
 
-        public void CreateDefenses(Transform[] Positions)
+        public void CreateDefenses(GameObject enemyToAttack)
         {
-            DefenseSpawner.Spawn(Positions);
+            DefenseSpawner.Spawn(enemyToAttack);
         }
     }
 }

@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class Pin : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField]
+    private float TimeToHide = 3;
+
+    [SerializeField]
+    private float TimeToDestroy = 10;
+
+    private float TimeBeingDisplayed = 0;
+
     void Start()
     {
-        
+        Destroy(gameObject, TimeToDestroy);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        TimeBeingDisplayed += Time.deltaTime;
+
+        if (TimeBeingDisplayed >= TimeToHide)
+            gameObject.SetActive(false);
     }
 }

@@ -21,9 +21,9 @@ namespace Bee.Interfaces
         void Spawn(Transform transform);
 
         /// <summary>
-        /// Spawn a gameobject that will have a path to follow
+        /// Spawn a gameobject that will have another gameobject as a target
         /// </summary>
-        /// <param name="transforms"></param>
-        void Spawn(Transform[] transforms);
+        /// <param name="target"></param>
+        void Spawn(GameObject target);
     }
 }

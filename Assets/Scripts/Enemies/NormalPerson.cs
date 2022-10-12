@@ -22,17 +22,15 @@ namespace Bee.Enemies
 
         void OnMouseDown()
         {
-            GameController.SetSelectedEnemy(gameObject.GetComponent<NormalPerson>());
+            GameController.SetSelectedEnemy(gameObject);
         }
 
         void OnTriggerEnter2D(Collider2D collider)
         {
-            Debug.Log("Entrou");
-
             if (!collider.gameObject.CompareTag(Tags.Defense))
                 return;
 
-            Debug.Log("Uma defesa colidiu");
+            Destroy(gameObject);
         }
     }
 }

@@ -1,120 +1,101 @@
+using Assets.Scripts.Interfaces;
 using Bee.Controllers;
+using Bee.Enums;
 using System.Linq;
 using UnityEngine;
 
 namespace Bee.Defenses
 {
-    public class SwarmOfBees : MonoBehaviour
+    public class SwarmOfBees : MonoBehaviour, IDefense
     {
         [Header("Movement")]
         [SerializeField]
         private float MoveSpeed = 2f;
 
         [Header("Position")]
-        private Transform[] PathsToEnemy;
-
-        private int CurrentPositionOnPath = 0;
+        private float MovementTime;
 
         [Header("Controllers")]
         private GameController GameController;
 
         private SwarmOfBeesController SwarmOfBeesController;
 
+        [SerializeField]
+        private int BeesQuantityInSwarm = 10_000;
+
+        [SerializeField]
+        private float Life = 100;
+
+        [Header("Enemy")]
+        private GameObject EnemyToAttack;
+
         void Awake()
         {
-            GameController = GameObject.FindGameObjectWithTag("GameController")
+            GameController = GameObject.FindGameObjectWithTag(Tags.GameController)
                 .GetComponent<GameController>();
-            SwarmOfBeesController = GameObject.FindGameObjectWithTag("SwarmOfBeesController")
+            SwarmOfBeesController = GameObject.FindGameObjectWithTag(Tags.SwarmOfBeesController)
                 .GetComponent<SwarmOfBeesController>();
         }
 
         void Update()
         {
+            Attack();
+        }
+
+        public void Attack()
+        {
+            if (EnemyToAttack == null) return;
+
             Move();
         }
 
-        public void SetPathToEnemy(Transform[] paths)
+        public void SetEnemyToAttack(GameObject enemy)
         {
-            CurrentPositionOnPath = 0;
-            PathsToEnemy = paths.Reverse().ToArray();
+            EnemyToAttack = enemy;
+        }
+
+        public void TakeDamage(float damage)
+        {
+            Life -= damage;
         }
 
         private void Move()
         {
-            if (PathsToEnemy == null || PathsToEnemy.Length == 0)
-                return;
+            transform.position = Vector3.Lerp(transform.position, EnemyToAttack.transform.position, MovementTime);
 
-            // If Enemy didn't reach last waypoint it can move
-            // If enemy reached last waypoint then it stops
-            if (CurrentPositionOnPath == (PathsToEnemy.Length - 1))
+            // .. and increase the t interpolater
+            MovementTime += 0.002f * Time.deltaTime;
+
+            // now check if the interpolator has reached 1.0
+            // and swap maximum and minimum so game object moves
+            // in the opposite direction.
+            if (MovementTime > 1.0f)
             {
-                DestroySwarm();
-                return;
-            } 
+                // DestroySwarm();
+                //InitialPosition = FinalPosition;
+                //FinalPosition = 0f;
+                //Time = 0f;
 
-            // Move Enemy from current waypoint to the next one
-            // using MoveTowards method
-            transform.position = Vector2.MoveTowards(
-                transform.position,
-                PathsToEnemy[CurrentPositionOnPath].transform.position,
-                MoveSpeed * Time.deltaTime
-            );
 
-            // If Enemy reaches position of waypoint he walked towards
-            // then waypointIndex is increased by 1
-            // and Enemy starts to walk to the next waypoint
-            if (transform.position == PathsToEnemy[CurrentPositionOnPath].transform.position)
-            {
-                CurrentPositionOnPath += 1;
+                // float temp = FinalPosition;
+                // FinalPosition = InitialPosition;
+                // InitialPosition = temp;
+                // Time = 0f;
             }
         }
 
-        //public void Attack()
-        //{
-        //    if (Input.GetMouseButtonDown(0) && Time == 0f)
-        //    {
-        //        Vector3 mousePos = Input.mousePosition;
-        //        mousePos.z = Camera.main.nearClipPlane;
-        //        TargetPosition = Camera.main.ScreenToWorldPoint(mousePos);
-        //        FinalPosition = TargetPosition.x;
-        //    }
-
-        //    if (FinalPosition == 0) return;
-
-        //    // animate the position of the game object...
-        //    transform.position = new Vector3(
-        //        Mathf.Lerp(InitialPosition, FinalPosition, Time),
-        //        gameObject.transform.position.y,
-        //        0
-        //    );
-
-        //    // .. and increase the t interpolater
-        //    Time += 0.5f * UnityEngine.Time.deltaTime;
-
-        //    // now check if the interpolator has reached 1.0
-        //    // and swap maximum and minimum so game object moves
-        //    // in the opposite direction.
-        //    if (Time > 1.0f)
-        //    {
-        //        Debug.Log("Destination!");
-
-        //        DestroySwarm();
-        //        //InitialPosition = FinalPosition;
-        //        //FinalPosition = 0f;
-        //        //Time = 0f;
-
-
-        //        // float temp = FinalPosition;
-        //        // FinalPosition = InitialPosition;
-        //        // InitialPosition = temp;
-        //        // Time = 0f;
-        //    }
-        //}
-
         private void DestroySwarm()
         {
-            SwarmOfBeesController.UseSwarm(100);
+            SwarmOfBeesController.UseSwarm(BeesQuantityInSwarm);
             Destroy(gameObject);
+        }
+
+        void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (!collider.gameObject.CompareTag(Tags.Enemy))
+                return;
+
+            DestroySwarm();
         }
     }
 }

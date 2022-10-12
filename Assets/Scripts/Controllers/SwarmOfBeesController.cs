@@ -8,25 +8,31 @@ namespace Bee.Controllers
     public class SwarmOfBeesController : MonoBehaviour
     {
         [SerializeField]
-        private int Quantity = 100;
+        private int InternalQuantityOfBees;
 
         [Header("UI")]
         [SerializeField]
         private TMP_Text Counter;
 
-        void Update()
+        private void Awake()
         {
-            Counter.text = Quantity.ToString().PadLeft(4, '0');
+            int.TryParse(Counter.text, out var quantityOfBees);
+            InternalQuantityOfBees = quantityOfBees;
+        }
+
+        void Update()
+        { 
+            Counter.text = InternalQuantityOfBees.ToString().PadLeft(5, '0');
         }
 
         public void AddSwarm(int quantityToAdd)
         {
-            Quantity += quantityToAdd;
+            InternalQuantityOfBees += quantityToAdd;
         }
 
         public void UseSwarm(int quantityToUse)
         {
-            Quantity -= quantityToUse;
+            InternalQuantityOfBees -= quantityToUse;
         }
     }
 }

@@ -23,17 +23,15 @@ namespace Bee.Spawners
             Instantiate(SwarmOfBees, position: transform.position, rotation: Quaternion.identity);
         }
 
-        public void Spawn(Transform[] transforms)
+        public void Spawn(GameObject target)
         {
-            var middle = transforms.Take(transforms.Length / 2).ToArray();
-
             var createdSwarm = Instantiate(
                 SwarmOfBees,
-                position: middle.Last().position,
+                position: new Vector3(),
                 rotation: Quaternion.identity
             );
 
-            createdSwarm.GetComponent<SwarmOfBees>().SetPathToEnemy(middle);
+            createdSwarm.GetComponent<SwarmOfBees>().SetEnemyToAttack(target);
         }
     }
 }
