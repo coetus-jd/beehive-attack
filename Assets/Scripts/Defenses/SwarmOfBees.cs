@@ -18,23 +18,17 @@ namespace Bee.Defenses
         [Header("Controllers")]
         private GameController GameController;
 
-        private SwarmOfBeesController SwarmOfBeesController;
-
-        [SerializeField]
-        private int BeesQuantityInSwarm = 10_000;
-
         [SerializeField]
         private float Life = 100;
 
         [Header("Enemy")]
+        [SerializeField]
         private GameObject EnemyToAttack;
 
         void Awake()
         {
             GameController = GameObject.FindGameObjectWithTag(Tags.GameController)
                 .GetComponent<GameController>();
-            SwarmOfBeesController = GameObject.FindGameObjectWithTag(Tags.SwarmOfBeesController)
-                .GetComponent<SwarmOfBeesController>();
         }
 
         void Update()
@@ -86,7 +80,7 @@ namespace Bee.Defenses
 
         private void DestroySwarm()
         {
-            SwarmOfBeesController.UseSwarm(BeesQuantityInSwarm);
+            GameController.UseSwarm();
             Destroy(gameObject);
         }
 

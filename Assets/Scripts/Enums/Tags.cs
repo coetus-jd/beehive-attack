@@ -12,7 +12,6 @@ namespace Bee.Enums
         public static string Defenses = "Defenses";
         public static string Base = "Base";
         public static string Enemy = "Enemy";
-        public static string SwarmOfBeesController = "SwarmOfBeesController";
 
         /// <summary>
         /// Indicates a Transform GameObject used as a point to the enemy walk

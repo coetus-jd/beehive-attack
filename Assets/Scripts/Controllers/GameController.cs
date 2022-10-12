@@ -26,6 +26,9 @@ namespace Bee.Controllers
         [SerializeField]
         private int QuantityOfBees = 50_000;
 
+        [SerializeField]
+        private int BeesQuantityInSwarm = 10_000;
+
         [Header("Enemy")]
         [SerializeField]
         private GameObject SelectedEnemy;
@@ -74,6 +77,16 @@ namespace Bee.Controllers
             SelectedEnemy = enemy;
         }
 
+        public void AddSwarm()
+        {
+            BeesCounter.text = (CurrentQuantityOfBees() + BeesQuantityInSwarm).ToString();
+        }
+
+        public void UseSwarm()
+        {
+            BeesCounter.text = (CurrentQuantityOfBees() - BeesQuantityInSwarm).ToString();
+        }
+
         private void CreateDefense()
         {
             if (SelectedEnemy == null)
@@ -83,5 +96,8 @@ namespace Bee.Controllers
 
             SelectedEnemy = null;
         }
+
+        private int CurrentQuantityOfBees()
+            => int.Parse(BeesCounter.text);
     }
 }

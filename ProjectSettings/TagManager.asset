@@ -7,7 +7,6 @@ TagManager:
   - Base
   - Defense
   - Enemy
-  - SwarmOfBeesController
   - EnemyPathPoint
   - EnemyPath
   - DefenseController
