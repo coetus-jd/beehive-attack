@@ -1,6 +1,7 @@
 using Assets.Scripts.Interfaces;
 using Bee.Controllers;
 using Bee.Enums;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -12,6 +13,13 @@ namespace Bee.Defenses
         [SerializeField]
         private float MoveSpeed = 2f;
 
+        /// <summary>
+        /// Number of seconds to await to return to the hive when the swarm
+        /// has reached nothing
+        /// </summary>
+        [SerializeField]
+        private float SecondsToReturnToHive = 2f;
+
         [Header("Position")]
         private float MovementTime;
 
@@ -21,14 +29,17 @@ namespace Bee.Defenses
         [SerializeField]
         private float Life = 100;
 
+        private GameObject Hive;
+
         [Header("Enemy")]
         [SerializeField]
-        private GameObject EnemyToAttack;
+        private GameObject TargetToReach;
 
         void Awake()
         {
             GameController = GameObject.FindGameObjectWithTag(Tags.GameController)
                 .GetComponent<GameController>();
+            Hive = GameObject.FindGameObjectWithTag(Tags.Hive);
         }
 
         void Update()
@@ -38,14 +49,14 @@ namespace Bee.Defenses
 
         public void Attack()
         {
-            if (EnemyToAttack == null) return;
+            if (TargetToReach == null) return;
 
             Move();
         }
 
         public void SetEnemyToAttack(GameObject enemy)
         {
-            EnemyToAttack = enemy;
+            TargetToReach = enemy;
         }
 
         public void TakeDamage(float damage)
@@ -55,27 +66,26 @@ namespace Bee.Defenses
 
         private void Move()
         {
-            transform.position = Vector3.Lerp(transform.position, EnemyToAttack.transform.position, MovementTime);
+            transform.position = Vector3.Lerp(
+                transform.position,
+                TargetToReach.transform.position,
+                MovementTime
+            );
 
-            // .. and increase the t interpolater
-            MovementTime += 0.002f * Time.deltaTime;
+            MovementTime += 0.02f * Time.deltaTime;
 
-            // now check if the interpolator has reached 1.0
-            // and swap maximum and minimum so game object moves
-            // in the opposite direction.
-            if (MovementTime > 1.0f)
+            var hasReachedTarget = Vector3.Distance(transform.position, TargetToReach.transform.position) < 1f;
+
+            if (!hasReachedTarget)
+                return;
+
+            if (TargetToReach.tag == Tags.Hive)
             {
-                // DestroySwarm();
-                //InitialPosition = FinalPosition;
-                //FinalPosition = 0f;
-                //Time = 0f;
-
-
-                // float temp = FinalPosition;
-                // FinalPosition = InitialPosition;
-                // InitialPosition = temp;
-                // Time = 0f;
+                Destroy(gameObject);
+                return;
             }
+
+            StartCoroutine(ReturnToHive());
         }
 
         private void DestroySwarm()
@@ -90,6 +100,14 @@ namespace Bee.Defenses
                 return;
 
             DestroySwarm();
+        }
+
+        private IEnumerator ReturnToHive()
+        {
+            yield return new WaitForSeconds(SecondsToReturnToHive);
+
+            MovementTime = 0f;
+            TargetToReach = Hive;
         }
     }
 }
