@@ -38,7 +38,7 @@ namespace Bee.Controllers
             DefenseController = GameObject.FindGameObjectWithTag(Tags.DefenseController)
                .GetComponent<DefenseController>();
 
-            BeesCounter.text = QuantityOfBees.ToString();
+            ChangeBeesCounterText(QuantityOfBees);
         }
 
         void Update()
@@ -50,6 +50,12 @@ namespace Bee.Controllers
         {
             if (!Input.GetMouseButtonDown(0))
                 return;
+
+            if (CurrentQuantityOfBees() <= 0)
+            {
+                print("Has reached the limit of swarms");
+                return;
+            }
 
             CreatePin();
             CreateDefense();
@@ -79,12 +85,12 @@ namespace Bee.Controllers
 
         public void AddSwarm()
         {
-            BeesCounter.text = (CurrentQuantityOfBees() + BeesQuantityInSwarm).ToString();
+            ChangeBeesCounterText(CurrentQuantityOfBees() + BeesQuantityInSwarm);
         }
 
         public void UseSwarm()
         {
-            BeesCounter.text = (CurrentQuantityOfBees() - BeesQuantityInSwarm).ToString();
+            ChangeBeesCounterText(CurrentQuantityOfBees() - BeesQuantityInSwarm);
         }
 
         private void CreateDefense()
@@ -95,6 +101,11 @@ namespace Bee.Controllers
             DefenseController.CreateDefenses(SelectedEnemy);
 
             SelectedEnemy = null;
+        }
+
+        private void ChangeBeesCounterText(int quantity)
+        {
+            BeesCounter.text = quantity.ToString().PadLeft(5, '0');
         }
 
         private int CurrentQuantityOfBees()

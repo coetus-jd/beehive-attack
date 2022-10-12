@@ -102,6 +102,10 @@ namespace Bee.Defenses
             if (TargetToReach.tag == Tags.Hive)
             {
                 Destroy(gameObject);
+
+                // If we came back to the hive we will add again the amount
+                // that wasn't used
+                GameController.AddSwarm();
                 return;
             }
 

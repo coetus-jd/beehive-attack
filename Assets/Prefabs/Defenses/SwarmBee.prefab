@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6931558206037875185}
   - component: {fileID: 6931558206037875190}
   - component: {fileID: 6931558206037875191}
-  - component: {fileID: 1893280345102484050}
   - component: {fileID: 7521148730315585033}
   - component: {fileID: 8893754912181177244}
+  - component: {fileID: 6061110643053355616}
   m_Layer: 0
   m_Name: SwarmBee
   m_TagString: Defense
@@ -4887,32 +4887,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!61 &1893280345102484050
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6931558206037875188}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.26531863, y: 0.78426}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 8.179087, y: 76.27524}
-  m_EdgeRadius: 0
 --- !u!50 &7521148730315585033
 Rigidbody2D:
   serializedVersion: 4
@@ -4947,7 +4921,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 2
-  m_IsWalking: 0
+  IsWalking: 0
   SecondsToReturnToHive: 2
   Life: 0
   TargetToReach: {fileID: 0}
+--- !u!58 &6061110643053355616
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6931558206037875188}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.08252382, y: -1676485}
+  serializedVersion: 2
+  m_Radius: 4.5413065
