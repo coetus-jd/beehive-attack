@@ -13,6 +13,11 @@ namespace Bee.Defenses
         [SerializeField]
         private float MoveSpeed = 2f;
 
+        [SerializeField]
+        private bool IsWalking;
+
+        private ParticleSystem Particles;
+
         /// <summary>
         /// Number of seconds to await to return to the hive when the swarm
         /// has reached nothing
@@ -40,6 +45,14 @@ namespace Bee.Defenses
             GameController = GameObject.FindGameObjectWithTag(Tags.GameController)
                 .GetComponent<GameController>();
             Hive = GameObject.FindGameObjectWithTag(Tags.Hive);
+            Particles = GetComponent<ParticleSystem>();
+        }
+
+        void Start()
+        {
+            // When a swarm is created that means that this defense will be used
+            // so automatically we use the swarm
+            GameController.UseSwarm();
         }
 
         void Update()
@@ -66,6 +79,11 @@ namespace Bee.Defenses
 
         private void Move()
         {
+            IsWalking = true;
+
+            WalkingParticles();
+            IdleParticles();
+
             transform.position = Vector3.Lerp(
                 transform.position,
                 TargetToReach.transform.position,
@@ -79,6 +97,8 @@ namespace Bee.Defenses
             if (!hasReachedTarget)
                 return;
 
+            IsWalking = false;
+
             if (TargetToReach.tag == Tags.Hive)
             {
                 Destroy(gameObject);
@@ -88,10 +108,43 @@ namespace Bee.Defenses
             StartCoroutine(ReturnToHive());
         }
 
-        private void DestroySwarm()
+        private void IdleParticles()
         {
-            GameController.UseSwarm();
-            Destroy(gameObject);
+            if (IsWalking) return;
+
+            var main = Particles.main;
+            main.startSize = 0.8f;
+
+            var emission = Particles.emission;
+            emission.rateOverTime = 45;
+
+            var shape = Particles.shape;
+            shape.radius = 1f;
+
+            var velocityOverLifetime = Particles.velocityOverLifetime;
+            velocityOverLifetime.orbitalX = -0.04f;
+            velocityOverLifetime.orbitalY = 2.3f;
+            velocityOverLifetime.radial = -0.4f;
+        }
+
+        private void WalkingParticles()
+        {
+            if (!IsWalking) return;
+
+            var main = Particles.main;
+            main.startSize = 1f;
+
+            var emission = Particles.emission;
+            emission.rateOverTime = 50;
+
+            var shape = Particles.shape;
+            shape.radius = 1.6f;
+
+            var velocityOverLifetime = Particles.velocityOverLifetime;
+            velocityOverLifetime.orbitalX = 0.1f;
+            velocityOverLifetime.orbitalY = 1.84f;
+            velocityOverLifetime.radial = 0.3f;
+
         }
 
         void OnTriggerEnter2D(Collider2D collider)
@@ -99,9 +152,13 @@ namespace Bee.Defenses
             if (!collider.gameObject.CompareTag(Tags.Enemy))
                 return;
 
-            DestroySwarm();
+            Destroy(gameObject);
         }
 
+        /// <summary>
+        /// Set the defense to return to the hive
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator ReturnToHive()
         {
             yield return new WaitForSeconds(SecondsToReturnToHive);

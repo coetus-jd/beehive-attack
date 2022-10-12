@@ -15,12 +15,12 @@ namespace Bee.Spawners
 
         public void Spawn()
         {
-            Instantiate(SwarmOfBees, position: new Vector3(), rotation: Quaternion.identity);
+            Instantiate(SwarmOfBees, position: new Vector3(), rotation: SwarmOfBees.transform.rotation);
         }
 
         public void Spawn(Transform transform)
         {
-            Instantiate(SwarmOfBees, position: transform.position, rotation: Quaternion.identity);
+            Instantiate(SwarmOfBees, position: transform.position, rotation: SwarmOfBees.transform.rotation);
         }
 
         public void Spawn(GameObject target)
@@ -28,7 +28,7 @@ namespace Bee.Spawners
             var createdSwarm = Instantiate(
                 SwarmOfBees,
                 position: new Vector3(),
-                rotation: Quaternion.identity
+                rotation: SwarmOfBees.transform.rotation
             );
 
             createdSwarm.GetComponent<SwarmOfBees>().SetEnemyToAttack(target);

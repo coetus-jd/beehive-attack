@@ -26,8 +26,12 @@ public class HiveController : MonoBehaviour
     /// <param name="collider"></param>
     private void DefenseCameBack(Collider2D collider)
     {
+        print($"Colidiu: {collider.gameObject.tag}");
+        
         if (!collider.gameObject.CompareTag(Tags.Defense))
             return;
+        
+        print("A defesa entrou");
 
         GameController.AddSwarm();
     }
