@@ -18,24 +18,24 @@ namespace Bee.Enemies
         [SerializeField]
         protected float SpeedMove;
 
-        protected Transform[] PathChosen { get { return PossiblePaths[ChoosenWay].PointsToWalk; } }
+        protected Transform[] PathChosen { get { return PossiblePaths[ChosenWay].PointsToWalk; } }
 
-        [Tooltip("The choosen way")]
+        [Tooltip("The chosen way")]
         [SerializeField]
-        private int ChoosenWay = 0;
+        private int ChosenWay = 0;
 
-        // private bool Retreat;
+        protected bool BeingAttacked;
 
         /// <summary>
         /// Index for the waypoint for Enemy walk
         /// </summary>
-        private int WayIndex = 0;
+        [SerializeField]
+        private int CurrentWayIndex = 0;
 
         void Start()
         {
             //Enemy start in the first position of the waypoints.
-            transform.position = PossiblePaths[ChoosenWay].PointsToWalk[WayIndex].transform.position;
-            // Retreat = false;
+            transform.position = PossiblePaths[ChosenWay].PointsToWalk[CurrentWayIndex].transform.position;
         }
 
 
@@ -62,22 +62,28 @@ namespace Bee.Enemies
             //        ChoosenWay = PossiblePaths.Length;
             //}
 
-            //Verify if it doesn't arrive in the final index    
-            if (WayIndex <= PossiblePaths[ChoosenWay].PointsToWalk.Length - 1) // && Retreat == false
+            var hasReached = transform.position == PossiblePaths[ChosenWay].PointsToWalk[CurrentWayIndex].transform.position;
+
+            if (CurrentWayIndex == 0 && BeingAttacked && hasReached)
             {
-                transform.position = Vector2.MoveTowards(
-                    transform.position,
-                    PossiblePaths[ChoosenWay].PointsToWalk[WayIndex].transform.position,
-                    SpeedMove * Time.deltaTime
-                );
-
-                if (transform.position == PossiblePaths[ChoosenWay].PointsToWalk[WayIndex].transform.position)
-                    WayIndex += 1;
-
+                Destroy(gameObject);
                 return;
             }
-            
-            Destroy(gameObject);
+
+            // Verify if it doesn't arrive in the final index    
+            if (CurrentWayIndex >= PossiblePaths[ChosenWay].PointsToWalk.Length - 1) // && Retreat == false
+                Destroy(gameObject);
+
+            transform.position = Vector2.MoveTowards(
+                transform.position,
+                PossiblePaths[ChosenWay].PointsToWalk[CurrentWayIndex].transform.position,
+                SpeedMove * Time.deltaTime
+            );
+
+            if (hasReached)
+                CurrentWayIndex += BeingAttacked ? -1 : 1;
+
+            return;
         }
     }
 }

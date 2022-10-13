@@ -36,6 +36,9 @@ namespace Bee.Defenses
 
         private GameObject Hive;
 
+        [SerializeField]
+        private bool Attacking;
+
         [Header("Enemy")]
         [SerializeField]
         private GameObject TargetToReach;
@@ -62,7 +65,10 @@ namespace Bee.Defenses
 
         public void Attack()
         {
-            if (TargetToReach == null) return;
+            ReachedEnemy();
+
+            if (TargetToReach == null)
+                return;
 
             Move();
         }
@@ -95,6 +101,10 @@ namespace Bee.Defenses
             var hasReachedTarget = Vector3.Distance(transform.position, TargetToReach.transform.position) < 1f;
 
             if (!hasReachedTarget)
+                return;
+
+            // If is attacking or the target is an enemy the defense has to reach the target
+            if (Attacking || TargetToReach.tag == Tags.Enemy)
                 return;
 
             IsWalking = false;
@@ -148,13 +158,25 @@ namespace Bee.Defenses
             velocityOverLifetime.orbitalX = 0.1f;
             velocityOverLifetime.orbitalY = 1.84f;
             velocityOverLifetime.radial = 0.3f;
-
         }
 
         void OnTriggerEnter2D(Collider2D collider)
         {
+            AttackEnemy(collider);
+        }
+
+        private void AttackEnemy(Collider2D collider)
+        {
             if (!collider.gameObject.CompareTag(Tags.Enemy))
                 return;
+
+            Attacking = true;
+        }
+
+        private void ReachedEnemy()
+        {
+            if (Attacking && TargetToReach == null)
+                Destroy(gameObject);
         }
 
         /// <summary>

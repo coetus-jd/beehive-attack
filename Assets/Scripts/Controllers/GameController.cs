@@ -63,6 +63,10 @@ namespace Bee.Controllers
 
         private void CreatePin()
         {
+            // In the case of an enemy already was selected isn't necessary to create the pin
+            if (SelectedEnemy != null)
+                return;
+
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = Camera.main.nearClipPlane;
             var position = Camera.main.ScreenToWorldPoint(mousePos);

@@ -30,7 +30,7 @@ namespace Bee.Enemies
             if (!collider.gameObject.CompareTag(Tags.Defense))
                 return;
 
-            Destroy(gameObject);
+            BeingAttacked = true;
         }
     }
 }
