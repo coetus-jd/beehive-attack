@@ -110,6 +110,9 @@ namespace Bee.Enemies
 
         private void ChoosePath()
         {
+            var chosen = Random.Range(0, PossiblePaths.Length - 1);
+            ChosenWay = chosen;
+
             transform.position = PossiblePaths[ChosenWay].PointsToWalk[CurrentWayIndex].transform.position;
         }
     }

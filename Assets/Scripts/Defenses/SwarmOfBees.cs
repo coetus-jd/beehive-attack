@@ -11,7 +11,7 @@ namespace Bee.Defenses
     {
         [Header("Movement")]
         [SerializeField]
-        private float MoveSpeed = 2f;
+        private float MoveSpeed = 0.02f;
 
         [SerializeField]
         private bool IsWalking;
@@ -96,7 +96,7 @@ namespace Bee.Defenses
                 MovementTime
             );
 
-            MovementTime += 0.02f * Time.deltaTime;
+            MovementTime += MoveSpeed * Time.deltaTime;
 
             var hasReachedTarget = Vector3.Distance(transform.position, TargetToReach.transform.position) < 1f;
 
