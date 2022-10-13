@@ -11,7 +11,7 @@ namespace Bee.Defenses
     {
         [Header("Movement")]
         [SerializeField]
-        private float MoveSpeed = 0.02f;
+        private float MoveSpeed = 0.002f;
 
         [SerializeField]
         private bool IsWalking;
@@ -29,7 +29,7 @@ namespace Bee.Defenses
         private float MovementTime;
 
         [Header("Controllers")]
-        private GameController GameController;
+        private PunctuationController PunctuationController;
 
         [SerializeField]
         private float Life = 100;
@@ -45,8 +45,8 @@ namespace Bee.Defenses
 
         void Awake()
         {
-            GameController = GameObject.FindGameObjectWithTag(Tags.GameController)
-                .GetComponent<GameController>();
+            PunctuationController = GameObject.FindGameObjectWithTag(Tags.PunctuationController)
+                .GetComponent<PunctuationController>();
             Hive = GameObject.FindGameObjectWithTag(Tags.Hive);
             Particles = GetComponent<ParticleSystem>();
         }
@@ -55,7 +55,7 @@ namespace Bee.Defenses
         {
             // When a swarm is created that means that this defense will be used
             // so automatically we use the swarm
-            GameController.UseSwarm();
+            PunctuationController.UseSwarm();
         }
 
         void Update()
@@ -115,7 +115,7 @@ namespace Bee.Defenses
 
                 // If we came back to the hive we will add again the amount
                 // that wasn't used
-                GameController.AddSwarm();
+                PunctuationController.AddSwarm();
                 return;
             }
 

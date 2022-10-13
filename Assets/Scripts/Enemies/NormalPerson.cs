@@ -10,19 +10,19 @@ namespace Bee.Enemies
     public class NormalPerson : PathFinderAi, IEnemy
     {
         [Header("Controllers")]
-        private GameController GameController;
+        private DefenseController DefenseController;
 
         void Awake()
         {
-            GameController = GameObject.FindGameObjectWithTag(Tags.GameController)
-               .GetComponent<GameController>();
+            DefenseController = GameObject.FindGameObjectWithTag(Tags.DefenseController)
+               .GetComponent<DefenseController>();
         }
 
         public Transform[] GetPaths() => PathChosen;
 
         void OnMouseDown()
         {
-            GameController.SetSelectedEnemy(gameObject);
+            DefenseController.SetSelectedEnemy(gameObject);
         }
 
         void OnTriggerEnter2D(Collider2D collider)

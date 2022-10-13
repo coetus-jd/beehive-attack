@@ -35,7 +35,6 @@ public class HiveController : MonoBehaviour
             return;
     }
 
-
     private bool LostGame(Collider2D collider)
     {
         if (!collider.gameObject.CompareTag(Tags.Enemy))

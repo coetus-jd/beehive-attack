@@ -33,14 +33,14 @@ public class EnemiesController : MonoBehaviour
 
     public IEnumerator CreateEnemies()
     {
-        if (QuantityOfEnemies <= 0)
-            yield return null;
-
         EnemiesSpawner.Spawn();
 
         QuantityOfEnemies--;
 
         yield return new WaitForSeconds(TimeToAwaitToSpawn);
+
+        if (QuantityOfEnemies <= 0)
+            yield return null;
 
         StartCoroutine(CreateEnemies());
     }

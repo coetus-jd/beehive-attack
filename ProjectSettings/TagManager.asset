@@ -15,6 +15,7 @@ TagManager:
   - Defenses
   - Pin
   - EnemiesController
+  - PunctuationController
   layers:
   - Default
   - TransparentFX

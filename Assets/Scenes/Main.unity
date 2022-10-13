@@ -185,67 +185,6 @@ Transform:
   m_Father: {fileID: 327111189}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &38548881
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 988128640}
-    m_Modifications:
-    - target: {fileID: 6314633993501924404, guid: 0ee8976c90ba136458cf780cf37367b1, type: 3}
-      propertyPath: m_Name
-      value: NormalPerson
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314633993501924404, guid: 0ee8976c90ba136458cf780cf37367b1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314633993501924405, guid: 0ee8976c90ba136458cf780cf37367b1, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314633993501924405, guid: 0ee8976c90ba136458cf780cf37367b1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -6.66
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314633993501924405, guid: 0ee8976c90ba136458cf780cf37367b1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.49
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314633993501924405, guid: 0ee8976c90ba136458cf780cf37367b1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314633993501924405, guid: 0ee8976c90ba136458cf780cf37367b1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314633993501924405, guid: 0ee8976c90ba136458cf780cf37367b1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314633993501924405, guid: 0ee8976c90ba136458cf780cf37367b1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314633993501924405, guid: 0ee8976c90ba136458cf780cf37367b1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314633993501924405, guid: 0ee8976c90ba136458cf780cf37367b1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314633993501924405, guid: 0ee8976c90ba136458cf780cf37367b1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6314633993501924405, guid: 0ee8976c90ba136458cf780cf37367b1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0ee8976c90ba136458cf780cf37367b1, type: 3}
 --- !u!1 &75871393
 GameObject:
   m_ObjectHideFlags: 0
@@ -1829,6 +1768,53 @@ MonoBehaviour:
   QuantityOfEnemies: 5
   TimeToAwaitToSpawn: 6
   AllEnemiesSpawner: {fileID: 1696788272698141121, guid: 84eb85e803bc6524b9bb1e4412dd230b, type: 3}
+--- !u!1 &657682148
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 657682149}
+  - component: {fileID: 657682150}
+  m_Layer: 0
+  m_Name: PunctuationController
+  m_TagString: PunctuationController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &657682149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657682148}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1825898531}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &657682150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657682148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b76893e05dc24e4598b37a3eb6a3498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BeesCounter: {fileID: 410457041}
+  QuantityOfBees: 50000
+  BeesQuantityInSwarm: 10000
 --- !u!1 &674445021
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,11 +1846,6 @@ Transform:
   m_Father: {fileID: 643825480}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &680394060 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6314633993501924405, guid: 0ee8976c90ba136458cf780cf37367b1, type: 3}
-  m_PrefabInstance: {fileID: 38548881}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &691261284
 GameObject:
   m_ObjectHideFlags: 0
@@ -2695,8 +2676,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 680394060}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4297,7 +4277,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e8614fd33dfed4b97a8481c9fff5c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PinParent: {fileID: 522932997}
+  Pin: {fileID: 6181466786408066652, guid: 9867a58d3b5f5924dbebb0773e56ab65, type: 3}
   SwarmOfBeesSpawner: {fileID: 3602309750125965033, guid: f81dc5e0f7e12e940974acc35ce11004, type: 3}
+  SelectedEnemy: {fileID: 0}
+  PunctuationController: {fileID: 0}
 --- !u!1 &1543560980
 GameObject:
   m_ObjectHideFlags: 0
@@ -4999,6 +4983,7 @@ Transform:
   - {fileID: 2095372604}
   - {fileID: 1515574529}
   - {fileID: 650483071}
+  - {fileID: 657682149}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5955,12 +5940,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f03276d767bce384b83ea17a9b8b1e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PinParent: {fileID: 522932997}
-  Pin: {fileID: 6181466786408066652, guid: 9867a58d3b5f5924dbebb0773e56ab65, type: 3}
-  BeesCounter: {fileID: 410457041}
-  QuantityOfBees: 50000
-  BeesQuantityInSwarm: 10000
-  SelectedEnemy: {fileID: 0}
 --- !u!1 &2096986035
 GameObject:
   m_ObjectHideFlags: 0
