@@ -26,5 +26,7 @@ namespace Bee.Enums
         public static string DefenseController = "DefenseController";
         public static string Honeycomb = "Honeycomb";
         public static string Hive = "Hive";
+
+        public static string EnemiesController { get; set; } = nameof(EnemiesController);
     }
 }

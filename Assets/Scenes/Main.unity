@@ -196,6 +196,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NormalPerson
       objectReference: {fileID: 0}
+    - target: {fileID: 6314633993501924404, guid: 0ee8976c90ba136458cf780cf37367b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6314633993501924405, guid: 0ee8976c90ba136458cf780cf37367b1, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1778,6 +1782,53 @@ Transform:
   m_Father: {fileID: 1415074274}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &650483070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 650483071}
+  - component: {fileID: 650483072}
+  m_Layer: 0
+  m_Name: EnemiesController
+  m_TagString: EnemiesController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &650483071
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650483070}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1825898531}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &650483072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650483070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d486b322db86784d9680629a49e2c39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  QuantityOfEnemies: 5
+  TimeToAwaitToSpawn: 6
+  AllEnemiesSpawner: {fileID: 1696788272698141121, guid: 84eb85e803bc6524b9bb1e4412dd230b, type: 3}
 --- !u!1 &674445021
 GameObject:
   m_ObjectHideFlags: 0
@@ -4947,6 +4998,7 @@ Transform:
   m_Children:
   - {fileID: 2095372604}
   - {fileID: 1515574529}
+  - {fileID: 650483071}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

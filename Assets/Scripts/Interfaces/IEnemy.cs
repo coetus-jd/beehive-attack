@@ -8,7 +8,7 @@ namespace Bee.Interfaces
     public interface IEnemy
     {
         /// <summary>
-        /// The path that the enemy will make until reach the honeymoon
+        /// The path that the enemy will make until reach the hive
         /// </summary>
         Transform[] GetPaths();
     }

@@ -23,6 +23,7 @@ namespace Bee.Controllers
         [Header("Controllers")]
         private DefenseController DefenseController;
 
+        [Header("Game")]
         [SerializeField]
         private int QuantityOfBees = 50_000;
 
