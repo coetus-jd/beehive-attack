@@ -36,8 +36,7 @@ namespace Bee.Defenses
 
         private GameObject Hive;
 
-        [SerializeField]
-        private bool Attacking;
+        public bool Attacking { get; private set; }
 
         [Header("Enemy")]
         [SerializeField]
