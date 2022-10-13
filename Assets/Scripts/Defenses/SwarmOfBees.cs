@@ -155,8 +155,6 @@ namespace Bee.Defenses
         {
             if (!collider.gameObject.CompareTag(Tags.Enemy))
                 return;
-
-            Destroy(gameObject);
         }
 
         /// <summary>

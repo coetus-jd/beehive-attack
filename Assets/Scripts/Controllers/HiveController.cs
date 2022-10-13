@@ -17,6 +17,9 @@ public class HiveController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
+        if (LostGame(collider))
+            return;
+
         DefenseCameBack(collider);
     }
 
@@ -30,5 +33,16 @@ public class HiveController : MonoBehaviour
         
         if (!collider.gameObject.CompareTag(Tags.Defense))
             return;
+    }
+
+
+    private bool LostGame(Collider2D collider)
+    {
+        if (!collider.gameObject.CompareTag(Tags.Enemy))
+            return false;
+
+        print("Lost!");
+
+        return true;
     }
 }
