@@ -13,6 +13,7 @@ TagManager:
   - Honeycomb
   - Hive
   - Defenses
+  - Pin
   layers:
   - Default
   - TransparentFX
