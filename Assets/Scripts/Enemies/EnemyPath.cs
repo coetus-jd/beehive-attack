@@ -8,7 +8,7 @@ namespace Bee.Enemies
     [Serializable]
     public class EnemyPath
     {
-        public Transform[] PointsToWalk;
+        public Transform[] PointsToWalk = new Transform[] { };
 
         public EnemyPath(Transform[] array)
         {

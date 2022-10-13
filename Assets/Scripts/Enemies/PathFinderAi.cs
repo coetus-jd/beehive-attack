@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Bee.Enums;
 using UnityEngine;
+using System.Linq;
 
 namespace Bee.Enemies
 {
@@ -34,13 +36,15 @@ namespace Bee.Enemies
 
         void Start()
         {
-            //Enemy start in the first position of the waypoints.
-            transform.position = PossiblePaths[ChosenWay].PointsToWalk[CurrentWayIndex].transform.position;
+            LoadAllPossiblePaths();
+            ChoosePath();
         }
-
 
         void Update()
         {
+            if (PossiblePaths == null || PossiblePaths.Length == 0 || PathChosen.Length == 0)
+                return;
+
             Move();
         }
 
@@ -62,7 +66,7 @@ namespace Bee.Enemies
             //        ChoosenWay = PossiblePaths.Length;
             //}
 
-            var hasReached = transform.position == PossiblePaths[ChosenWay].PointsToWalk[CurrentWayIndex].transform.position;
+            var hasReached = transform.position == PathChosen[CurrentWayIndex].transform.position;
 
             if (CurrentWayIndex == 0 && BeingAttacked && hasReached)
             {
@@ -71,12 +75,12 @@ namespace Bee.Enemies
             }
 
             // Verify if it doesn't arrive in the final index    
-            if (CurrentWayIndex >= PossiblePaths[ChosenWay].PointsToWalk.Length - 1) // && Retreat == false
+            if (CurrentWayIndex >= PathChosen.Length - 1) // && Retreat == false
                 Destroy(gameObject);
 
             transform.position = Vector2.MoveTowards(
                 transform.position,
-                PossiblePaths[ChosenWay].PointsToWalk[CurrentWayIndex].transform.position,
+                PathChosen[CurrentWayIndex].transform.position,
                 SpeedMove * Time.deltaTime
             );
 
@@ -84,6 +88,29 @@ namespace Bee.Enemies
                 CurrentWayIndex += BeingAttacked ? -1 : 1;
 
             return;
+        }
+
+        private void LoadAllPossiblePaths()
+        {
+            var allPossiblesPaths = GameObject.FindGameObjectsWithTag(Tags.EnemyPath);
+
+            PossiblePaths = new EnemyPath[allPossiblesPaths.Length];
+
+            for (int index = 0; index < allPossiblesPaths.Length; index++)
+            {
+                var currentPath = allPossiblesPaths[index];
+
+                var allPointsToWalk = currentPath.GetComponentsInChildren<Transform>();
+
+                allPointsToWalk = allPointsToWalk.Skip(1).ToArray();
+                
+                PossiblePaths[index] = new EnemyPath(allPointsToWalk);
+            }
+        }
+
+        private void ChoosePath()
+        {
+            transform.position = PossiblePaths[ChosenWay].PointsToWalk[CurrentWayIndex].transform.position;
         }
     }
 }
