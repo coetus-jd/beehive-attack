@@ -12,18 +12,18 @@ namespace Bee.Interfaces
         /// <summary>
         /// Spawn a gameobject
         /// </summary>
-        void Spawn();
+        void Spawn(Transform parent = null);
 
         /// <summary>
         /// Spawn a gameobject given a position
         /// </summary>
         /// <param name="transform"></param>
-        void Spawn(Transform transform);
+        void Spawn(Transform transform, Transform parent = null);
 
         /// <summary>
         /// Spawn a gameobject that will have another gameobject as a target
         /// </summary>
         /// <param name="target"></param>
-        void Spawn(GameObject target);
+        void Spawn(GameObject target, Transform parent = null);
     }
 }

@@ -26,6 +26,9 @@ namespace Bee.Controllers
         /// </summary>
         private ISpawner DefenseSpawner;
 
+        [SerializeField]
+        private GameObject DefensesParent;
+
         [Header("Enemy")]
         [SerializeField]
         private GameObject SelectedEnemy;
@@ -92,7 +95,7 @@ namespace Bee.Controllers
             if (SelectedEnemy == null)
                 return;
 
-            DefenseSpawner.Spawn(SelectedEnemy);
+            DefenseSpawner.Spawn(SelectedEnemy, DefensesParent.transform);
 
             SelectedEnemy = null;
         }

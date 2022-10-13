@@ -1768,6 +1768,8 @@ MonoBehaviour:
   QuantityOfEnemies: 5
   TimeToAwaitToSpawn: 6
   AllEnemiesSpawner: {fileID: 1696788272698141121, guid: 84eb85e803bc6524b9bb1e4412dd230b, type: 3}
+  EnemiesParent: {fileID: 988128639}
+  PositionToCreate: {fileID: 1182445800}
 --- !u!1 &657682148
 GameObject:
   m_ObjectHideFlags: 0
@@ -1813,7 +1815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BeesCounter: {fileID: 410457041}
-  QuantityOfBees: 50000
+  QuantityOfBees: 90000
   BeesQuantityInSwarm: 10000
 --- !u!1 &674445021
 GameObject:
@@ -2676,7 +2678,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1182445800}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3341,6 +3344,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 134448872}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1182445799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1182445800}
+  m_Layer: 0
+  m_Name: PositionToCreate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1182445800
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182445799}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 988128640}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1187835321
 GameObject:
@@ -4280,6 +4314,7 @@ MonoBehaviour:
   PinParent: {fileID: 522932997}
   Pin: {fileID: 6181466786408066652, guid: 9867a58d3b5f5924dbebb0773e56ab65, type: 3}
   SwarmOfBeesSpawner: {fileID: 3602309750125965033, guid: f81dc5e0f7e12e940974acc35ce11004, type: 3}
+  DefensesParent: {fileID: 344355265}
   SelectedEnemy: {fileID: 0}
   PunctuationController: {fileID: 0}
 --- !u!1 &1543560980

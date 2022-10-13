@@ -15,6 +15,12 @@ public class EnemiesController : MonoBehaviour
     [SerializeField]
     private GameObject AllEnemiesSpawner;
 
+    [SerializeField]
+    private GameObject EnemiesParent;
+
+    [SerializeField]
+    private Transform PositionToCreate;
+
     /// <summary>
     /// Define the enemies spawner, currently it will be an EnemiesSpawner, but can be another
     /// type of the enemies that implements ISpawner
@@ -33,7 +39,7 @@ public class EnemiesController : MonoBehaviour
 
     public IEnumerator CreateEnemies()
     {
-        EnemiesSpawner.Spawn();
+        EnemiesSpawner.Spawn(PositionToCreate, EnemiesParent.transform);
 
         QuantityOfEnemies--;
 
