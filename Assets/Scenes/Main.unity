@@ -1766,7 +1766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QuantityOfEnemies: 5
-  TimeToAwaitToSpawn: 6
+  TimeToAwaitToSpawn: 3
   AllEnemiesSpawner: {fileID: 1696788272698141121, guid: 84eb85e803bc6524b9bb1e4412dd230b, type: 3}
   EnemiesParent: {fileID: 988128639}
   PositionToCreate: {fileID: 1182445800}

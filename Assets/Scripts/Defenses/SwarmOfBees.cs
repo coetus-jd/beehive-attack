@@ -9,9 +9,19 @@ namespace Bee.Defenses
 {
     public class SwarmOfBees : MonoBehaviour, IDefense
     {
+        public bool Attacking { get; private set; }
+
+        public string TargetTag
+        {
+            get
+            {
+                return TargetToReach?.tag;
+            }
+        }
+
         [Header("Movement")]
         [SerializeField]
-        private float MoveSpeed = 0.002f;
+        private float MoveSpeed = 0.02f;
 
         [SerializeField]
         private bool IsWalking;
@@ -26,6 +36,7 @@ namespace Bee.Defenses
         private float SecondsToReturnToHive = 2f;
 
         [Header("Position")]
+        [SerializeField]
         private float MovementTime;
 
         [Header("Controllers")]
@@ -35,8 +46,6 @@ namespace Bee.Defenses
         private float Life = 100;
 
         private GameObject Hive;
-
-        public bool Attacking { get; private set; }
 
         [Header("Enemy")]
         [SerializeField]

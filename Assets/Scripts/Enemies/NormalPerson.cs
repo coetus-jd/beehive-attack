@@ -31,12 +31,12 @@ namespace Bee.Enemies
             if (!collider.gameObject.CompareTag(Tags.Defense))
                 return;
 
-            var isAttacking = collider.gameObject
-                .GetComponent<SwarmOfBees>()
-                ?.Attacking ?? false;
+            // var isAttacking = collider.gameObject
+            //     .GetComponent<SwarmOfBees>()
+            //     ?.Attacking ?? false;
 
-            if (isAttacking)
-                return;
+            // if (isAttacking)
+            //     return;
 
             // If already is attacking something and accidentally collides with another
             // enemy the 
