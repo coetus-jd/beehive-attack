@@ -45,9 +45,12 @@ public class EnemiesController : MonoBehaviour
 
         yield return new WaitForSeconds(TimeToAwaitToSpawn);
 
-        if (QuantityOfEnemies <= 0)
-            yield return null;
+        if (QuantityOfEnemies > 0)
+        {
+            StartCoroutine(CreateEnemies());
+            yield return null;    
+        }
 
-        StartCoroutine(CreateEnemies());
+        yield return null;
     }
 }
