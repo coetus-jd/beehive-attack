@@ -16,9 +16,9 @@ namespace Bee.Spawners
         [SerializeField]
         private GameObject Beekeeper;
 
-        public void Spawn(Transform parent = null)
+        public GameObject Spawn(Transform parent = null)
         {
-            Instantiate(
+            return Instantiate(
                 NormalPerson,
                 position: new Vector3(),
                 rotation: NormalPerson.transform.rotation,
@@ -26,9 +26,9 @@ namespace Bee.Spawners
             );
         }
 
-        public void Spawn(Transform transform, Transform parent = null)
+        public GameObject Spawn(Transform transform, Transform parent = null)
         {
-            Instantiate(
+            return Instantiate(
                 NormalPerson,
                 position: transform.position,
                 rotation: NormalPerson.transform.rotation,
@@ -36,9 +36,9 @@ namespace Bee.Spawners
             );
         }
 
-        public void Spawn(GameObject target, Transform parent = null)
+        public GameObject Spawn(GameObject target, Transform parent = null)
         {
-            Instantiate(
+            return Instantiate(
                 NormalPerson,
                 position: new Vector3(),
                 rotation: NormalPerson.transform.rotation,

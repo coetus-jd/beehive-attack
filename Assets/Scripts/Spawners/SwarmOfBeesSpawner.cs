@@ -13,9 +13,9 @@ namespace Bee.Spawners
         [SerializeField]
         private GameObject SwarmOfBees;
 
-        public void Spawn(Transform parent = null)
+        public GameObject Spawn(Transform parent = null)
         {
-            Instantiate(
+            return Instantiate(
                 SwarmOfBees,
                 position: new Vector3(),
                 rotation: SwarmOfBees.transform.rotation,
@@ -23,9 +23,9 @@ namespace Bee.Spawners
             );
         }
 
-        public void Spawn(Transform transform, Transform parent = null)
+        public GameObject Spawn(Transform transform, Transform parent = null)
         {
-            Instantiate(
+            return Instantiate(
                 SwarmOfBees,
                 position: transform.position,
                 rotation: SwarmOfBees.transform.rotation,
@@ -33,7 +33,7 @@ namespace Bee.Spawners
             );
         }
 
-        public void Spawn(GameObject target, Transform parent = null)
+        public GameObject Spawn(GameObject target, Transform parent = null)
         {
             var createdSwarm = Instantiate(
                 SwarmOfBees,
@@ -43,6 +43,8 @@ namespace Bee.Spawners
             );
 
             createdSwarm.GetComponent<SwarmOfBees>().SetEnemyToAttack(target);
+
+            return createdSwarm;
         }
     }
 }
