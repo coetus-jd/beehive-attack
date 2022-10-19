@@ -29,8 +29,6 @@ public class HiveController : MonoBehaviour
     /// <param name="collider"></param>
     private void DefenseCameBack(Collider2D collider)
     {
-        print($"Collided: {collider.gameObject.tag}");
-        
         if (!collider.gameObject.CompareTag(Tags.Defense))
             return;
     }
@@ -39,8 +37,6 @@ public class HiveController : MonoBehaviour
     {
         if (!collider.gameObject.CompareTag(Tags.Enemy))
             return false;
-
-        print("Lost!");
 
         return true;
     }

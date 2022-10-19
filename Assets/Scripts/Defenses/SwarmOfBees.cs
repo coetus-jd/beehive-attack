@@ -26,6 +26,14 @@ namespace Bee.Defenses
         [SerializeField]
         private bool IsWalking;
 
+        private bool IsReturningToHive
+        {
+            get 
+            {
+                return TargetTag == Tags.Hive;
+            }
+        }
+
         private ParticleSystem Particles;
 
         /// <summary>
@@ -45,11 +53,11 @@ namespace Bee.Defenses
         [SerializeField]
         private float Life = 100;
 
+        [Header("Enemy")]
         private GameObject Hive;
 
-        [Header("Enemy")]
         [SerializeField]
-        private GameObject TargetToReach;
+        public GameObject TargetToReach;
 
         void Awake()
         {
@@ -106,7 +114,7 @@ namespace Bee.Defenses
 
             MovementTime += MoveSpeed * Time.deltaTime;
 
-            var hasReachedTarget = Vector3.Distance(transform.position, TargetToReach.transform.position) < 1f;
+            var hasReachedTarget = Vector3.Distance(transform.position, TargetToReach.transform.position) < 0.1f;
 
             if (!hasReachedTarget)
                 return;
@@ -170,6 +178,11 @@ namespace Bee.Defenses
 
         void OnTriggerEnter2D(Collider2D collider)
         {
+            // If the swarm is returning to the hive and collides with
+            // an enemy, it still has to reach the hive
+            if (IsReturningToHive)
+                return;
+
             AttackEnemy(collider);
         }
 
@@ -193,9 +206,11 @@ namespace Bee.Defenses
         /// <returns></returns>
         private IEnumerator ReturnToHive()
         {
+            TargetToReach = null;
+            MovementTime = 0f;
+
             yield return new WaitForSeconds(SecondsToReturnToHive);
 
-            MovementTime = 0f;
             TargetToReach = Hive;
         }
     }

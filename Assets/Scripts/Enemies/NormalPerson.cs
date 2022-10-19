@@ -31,17 +31,14 @@ namespace Bee.Enemies
             if (!collider.gameObject.CompareTag(Tags.Defense))
                 return;
 
-            // var isAttacking = collider.gameObject
-            //     .GetComponent<SwarmOfBees>()
-            //     ?.Attacking ?? false;
-
-            // if (isAttacking)
-            //     return;
+            var defense = collider.gameObject
+                .GetComponent<SwarmOfBees>();
 
             // If already is attacking something and accidentally collides with another
             // enemy the 
-
-            BeingAttacked = true;
+            if (defense.Attacking && defense.TargetToReach.GetInstanceID() == gameObject.GetInstanceID())
+                BeingAttacked = true;
+            
         }
     }
 }
