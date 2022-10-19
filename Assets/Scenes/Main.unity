@@ -6758,9 +6758,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e8614fd33dfed4b97a8481c9fff5c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Canvas: {fileID: 1823059136}
   PinParent: {fileID: 522932997}
   Pin: {fileID: 6181466786408066652, guid: 9867a58d3b5f5924dbebb0773e56ab65, type: 3}
+  BeeQueen: {fileID: 1946930959541548822, guid: 888a21e02090c904bae1b60b1c4e8893, type: 3}
   SwarmOfBeesSpawner: {fileID: 3602309750125965033, guid: f81dc5e0f7e12e940974acc35ce11004, type: 3}
+  TimeToSpawn: 2
+  TimeBetweenSpawn: 0
   DefensesParent: {fileID: 344355265}
   SelectedEnemy: {fileID: 0}
   PunctuationController: {fileID: 0}

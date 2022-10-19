@@ -11,10 +11,16 @@ namespace Bee.Controllers
     {
         [Header("UI")]
         [SerializeField]
+        private GameObject Canvas;
+
+        [SerializeField]
         private GameObject PinParent;
 
         [SerializeField]
         private GameObject Pin;
+
+        [SerializeField]
+        private GameObject BeeQueen;
 
         [Header("Spawner")]
         [SerializeField]
@@ -104,6 +110,9 @@ namespace Bee.Controllers
         {
             if (SelectedEnemy == null)
                 return;
+
+            if (SelectedEnemy.tag == Tags.Enemy)
+                Instantiate(BeeQueen);
 
             DefenseSpawner.Spawn(SelectedEnemy, DefensesParent.transform);
 

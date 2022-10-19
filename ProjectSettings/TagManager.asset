@@ -17,6 +17,8 @@ TagManager:
   - EnemiesController
   - PunctuationController
   - EnemyFakePath
+  - BeeQueen
+  - BaseCanvas
   layers:
   - Default
   - TransparentFX
