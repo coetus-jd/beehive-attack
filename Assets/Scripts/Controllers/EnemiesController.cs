@@ -10,7 +10,10 @@ namespace Bee.Controllers
     public class EnemiesController : MonoBehaviour
     {
         [SerializeField]
-        private int QuantityOfEnemies = 0;
+        private int QuantityOfEnemies = 5;
+
+        [SerializeField]
+        private int QuantityOfFakeEnemies = 0;
 
         [SerializeField]
         private int TimeToAwaitToSpawn = 3;
@@ -43,6 +46,7 @@ namespace Bee.Controllers
 
         void Start()
         {
+            PunctuationController.SetQuantityOfBeesByEnemies(QuantityOfEnemies);
             StartCoroutine(CreateEnemies());
         }
 

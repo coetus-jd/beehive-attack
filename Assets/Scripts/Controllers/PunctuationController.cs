@@ -38,6 +38,13 @@ namespace Bee.Controllers
             ChangeBeesCounterText(CurrentQuantityOfBees - BeesQuantityInSwarm);
         }
 
+        public void SetQuantityOfBeesByEnemies(int enemiesQuantity)
+        {
+            QuantityOfBees = enemiesQuantity * BeesQuantityInSwarm;
+
+            ChangeBeesCounterText(QuantityOfBees);
+        }
+
         private void ChangeBeesCounterText(int quantity)
         {
             BeesCounter.text = quantity.ToString().PadLeft(5, '0');
