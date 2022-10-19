@@ -16,6 +16,7 @@ TagManager:
   - Pin
   - EnemiesController
   - PunctuationController
+  - EnemyFakePath
   layers:
   - Default
   - TransparentFX

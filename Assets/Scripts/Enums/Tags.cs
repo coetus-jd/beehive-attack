@@ -29,5 +29,6 @@ namespace Bee.Enums
 
         public static string EnemiesController { get; set; } = nameof(EnemiesController);
         public static string PunctuationController { get; set; } = nameof(PunctuationController);
+        public static string EnemyFakePath { get; set; } = nameof(EnemyFakePath);
     }
 }
