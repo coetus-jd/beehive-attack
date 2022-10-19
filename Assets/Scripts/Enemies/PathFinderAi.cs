@@ -16,11 +16,23 @@ namespace Bee.Enemies
         [SerializeField]
         protected EnemyPath[] PossiblePaths;
 
+        [SerializeField]
+        protected EnemyPath[] FakePaths;
+
         [Tooltip("Enemy speed")]
         [SerializeField]
         protected float SpeedMove;
 
-        protected Transform[] PathChosen { get { return PossiblePaths[ChosenWay].PointsToWalk; } }
+        protected Transform[] PathChosen
+        {
+            get
+            {
+                if (IsFakeEnemy)
+                    return FakePaths[ChosenWay].PointsToWalk;
+
+                return PossiblePaths[ChosenWay].PointsToWalk;
+            }
+        }
 
         [Tooltip("The chosen way")]
         [SerializeField]
@@ -34,9 +46,13 @@ namespace Bee.Enemies
         [SerializeField]
         private int CurrentWayIndex = 0;
 
+        [SerializeField]
+        private bool IsFakeEnemy;
+
         void Start()
         {
             LoadAllPossiblePaths();
+            LoadFakePaths();
             ChoosePath();
         }
 
@@ -102,17 +118,45 @@ namespace Bee.Enemies
 
                 var allPointsToWalk = currentPath.GetComponentsInChildren<Transform>();
 
+                // Skip 1 because the first game object is the parent itself
                 allPointsToWalk = allPointsToWalk.Skip(1).ToArray();
-                
+
+                PossiblePaths[index] = new EnemyPath(allPointsToWalk);
+            }
+        }
+
+        private void LoadFakePaths()
+        {
+            var allFakesPaths = GameObject.FindGameObjectsWithTag(Tags.EnemyFakePath);
+
+            FakePaths = new EnemyPath[allFakesPaths.Length];
+
+            for (int index = 0; index < allFakesPaths.Length; index++)
+            {
+                var currentPath = allFakesPaths[index];
+
+                var allPointsToWalk = currentPath.GetComponentsInChildren<Transform>();
+
+                // Skip 1 because the first game object is the parent itself
+                allPointsToWalk = allPointsToWalk.Skip(1).ToArray();
+
                 PossiblePaths[index] = new EnemyPath(allPointsToWalk);
             }
         }
 
         private void ChoosePath()
         {
-            var chosen = Random.Range(0, PossiblePaths.Length - 1);
+            var length = IsFakeEnemy ? FakePaths.Length - 1 : PossiblePaths.Length - 1;
+            var chosen = Random.Range(0, length);
+
             ChosenWay = chosen;
 
+            if (IsFakeEnemy)
+            {
+                transform.position = FakePaths[ChosenWay].PointsToWalk[CurrentWayIndex].transform.position;
+                return;
+            }
+            
             transform.position = PossiblePaths[ChosenWay].PointsToWalk[CurrentWayIndex].transform.position;
         }
     }

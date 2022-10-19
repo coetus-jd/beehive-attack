@@ -10,7 +10,7 @@ namespace Bee.Controllers
 
         [Header("Game")]
         [SerializeField]
-        private int QuantityOfBees = 50_000;
+        private int QuantityOfBees = 0;
 
         [SerializeField]
         private int BeesQuantityInSwarm = 10_000;
