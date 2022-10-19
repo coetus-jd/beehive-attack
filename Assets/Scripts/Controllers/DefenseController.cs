@@ -29,7 +29,6 @@ namespace Bee.Controllers
         [SerializeField]
         private float TimeToSpawn = 2;
 
-        [SerializeField]
         private float TimeBetweenSpawn = 0;
 
         /// <summary>
