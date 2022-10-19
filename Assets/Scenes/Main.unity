@@ -2526,6 +2526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QuantityOfEnemies: 5
+  QuantityOfFakeEnemies: 0
   TimeToAwaitToSpawn: 3
   AllEnemiesSpawner: {fileID: 1696788272698141121, guid: 84eb85e803bc6524b9bb1e4412dd230b, type: 3}
   EnemiesParent: {fileID: 988128639}
@@ -2576,7 +2577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BeesCounter: {fileID: 396481501}
-  QuantityOfBees: 90000
+  QuantityOfBees: 0
   BeesQuantityInSwarm: 10000
 --- !u!1 &671260716
 GameObject:
@@ -6764,7 +6765,6 @@ MonoBehaviour:
   BeeQueen: {fileID: 1946930959541548822, guid: 888a21e02090c904bae1b60b1c4e8893, type: 3}
   SwarmOfBeesSpawner: {fileID: 3602309750125965033, guid: f81dc5e0f7e12e940974acc35ce11004, type: 3}
   TimeToSpawn: 2
-  TimeBetweenSpawn: 0
   DefensesParent: {fileID: 344355265}
   SelectedEnemy: {fileID: 0}
   PunctuationController: {fileID: 0}
