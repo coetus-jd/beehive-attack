@@ -20,6 +20,12 @@ namespace Bee.Controllers
         [SerializeField]
         private GameObject SwarmOfBeesSpawner;
 
+        [SerializeField]
+        private float TimeToSpawn = 2;
+
+        [SerializeField]
+        private float TimeBetweenSpawn = 0;
+
         /// <summary>
         /// Define the defense spawner, currently it will be an SwarmOfBeesSpawner, but can be another
         /// type of the defense that implements ISpawner
@@ -46,13 +52,17 @@ namespace Bee.Controllers
 
         void Update()
         {
+            TimeBetweenSpawn += Time.deltaTime;
+
             HandleDefense();
         }
 
         private void HandleDefense()
         {
-            if (!Input.GetMouseButtonDown(0))
+            if (!Input.GetMouseButtonDown(0) || TimeBetweenSpawn < TimeToSpawn)
                 return;
+
+            TimeBetweenSpawn = 0;
 
             if (PunctuationController.CurrentQuantityOfBees <= 0)
             {
