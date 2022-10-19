@@ -1,56 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
+using Bee.Enums;
 using Bee.Interfaces;
 using Bee.Spawners;
 using UnityEngine;
 
-public class EnemiesController : MonoBehaviour
+namespace Bee.Controllers
 {
-    [SerializeField]
-    private int QuantityOfEnemies = 5;
-
-    [SerializeField]
-    private int TimeToAwaitToSpawn = 6;
-
-    [SerializeField]
-    private GameObject AllEnemiesSpawner;
-
-    [SerializeField]
-    private GameObject EnemiesParent;
-
-    [SerializeField]
-    private Transform PositionToCreate;
-
-    /// <summary>
-    /// Define the enemies spawner, currently it will be an EnemiesSpawner, but can be another
-    /// type of the enemies that implements ISpawner
-    /// </summary>
-    private ISpawner EnemiesSpawner;
-
-    void Awake()
+    public class EnemiesController : MonoBehaviour
     {
-        EnemiesSpawner = AllEnemiesSpawner.GetComponent<EnemiesSpawner>();
-    }
+        [SerializeField]
+        private int QuantityOfEnemies = 0;
 
-    void Start()
-    {
-        StartCoroutine(CreateEnemies());
-    }
+        [SerializeField]
+        private int TimeToAwaitToSpawn = 3;
 
-    public IEnumerator CreateEnemies()
-    {
-        EnemiesSpawner.Spawn(PositionToCreate, EnemiesParent.transform);
+        [SerializeField]
+        private GameObject AllEnemiesSpawner;
 
-        QuantityOfEnemies--;
+        [SerializeField]
+        private GameObject EnemiesParent;
 
-        yield return new WaitForSeconds(TimeToAwaitToSpawn);
+        [SerializeField]
+        private Transform PositionToCreate;
 
-        if (QuantityOfEnemies > 0)
+        /// <summary>
+        /// Define the enemies spawner, currently it will be an EnemiesSpawner, but can be another
+        /// type of the enemies that implements ISpawner
+        /// </summary>
+        private ISpawner EnemiesSpawner;
+
+        [Header("Controllers")]
+        [SerializeField]
+        private PunctuationController PunctuationController;
+
+        void Awake()
         {
-            StartCoroutine(CreateEnemies());
-            yield return null;    
+            EnemiesSpawner = AllEnemiesSpawner.GetComponent<EnemiesSpawner>();
+            PunctuationController = GameObject.FindGameObjectWithTag(Tags.PunctuationController)
+                .GetComponent<PunctuationController>();
         }
 
-        yield return null;
+        void Start()
+        {
+            StartCoroutine(CreateEnemies());
+        }
+
+        public IEnumerator CreateEnemies()
+        {
+            EnemiesSpawner.Spawn(PositionToCreate, EnemiesParent.transform);
+
+            QuantityOfEnemies--;
+
+            yield return new WaitForSeconds(TimeToAwaitToSpawn);
+
+            if (QuantityOfEnemies > 0)
+            {
+                StartCoroutine(CreateEnemies());
+                yield return null;
+            }
+
+            yield return null;
+        }
     }
 }
