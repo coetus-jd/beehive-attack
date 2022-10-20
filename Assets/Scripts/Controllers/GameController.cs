@@ -41,10 +41,8 @@ namespace Bee.Controllers
         {
             CurrentLevel++;
             LevelText.text = $"Level {CurrentLevel}";
-            // aumentar a quantidade de inimigos
             EnemiesController.OnNextLevel();
-            // diminuir o tempo de spawn de inimigos?
-            // resetar a quantidade de abelhas
+            DefenseController.OnNextLevel();
         }
 
         public static void QuitGame() => Application.Quit();

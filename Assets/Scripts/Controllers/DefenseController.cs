@@ -62,6 +62,24 @@ namespace Bee.Controllers
             HandleDefense();
         }
 
+        /// <summary>
+        /// Define the current enemy selected by the player that will be attacked by the defenses
+        /// </summary>
+        /// <param name="enemy"></param>
+        public void SetSelectedEnemy(GameObject enemy)
+        {
+            SelectedEnemy = enemy;
+        }
+
+        /// <summary>
+        /// Mechanics that have to happen when the player go to the next phase
+        /// </summary>
+        public void OnNextLevel()
+        {
+            TimeBetweenSpawn = 0;
+            TimeToSpawn = TimeToSpawn - (TimeToSpawn * 0.04f);
+        }
+
         private void HandleDefense()
         {
             if (!Input.GetMouseButtonDown(0) || TimeBetweenSpawn < TimeToSpawn)
@@ -94,15 +112,6 @@ namespace Bee.Controllers
             createdPin.transform.localPosition = position;
 
             SetSelectedEnemy(createdPin);
-        }
-
-        /// <summary>
-        /// Define the current enemy selected by the player that will be attacked by the defenses
-        /// </summary>
-        /// <param name="enemy"></param>
-        public void SetSelectedEnemy(GameObject enemy)
-        {
-            SelectedEnemy = enemy;
         }
 
         private void CreateDefenses()
