@@ -13,6 +13,10 @@ namespace Bee.Controllers
         [SerializeField]
         private int CurrentLevel = 1;
 
+        [Header("UI")]
+        [SerializeField]
+        private TMP_Text LevelText;
+
         [Header("Controllers")]
         private PunctuationController PunctuationController;
         private EnemiesController EnemiesController;
@@ -28,10 +32,15 @@ namespace Bee.Controllers
                 .GetComponent<DefenseController>();
         }
 
+        void Start()
+        {
+            LevelText.text = $"Level {CurrentLevel}";
+        }
 
         public void NextLevel()
         {
             CurrentLevel++;
+            LevelText.text = $"Level {CurrentLevel}";
             // aumentar a quantidade de inimigos
             EnemiesController.OnNextLevel();
             // diminuir o tempo de spawn de inimigos?
