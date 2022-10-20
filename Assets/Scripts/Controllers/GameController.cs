@@ -11,16 +11,23 @@ namespace Bee.Controllers
     public class GameController : MonoBehaviour
     {   
         [SerializeField]
+        private GameState State;
+
+        [SerializeField]
         private int CurrentLevel = 1;
 
         [Header("UI")]
         [SerializeField]
         private TMP_Text LevelText;
 
+        [SerializeField]
+        private GameObject LostPanel;
+
         [Header("Controllers")]
         private PunctuationController PunctuationController;
         private EnemiesController EnemiesController;
         private DefenseController DefenseController;
+        private HiveController HiveController;
 
         void Awake()
         {
@@ -30,11 +37,18 @@ namespace Bee.Controllers
                 .GetComponent<EnemiesController>();
             DefenseController = GameObject.FindGameObjectWithTag(Tags.DefenseController)
                 .GetComponent<DefenseController>();
+            HiveController = GameObject.FindGameObjectWithTag(Tags.Hive)
+                .GetComponent<HiveController>();
         }
 
         void Start()
         {
             LevelText.text = $"Level {CurrentLevel}";
+        }
+
+        void Update()
+        {
+            OnLost();
         }
 
         public void NextLevel()
@@ -43,6 +57,15 @@ namespace Bee.Controllers
             LevelText.text = $"Level {CurrentLevel}";
             EnemiesController.OnNextLevel();
             DefenseController.OnNextLevel();
+        }
+
+        public void OnLost()
+        {
+            if (!HiveController.EnemyAttacked)
+                return;
+
+            LostPanel.SetActive(true);
+            Time.timeScale = 0;
         }
 
         public static void QuitGame() => Application.Quit();

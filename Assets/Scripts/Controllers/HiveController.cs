@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class HiveController : MonoBehaviour
 {
+    public bool EnemyAttacked { get; private set; }
+    
     [Header("Controllers")]
     private GameController GameController;
 
@@ -17,7 +19,7 @@ public class HiveController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (LostGame(collider))
+        if (HasLostGame(collider))
             return;
 
         DefenseCameBack(collider);
@@ -33,11 +35,12 @@ public class HiveController : MonoBehaviour
             return;
     }
 
-    private bool LostGame(Collider2D collider)
+    private bool HasLostGame(Collider2D collider)
     {
         if (!collider.gameObject.CompareTag(Tags.Enemy))
             return false;
 
+        EnemyAttacked = true;
         return true;
     }
 }

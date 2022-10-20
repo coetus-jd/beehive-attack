@@ -63,10 +63,17 @@ namespace Bee.Enemies
 
         void Update()
         {
-            if (PossiblePaths == null || PossiblePaths.Length == 0 || PathChosen.Length == 0)
+            if (PathChosen == null || PathChosen.Length == 0)
                 return;
 
             Move();
+        }
+
+        public void SetAsFakeEnemy()
+        {
+            IsFakeEnemy = true;
+            CurrentWayIndex = 0;
+            ChoosePath();
         }
 
         private void Move()
@@ -148,7 +155,7 @@ namespace Bee.Enemies
                 // Skip 1 because the first game object is the parent itself
                 allPointsToWalk = allPointsToWalk.Skip(1).ToArray();
 
-                PossiblePaths[index] = new EnemyPath(allPointsToWalk);
+                FakePaths[index] = new EnemyPath(allPointsToWalk);
             }
         }
 
@@ -158,6 +165,7 @@ namespace Bee.Enemies
             var chosen = Random.Range(0, length);
 
             ChosenWay = chosen;
+            CurrentWayIndex = 0;
 
             if (IsFakeEnemy)
             {

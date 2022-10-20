@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Bee.Enemies;
 using Bee.Enums;
 using Bee.Interfaces;
 using Bee.Spawners;
@@ -10,15 +11,36 @@ namespace Bee.Controllers
 {
     public class EnemiesController : MonoBehaviour
     {
+        [Header("Enemies quantity control")]
         [SerializeField]
-        private int QuantityOfEnemies = 5;
+        private int QuantityOfNormalEnemies = 5;
 
         [SerializeField]
-        private int EnemiesSpawned = 0;
+        private int NormalEnemiesSpawned = 0;
 
         [SerializeField]
         private int QuantityOfFakeEnemies = 0;
 
+        [SerializeField]
+        private int FakeEnemiesSpawned = 0;
+
+        private int TotalNumberOfEnemies
+        {
+            get
+            {
+                return QuantityOfNormalEnemies + QuantityOfFakeEnemies;
+            }
+        }
+
+        private int TotalNumberOfSpawnedEnemies
+        {
+            get
+            {
+                return NormalEnemiesSpawned + FakeEnemiesSpawned;
+            }
+        }
+
+        [Header("Spawn")]
         [SerializeField]
         private float TimeToAwaitToSpawn = 3;
 
@@ -57,7 +79,7 @@ namespace Bee.Controllers
 
         void Start()
         {
-            PunctuationController.SetQuantityOfBeesByEnemies(QuantityOfEnemies);
+            PunctuationController.SetQuantityOfBeesByEnemies(QuantityOfNormalEnemies);
             StartCoroutine(CreateEnemies());
         }
 
@@ -80,7 +102,7 @@ namespace Bee.Controllers
         public bool AllEnemiesHaveDied()
         {
             // Not all enemies were spawned yet
-            if (EnemiesSpawned < (QuantityOfEnemies + QuantityOfFakeEnemies))
+            if (NormalEnemiesSpawned < TotalNumberOfEnemies)
                 return false;
 
             return EnemiesCreated.Count == 0;
@@ -91,25 +113,36 @@ namespace Bee.Controllers
         /// </summary>
         public void OnNextLevel()
         {
-            EnemiesSpawned = 0;
-            QuantityOfEnemies++;
+            NormalEnemiesSpawned = 0;
+            QuantityOfNormalEnemies++;
             QuantityOfFakeEnemies++;
             TimeToAwaitToSpawn = TimeToAwaitToSpawn - (TimeToAwaitToSpawn * 0.05f);
 
-            PunctuationController.SetQuantityOfBeesByEnemies(QuantityOfEnemies);
+            PunctuationController.SetQuantityOfBeesByEnemies(QuantityOfNormalEnemies);
         }
 
         public IEnumerator CreateEnemies()
         {
+            var spawnFake = Random.Range(0, 2) == 1;
+
             var createdEnemy = EnemiesSpawner.Spawn(PositionToCreate, EnemiesParent.transform);
 
-            EnemiesCreated.Add(createdEnemy);
+            if (spawnFake && FakeEnemiesSpawned < QuantityOfFakeEnemies)
+            {
+                var pathFinder = createdEnemy.GetComponent<PathFinderAi>();
+                pathFinder.SetAsFakeEnemy();
 
-            EnemiesSpawned++;
+                FakeEnemiesSpawned++;
+            }
+            else if (NormalEnemiesSpawned < QuantityOfNormalEnemies)
+            {
+                EnemiesCreated.Add(createdEnemy);
+                NormalEnemiesSpawned++;
+            }
 
             yield return new WaitForSeconds(TimeToAwaitToSpawn);
 
-            if (EnemiesSpawned < (QuantityOfEnemies + QuantityOfFakeEnemies))
+            if (TotalNumberOfSpawnedEnemies < TotalNumberOfEnemies)
             {
                 StartCoroutine(CreateEnemies());
                 yield return null;
