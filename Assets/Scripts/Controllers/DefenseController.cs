@@ -111,7 +111,7 @@ namespace Bee.Controllers
                 return;
 
             if (SelectedEnemy.tag == Tags.Enemy)
-                Instantiate(BeeQueen);
+                Instantiate(BeeQueen, parent: Canvas.transform);
 
             DefenseSpawner.Spawn(SelectedEnemy, DefensesParent.transform);
 

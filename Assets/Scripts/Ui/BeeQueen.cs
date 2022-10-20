@@ -11,7 +11,7 @@ namespace Bee.Ui
     public class BeeQueen : MonoBehaviour
     {
         [SerializeField]
-        private float TimeToDestroy = 15;
+        private float TimeToDestroy = 2;
 
         void Start()
         {

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1946930959541548823}
   - component: {fileID: 1008276188742601378}
   m_Layer: 0
-  m_Name: BeeQueen
+  m_Name: BeeQueenV1
   m_TagString: BeeQueen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
