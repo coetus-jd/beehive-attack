@@ -38,7 +38,6 @@ namespace Bee.Enemies
             // enemy the 
             if (defense.Attacking && defense.TargetToReach.GetInstanceID() == gameObject.GetInstanceID())
                 BeingAttacked = true;
-            
         }
     }
 }

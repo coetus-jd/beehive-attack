@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace Bee.Enemies
 {
+    [RequireComponent(typeof(EnemyAnim))]
     public class PathFinderAi : MonoBehaviour
     {
         //[Tooltip("Comb Object")]
@@ -22,6 +23,7 @@ namespace Bee.Enemies
         [Tooltip("Enemy speed")]
         [SerializeField]
         protected float SpeedMove;
+        
 
         protected Transform[] PathChosen
         {
@@ -48,9 +50,12 @@ namespace Bee.Enemies
 
         [SerializeField]
         private bool IsFakeEnemy;
+        private Vector2 Dir;
+        private EnemyAnim EnemyAnim;
 
         void Start()
         {
+            EnemyAnim = GetComponent<EnemyAnim>();
             LoadAllPossiblePaths();
             LoadFakePaths();
             ChoosePath();
@@ -99,6 +104,8 @@ namespace Bee.Enemies
                 PathChosen[CurrentWayIndex].transform.position,
                 SpeedMove * Time.deltaTime
             );
+            Dir = ((PathChosen[CurrentWayIndex].transform.position)-transform.position).normalized;
+            EnemyAnim.WalkAnim(Dir);
 
             if (hasReached)
                 CurrentWayIndex += BeingAttacked ? -1 : 1;

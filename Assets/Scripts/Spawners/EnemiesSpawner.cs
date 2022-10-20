@@ -14,6 +14,9 @@ namespace Bee.Spawners
         private GameObject NormalPerson;
 
         [SerializeField]
+        private GameObject BigPerson;
+
+        [SerializeField]
         private GameObject Beekeeper;
 
         public GameObject Spawn(Transform parent = null)
