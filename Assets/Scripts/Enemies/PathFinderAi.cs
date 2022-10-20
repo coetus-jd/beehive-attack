@@ -23,7 +23,7 @@ namespace Bee.Enemies
         [Tooltip("Enemy speed")]
         [SerializeField]
         protected float SpeedMove;
-        
+
 
         protected Transform[] PathChosen
         {
@@ -96,7 +96,7 @@ namespace Bee.Enemies
             }
 
             // Verify if it doesn't arrive in the final index    
-            if (CurrentWayIndex >= PathChosen.Length - 1) // && Retreat == false
+            if (hasReached && CurrentWayIndex >= PathChosen.Length - 1) // && Retreat == false
                 Destroy(gameObject);
 
             transform.position = Vector2.MoveTowards(
@@ -104,7 +104,8 @@ namespace Bee.Enemies
                 PathChosen[CurrentWayIndex].transform.position,
                 SpeedMove * Time.deltaTime
             );
-            Dir = ((PathChosen[CurrentWayIndex].transform.position)-transform.position).normalized;
+
+            Dir = ((PathChosen[CurrentWayIndex].transform.position) - transform.position).normalized;
             EnemyAnim.WalkAnim(Dir);
 
             if (hasReached)
@@ -163,7 +164,7 @@ namespace Bee.Enemies
                 transform.position = FakePaths[ChosenWay].PointsToWalk[CurrentWayIndex].transform.position;
                 return;
             }
-            
+
             transform.position = PossiblePaths[ChosenWay].PointsToWalk[CurrentWayIndex].transform.position;
         }
     }
