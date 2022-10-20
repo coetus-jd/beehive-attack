@@ -23,6 +23,9 @@ namespace Bee.Enemies
         [Tooltip("Enemy speed")]
         [SerializeField]
         protected float SpeedMove;
+        [Tooltip("Enemy Run")]
+        [SerializeField]
+        protected float RunnningMove;
 
 
         protected Transform[] PathChosen
@@ -102,6 +105,15 @@ namespace Bee.Enemies
                 return;
             }
 
+            if(!BeingAttacked)
+                EnemyAnim.WalkAnim(Dir);
+            else
+            {
+                SpeedMove = RunnningMove;
+                EnemyAnim.RunningAnim(Dir);
+            }
+
+
             // Verify if it doesn't arrive in the final index    
             if (hasReached && CurrentWayIndex >= PathChosen.Length - 1) // && Retreat == false
                 Destroy(gameObject);
@@ -113,7 +125,6 @@ namespace Bee.Enemies
             );
 
             Dir = ((PathChosen[CurrentWayIndex].transform.position) - transform.position).normalized;
-            EnemyAnim.WalkAnim(Dir);
 
             if (hasReached)
                 CurrentWayIndex += BeingAttacked ? -1 : 1;

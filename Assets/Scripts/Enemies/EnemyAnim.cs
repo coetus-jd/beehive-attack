@@ -6,17 +6,21 @@ namespace Bee.Enemies
 {
     public class EnemyAnim : MonoBehaviour
     {
-        [SerializeField]
         private Animator anim;
+
+        void Start() 
+        {
+            anim = GetComponent<Animator>();    
+        }
 
         public void WalkAnim(Vector2 direction)
         {
             anim.SetFloat("DirX",direction.x);
             anim.SetFloat("DirY",direction.y);
-            Debug.Log(direction);
         }
         public void RunningAnim(Vector2 direction)
         {
+            anim.SetBool("Run", true);
             anim.SetFloat("DirX",direction.x);
             anim.SetFloat("DirY",direction.y);
         }

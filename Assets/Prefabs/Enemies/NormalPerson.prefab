@@ -103,7 +103,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PossiblePaths: []
   FakePaths: []
-  SpeedMove: 1
+  SpeedMove: 0.5
+  RunnningMove: 1
   ChosenWay: 0
   CurrentWayIndex: 0
   IsFakeEnemy: 0
@@ -166,7 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2596605dc087ef34d9f62d6aa7515edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 5546206730309638926}
 --- !u!95 &5546206730309638926
 Animator:
   serializedVersion: 4
