@@ -46,5 +46,7 @@ namespace Bee.Controllers
             // diminuir o tempo de spawn de inimigos?
             // resetar a quantidade de abelhas
         }
+
+        public static void QuitGame() => Application.Quit();
     }
 }
