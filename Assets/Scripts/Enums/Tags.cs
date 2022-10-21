@@ -32,5 +32,6 @@ namespace Bee.Enums
         public static string EnemyFakePath { get; set; } = nameof(EnemyFakePath);
         public static string BeeQueen { get; set; } = nameof(BeeQueen);
         public static string BaseCanvas { get; set; } = nameof(BaseCanvas);
+        public static string BeeKeeper { get; set; } = nameof(BeeKeeper);
     }
 }

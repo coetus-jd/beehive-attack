@@ -273,3 +273,4 @@ MonoBehaviour:
   BeingAttacked: 0
   CurrentWayIndex: 0
   IsFakeEnemy: 0
+  Life: 2

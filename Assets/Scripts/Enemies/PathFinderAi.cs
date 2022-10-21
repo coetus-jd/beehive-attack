@@ -66,6 +66,9 @@ namespace Bee.Enemies
         /// </summary>
         private bool UrgentChangePath = false;
 
+        [SerializeField]
+        protected float Life = 1;
+
         void Awake()
         {
             DefenseController = GameObject.FindGameObjectWithTag(Tags.DefenseController)
@@ -101,13 +104,20 @@ namespace Bee.Enemies
             if (!collider.gameObject.CompareTag(Tags.Defense))
                 return;
 
-            var defense = collider.gameObject
-                .GetComponent<SwarmOfBees>();
+            var defense = collider.gameObject.GetComponent<SwarmOfBees>();
 
             // If already is attacking something and accidentally collides with another
             // enemy then we should guarantee that we attacking the same enemy by his ID
             if (defense.Attacking && defense.TargetToReach.GetInstanceID() == gameObject.GetInstanceID())
-                BeingAttacked = true;
+            {
+                Life--;
+                BeingAttacked = Life == 0;
+
+                // If the enemy have more life then more defenses will be needed
+                // so we clean the current defense in order to not accumulate
+                if (!BeingAttacked)
+                    Destroy(collider.gameObject, 1.2f);
+            }
         }
 
         private void Move()

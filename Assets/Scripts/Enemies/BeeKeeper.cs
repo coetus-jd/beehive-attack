@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Bee.Enemies
 {
     public class BeeKeeper : PathFinderAi, IEnemy
-    {
+    {  
         public Transform[] GetPaths() => PathChosen;
 
         void OnMouseDown()

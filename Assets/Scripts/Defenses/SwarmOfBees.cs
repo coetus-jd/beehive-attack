@@ -28,7 +28,7 @@ namespace Bee.Defenses
 
         private bool IsReturningToHive
         {
-            get 
+            get
             {
                 return TargetTag == Tags.Hive;
             }
@@ -190,7 +190,7 @@ namespace Bee.Defenses
         {
             if (!collider.gameObject.CompareTag(Tags.Enemy))
                 return;
-
+            
             Attacking = true;
         }
 
