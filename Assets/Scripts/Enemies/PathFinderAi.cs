@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using Bee.Enums;
 using UnityEngine;
 using System.Linq;
+using Bee.Controllers;
+using Bee.Defenses;
 
 namespace Bee.Enemies
 {
     [RequireComponent(typeof(EnemyAnim))]
-    public class PathFinderAi : MonoBehaviour
+    public abstract class PathFinderAi : MonoBehaviour
     {
-        //[Tooltip("Comb Object")]
-        //[SerializeField]
-        //protected Transform Tartget;
-
         [Tooltip("All the possibles paths for an enemy follow")]
         [SerializeField]
         protected EnemyPath[] PossiblePaths;
@@ -23,10 +21,10 @@ namespace Bee.Enemies
         [Tooltip("Enemy speed")]
         [SerializeField]
         protected float SpeedMove;
+
         [Tooltip("Enemy Run")]
         [SerializeField]
-        protected float RunnningMove;
-
+        protected float RunningMove;
 
         protected Transform[] PathChosen
         {
@@ -43,6 +41,7 @@ namespace Bee.Enemies
         [SerializeField]
         private int ChosenWay = 0;
 
+        [SerializeField]
         protected bool BeingAttacked;
 
         /// <summary>
@@ -53,8 +52,16 @@ namespace Bee.Enemies
 
         [SerializeField]
         private bool IsFakeEnemy;
+
         private Vector2 Dir;
+
         private EnemyAnim EnemyAnim;
+
+        /// <summary>
+        /// An auxiliary flag that will tell to change the path immediately when
+        /// the enemy starts being attacked
+        /// </summary>
+        private bool UrgentChangePath = false;
 
         void Start()
         {
@@ -76,27 +83,26 @@ namespace Bee.Enemies
         {
             IsFakeEnemy = true;
             CurrentWayIndex = 0;
+            LoadFakePaths();
             ChoosePath();
+        }
+
+        void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (!collider.gameObject.CompareTag(Tags.Defense))
+                return;
+
+            var defense = collider.gameObject
+                .GetComponent<SwarmOfBees>();
+
+            // If already is attacking something and accidentally collides with another
+            // enemy then we should guarantee that we attacking the same enemy by his ID
+            if (defense.Attacking && defense.TargetToReach.GetInstanceID() == gameObject.GetInstanceID())
+                BeingAttacked = true;
         }
 
         private void Move()
         {
-
-            //if (Retreat == true)
-            //{
-            //    WayIndex = 0;
-
-            //    float randomWay = Random.Range(0, 2);
-            //    if (randomWay == 1)
-            //        ChoosenWay += 1;
-
-            //    else if (randomWay == 2)
-            //        ChoosenWay -= 1;
-
-            //    if (ChoosenWay < 0)
-            //        ChoosenWay = PossiblePaths.Length;
-            //}
-
             var hasReached = transform.position == PathChosen[CurrentWayIndex].transform.position;
 
             if (CurrentWayIndex == 0 && BeingAttacked && hasReached)
@@ -105,17 +111,16 @@ namespace Bee.Enemies
                 return;
             }
 
-            if(!BeingAttacked)
+            if (!BeingAttacked)
                 EnemyAnim.WalkAnim(Dir);
             else
             {
-                SpeedMove = RunnningMove;
+                SpeedMove = RunningMove;
                 EnemyAnim.RunningAnim(Dir);
             }
 
-
             // Verify if it doesn't arrive in the final index    
-            if (hasReached && CurrentWayIndex >= PathChosen.Length - 1) // && Retreat == false
+            if (hasReached && CurrentWayIndex >= PathChosen.Length - 1)
                 Destroy(gameObject);
 
             transform.position = Vector2.MoveTowards(
@@ -126,14 +131,22 @@ namespace Bee.Enemies
 
             Dir = ((PathChosen[CurrentWayIndex].transform.position) - transform.position).normalized;
 
+            if (BeingAttacked && !UrgentChangePath)
+            {
+                UrgentChangePath = true;
+                CurrentWayIndex -= 1;
+            }
+
             if (hasReached)
                 CurrentWayIndex += BeingAttacked ? -1 : 1;
-
-            return;
         }
 
         private void LoadAllPossiblePaths()
         {
+            // If was already loaded
+            if (PossiblePaths.Length > 0)
+                return;
+
             var allPossiblesPaths = GameObject.FindGameObjectsWithTag(Tags.EnemyPath);
 
             PossiblePaths = new EnemyPath[allPossiblesPaths.Length];
@@ -153,6 +166,10 @@ namespace Bee.Enemies
 
         private void LoadFakePaths()
         {
+            // If was already loaded
+            if (FakePaths.Length > 0)
+                return;
+
             var allFakesPaths = GameObject.FindGameObjectsWithTag(Tags.EnemyFakePath);
 
             FakePaths = new EnemyPath[allFakesPaths.Length];
@@ -178,11 +195,14 @@ namespace Bee.Enemies
             ChosenWay = chosen;
             CurrentWayIndex = 0;
 
-            if (IsFakeEnemy)
+            if (IsFakeEnemy && FakePaths.Length > 0)
             {
                 transform.position = FakePaths[ChosenWay].PointsToWalk[CurrentWayIndex].transform.position;
                 return;
             }
+
+            if (PossiblePaths.Length < 0)
+                return;
 
             transform.position = PossiblePaths[ChosenWay].PointsToWalk[CurrentWayIndex].transform.position;
         }
