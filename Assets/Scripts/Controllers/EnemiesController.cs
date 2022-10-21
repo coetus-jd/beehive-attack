@@ -32,7 +32,7 @@ namespace Bee.Controllers
         {
             get
             {
-                return QuantityOfNormalEnemies + QuantityOfFakeEnemies + BeeKeepersSpawned;
+                return QuantityOfNormalEnemies + QuantityOfFakeEnemies + QuantityOfBeeKeepers;
             }
         }
 
@@ -171,6 +171,9 @@ namespace Bee.Controllers
             }
 
             yield return new WaitForSeconds(TimeToAwaitToSpawn);
+
+            print($"Total spawned: {TotalNumberOfSpawnedEnemies}");
+            print($"Total enemies: {TotalNumberOfEnemies}");
 
             if (TotalNumberOfSpawnedEnemies < TotalNumberOfEnemies)
             {
