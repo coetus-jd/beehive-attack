@@ -172,8 +172,9 @@ MonoBehaviour:
   PossiblePaths: []
   FakePaths: []
   SpeedMove: 0.5
-  RunnningMove: 1
+  RunningMove: 1
   ChosenWay: 0
+  BeingAttacked: 0
   CurrentWayIndex: 0
   IsFakeEnemy: 0
 --- !u!114 &4229062412385696056

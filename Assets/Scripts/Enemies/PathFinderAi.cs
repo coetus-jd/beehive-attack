@@ -23,10 +23,10 @@ namespace Bee.Enemies
         [Tooltip("Enemy speed")]
         [SerializeField]
         protected float SpeedMove;
+
         [Tooltip("Enemy Run")]
         [SerializeField]
         protected float RunningMove;
-
 
         protected Transform[] PathChosen
         {
@@ -43,6 +43,7 @@ namespace Bee.Enemies
         [SerializeField]
         private int ChosenWay = 0;
 
+        [SerializeField]
         protected bool BeingAttacked;
 
         /// <summary>
@@ -53,7 +54,9 @@ namespace Bee.Enemies
 
         [SerializeField]
         private bool IsFakeEnemy;
+
         private Vector2 Dir;
+
         private EnemyAnim EnemyAnim;
 
         void Start()
@@ -76,6 +79,7 @@ namespace Bee.Enemies
         {
             IsFakeEnemy = true;
             CurrentWayIndex = 0;
+            LoadFakePaths();
             ChoosePath();
         }
 
@@ -89,14 +93,13 @@ namespace Bee.Enemies
                 return;
             }
 
-            if(!BeingAttacked)
+            if (!BeingAttacked)
                 EnemyAnim.WalkAnim(Dir);
             else
             {
                 SpeedMove = RunningMove;
                 EnemyAnim.RunningAnim(Dir);
             }
-
 
             // Verify if it doesn't arrive in the final index    
             if (hasReached && CurrentWayIndex >= PathChosen.Length - 1)
@@ -118,6 +121,10 @@ namespace Bee.Enemies
 
         private void LoadAllPossiblePaths()
         {
+            // If was already loaded
+            if (PossiblePaths.Length > 0)
+                return;
+
             var allPossiblesPaths = GameObject.FindGameObjectsWithTag(Tags.EnemyPath);
 
             PossiblePaths = new EnemyPath[allPossiblesPaths.Length];
@@ -137,6 +144,10 @@ namespace Bee.Enemies
 
         private void LoadFakePaths()
         {
+            // If was already loaded
+            if (FakePaths.Length > 0)
+                return;
+
             var allFakesPaths = GameObject.FindGameObjectsWithTag(Tags.EnemyFakePath);
 
             FakePaths = new EnemyPath[allFakesPaths.Length];
@@ -162,11 +173,14 @@ namespace Bee.Enemies
             ChosenWay = chosen;
             CurrentWayIndex = 0;
 
-            if (IsFakeEnemy)
+            if (IsFakeEnemy && FakePaths.Length > 0)
             {
                 transform.position = FakePaths[ChosenWay].PointsToWalk[CurrentWayIndex].transform.position;
                 return;
             }
+
+            if (PossiblePaths.Length < 0)
+                return;
 
             transform.position = PossiblePaths[ChosenWay].PointsToWalk[CurrentWayIndex].transform.position;
         }

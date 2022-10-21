@@ -8,21 +8,21 @@ namespace Bee.Enemies
     {
         private Animator anim;
 
-        void Start() 
+        void Start()
         {
-            anim = GetComponent<Animator>();    
+            anim = GetComponent<Animator>();
         }
 
         public void WalkAnim(Vector2 direction)
         {
-            anim.SetFloat("DirX",direction.x);
-            anim.SetFloat("DirY",direction.y);
+            anim.SetFloat("DirX", direction.x);
+            anim.SetFloat("DirY", direction.y);
         }
         public void RunningAnim(Vector2 direction)
         {
             anim.SetBool("Run", true);
-            anim.SetFloat("DirX",direction.x);
-            anim.SetFloat("DirY",direction.y);
+            anim.SetFloat("DirX", direction.x);
+            anim.SetFloat("DirY", direction.y);
         }
     }
 
