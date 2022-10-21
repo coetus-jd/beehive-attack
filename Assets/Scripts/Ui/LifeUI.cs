@@ -17,8 +17,8 @@ namespace Bee.Ui
 
         public void HeartControl(int life)
         {
-                var img = LifeHeart[life].GetComponent<Image>();
-                img.sprite = LowHeart;
+                var Heart = LifeHeart[life].GetComponent<Animator>();
+                Heart.enabled = true;
 
 
         }
