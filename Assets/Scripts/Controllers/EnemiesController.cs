@@ -13,20 +13,20 @@ namespace Bee.Controllers
     {
         [Header("Enemies quantity control")]
         [SerializeField]
-        private int QuantityOfNormalEnemies = 5;
+        private int QuantityOfNormalEnemies;
         [SerializeField]
-        private int NormalEnemiesSpawned = 0;
+        private int NormalEnemiesSpawned;
 
         [SerializeField]
-        private int QuantityOfFakeEnemies = 0;
+        private int QuantityOfFakeEnemies;
         [SerializeField]
-        private int FakeEnemiesSpawned = 0;
+        private int FakeEnemiesSpawned;
 
         [SerializeField]
-        private int QuantityOfBeeKeepers = 0;
+        private int QuantityOfBeeKeepers;
 
         [SerializeField]
-        private int BeeKeepersSpawned = 0;
+        private int BeeKeepersSpawned;
 
         private int TotalNumberOfEnemies
         {

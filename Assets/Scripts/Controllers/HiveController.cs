@@ -7,10 +7,28 @@ using Bee.Ui;
 
 namespace Bee.Controllers
 {
-    public class HiveController : MonoBehaviour
+    public bool EnemyAttacked { get; private set; }
+
+    [SerializeField]
+    private float Life = 2;
+
+    private float InitialLife;
+
+    [Header("Controllers")]
+    private GameController GameController;
+
+    void Awake()
     {
-        public bool EnemyAttacked { get; private set; }
-        public int Life = 2;
+        GameController = GameObject.FindGameObjectWithTag(Tags.GameController)
+            .GetComponent<GameController>();
+
+        InitialLife = Life;
+    }
+
+    public void OnNextLevel(int newLevel)
+    {
+        Life = InitialLife;
+    }
 
         [SerializeField]
         private GameObject LifeUI;

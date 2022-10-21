@@ -14,7 +14,7 @@ namespace Bee.Controllers
         private GameState State;
 
         [SerializeField]
-        private int CurrentLevel = 1;
+        private int CurrentLevel;
 
         [Header("UI")]
         [SerializeField]
@@ -46,6 +46,8 @@ namespace Bee.Controllers
                 .GetComponent<DefenseController>();
             HiveController = GameObject.FindGameObjectWithTag(Tags.Hive)
                 .GetComponent<HiveController>();
+
+            HandleLevel();
         }
 
         void Start()
@@ -67,14 +69,23 @@ namespace Bee.Controllers
             Time.timeScale = PausePanel.activeSelf ? 0 : 1;
         }
 
-        public void NextLevel()
+        public void PlaySameLevelAgain()
+        {
+            PlayerPrefs.SetInt(PlayerPrefsKeys.PreviousLevel, CurrentLevel);
+            SceneLoaderController.ReloadCurrentScene();
+        }
+
+        public void NextLevel(bool ignoreLevelUp = false)
         {
             CurrentLevel++;
+            print($"Level up: {CurrentLevel}");
             LevelText.text = $"Level {CurrentLevel}";
             EnemiesController.OnNextLevel(CurrentLevel);
             DefenseController.OnNextLevel(CurrentLevel);
+            HiveController.OnNextLevel(CurrentLevel);
 
-            StartCoroutine(HandleLevelUp());
+            if (!ignoreLevelUp)
+                StartCoroutine(HandleLevelUp());    
         }
 
         public void OnLost()
@@ -102,6 +113,26 @@ namespace Bee.Controllers
         {
             foreach (var gameObject in GameObject.FindGameObjectsWithTag(Tags.BeeQueen))
                 Destroy(gameObject);
+        }
+
+        private void HandleLevel()
+        {   
+            var savedLevel = PlayerPrefs.GetInt(PlayerPrefsKeys.PreviousLevel);
+
+            print($"Save level: {savedLevel}");
+
+            if (savedLevel == 0)
+            {
+                CurrentLevel = 1;
+                return;
+            }
+
+            CurrentLevel = 0;
+
+            for (int index = 0; index < savedLevel; index++)
+                NextLevel(ignoreLevelUp: true);
+
+            PlayerPrefs.DeleteKey(PlayerPrefsKeys.PreviousLevel);
         }
 
         public static void QuitGame() => Application.Quit();
