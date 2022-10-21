@@ -57,7 +57,7 @@ namespace Bee.Controllers
         }
 
         public static void ReloadCurrentScene()
-            => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
 
         public async void PlaySceneWithLoading(string sceneName)
         {

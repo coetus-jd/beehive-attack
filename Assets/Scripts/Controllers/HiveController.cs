@@ -11,6 +11,8 @@ public class HiveController : MonoBehaviour
     [SerializeField]
     private float Life = 2;
 
+    private float InitialLife;
+
     [Header("Controllers")]
     private GameController GameController;
 
@@ -18,6 +20,13 @@ public class HiveController : MonoBehaviour
     {
         GameController = GameObject.FindGameObjectWithTag(Tags.GameController)
             .GetComponent<GameController>();
+
+        InitialLife = Life;
+    }
+
+    public void OnNextLevel(int newLevel)
+    {
+        Life = InitialLife;
     }
 
     void OnTriggerEnter2D(Collider2D collider)
