@@ -29,6 +29,7 @@ namespace Bee.Controllers
 
 
             InitialLife = Life;
+            LifeUI.GetComponent<LifeUI>().HeartSetUp((int)Life);
         }
 
         public void OnNextLevel(int newLevel)
@@ -67,7 +68,13 @@ namespace Bee.Controllers
 
             if (Life == 0)
             {
+                StartCoroutine(hurtCooldown(1f));
+
+            IEnumerator hurtCooldown(float t)
+            {
+                yield return new WaitForSeconds(t);
                 EnemyAttacked = true;
+            }
                 return true;
             }
 
