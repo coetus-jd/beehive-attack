@@ -4920,9 +4920,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d49e6d06ae0aa94eb3c9aba414e247b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 2
+  MoveSpeed: 0.04
   IsWalking: 0
   SecondsToReturnToHive: 2
+  MovementTime: 0
   Life: 0
   TargetToReach: {fileID: 0}
 --- !u!58 &6061110643053355616

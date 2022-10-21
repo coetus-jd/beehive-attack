@@ -9,7 +9,7 @@ using Bee.Defenses;
 namespace Bee.Enemies
 {
     [RequireComponent(typeof(EnemyAnim))]
-    public class PathFinderAi : MonoBehaviour
+    public abstract class PathFinderAi : MonoBehaviour
     {
         [Tooltip("All the possibles paths for an enemy follow")]
         [SerializeField]
