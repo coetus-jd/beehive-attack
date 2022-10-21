@@ -154,6 +154,7 @@ namespace Bee.Enemies
             {
                 UrgentChangePath = true;
                 CurrentWayIndex -= 1;
+                return;
             }
 
             if (hasReached)

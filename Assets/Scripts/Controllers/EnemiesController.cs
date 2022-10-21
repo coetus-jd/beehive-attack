@@ -110,7 +110,7 @@ namespace Bee.Controllers
         public bool AllEnemiesHaveDied()
         {
             // Not all enemies were spawned yet
-            if (NormalEnemiesSpawned < TotalNumberOfEnemies)
+            if (TotalNumberOfSpawnedEnemies < TotalNumberOfEnemies)
                 return false;
 
             return EnemiesCreated.Count == 0;
@@ -133,6 +133,7 @@ namespace Bee.Controllers
                 QuantityOfBeeKeepers++;
 
             // BeeKeepers are more stronger, so they will need 2 swarms to be destroyed
+            // + 1 is a workaround
             var totalOfEnemies = QuantityOfNormalEnemies + (QuantityOfBeeKeepers * 2);
 
             PunctuationController.SetQuantityOfBeesByEnemies(totalOfEnemies);
@@ -140,6 +141,10 @@ namespace Bee.Controllers
 
         public IEnumerator CreateEnemies()
         {
+            print($"Fake enemies spawned: {FakeEnemiesSpawned}");
+            print($"Normal enemies spawned: {NormalEnemiesSpawned}");
+            print($"BeeKeeper spawned: {BeeKeepersSpawned}");
+
             var spawnFake = Random.Range(0, 2) == 1;
 
             var createdEnemy = EnemiesSpawner.Spawn(PositionToCreate, EnemiesParent.transform);

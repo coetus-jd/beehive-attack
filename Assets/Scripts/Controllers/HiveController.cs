@@ -7,7 +7,10 @@ using UnityEngine;
 public class HiveController : MonoBehaviour
 {
     public bool EnemyAttacked { get; private set; }
-    
+
+    [SerializeField]
+    private float Life = 2;
+
     [Header("Controllers")]
     private GameController GameController;
 
@@ -40,7 +43,16 @@ public class HiveController : MonoBehaviour
         if (!collider.gameObject.CompareTag(Tags.Enemy))
             return false;
 
-        EnemyAttacked = true;
-        return true;
+        Destroy(collider.gameObject);
+
+        Life--;
+
+        if (Life == 0)
+        {
+            EnemyAttacked = true;
+            return true;
+        }
+
+        return false;
     }
 }
