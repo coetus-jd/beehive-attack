@@ -22,7 +22,7 @@ namespace Bee.Controllers
         [SerializeField]
         private GameObject LifeUI;
 
-        void Awake()
+        void Start()
         {
             GameController = GameObject.FindGameObjectWithTag(Tags.GameController)
                 .GetComponent<GameController>();

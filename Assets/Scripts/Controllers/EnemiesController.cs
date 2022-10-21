@@ -75,7 +75,7 @@ namespace Bee.Controllers
 
         private PunctuationController PunctuationController;
 
-        void Awake()
+        void Start()
         {
             EnemiesCreated = new List<GameObject>();
             EnemiesSpawner = AllEnemiesSpawner.GetComponent<EnemiesSpawner>();
@@ -83,10 +83,7 @@ namespace Bee.Controllers
                 .GetComponent<PunctuationController>();
             GameController = GameObject.FindGameObjectWithTag(Tags.GameController)
                 .GetComponent<GameController>();
-        }
 
-        void Start()
-        {
             PunctuationController.SetQuantityOfBeesByEnemies(QuantityOfNormalEnemies);
             StartCoroutine(CreateEnemies());
         }
@@ -98,6 +95,10 @@ namespace Bee.Controllers
             if (!AllEnemiesHaveDied())
                 return;
 
+            if (GameController == null)
+                GameController = GameObject.FindGameObjectWithTag(Tags.GameController)
+                .GetComponent<GameController>();
+                
             GameController.NextLevel();
             StartCoroutine(CreateEnemies());
         }

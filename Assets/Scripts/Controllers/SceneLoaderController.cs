@@ -17,7 +17,7 @@ namespace Bee.Controllers
 
         private float TargetAlpha;
 
-        void Awake()
+        void Start()
         {
             if (Instance == null)
             {

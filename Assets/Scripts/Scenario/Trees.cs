@@ -17,7 +17,7 @@ namespace Bee.Scenario
 
         private float StartTime;
 
-        private void Awake()
+        private void Start()
         {
             TreePosition = transform.position;
             TreeScale = transform.localScale;

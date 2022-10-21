@@ -35,9 +35,11 @@ namespace Bee.Controllers
         private DefenseController DefenseController;
         private HiveController HiveController;
 
-        void Awake()
+        void Start()
         {
             Time.timeScale = 1;
+            LevelText.text = $"Level {CurrentLevel}";
+
             PunctuationController = GameObject.FindGameObjectWithTag(Tags.PunctuationController)
                 .GetComponent<PunctuationController>();
             EnemiesController = GameObject.FindGameObjectWithTag(Tags.EnemiesController)
@@ -48,11 +50,6 @@ namespace Bee.Controllers
                 .GetComponent<HiveController>();
 
             HandleLevel();
-        }
-
-        void Start()
-        {
-            LevelText.text = $"Level {CurrentLevel}";
         }
 
         void Update()
@@ -124,6 +121,7 @@ namespace Bee.Controllers
             if (savedLevel == 0)
             {
                 CurrentLevel = 1;
+                PlayerPrefs.DeleteKey(PlayerPrefsKeys.PreviousLevel);
                 return;
             }
 

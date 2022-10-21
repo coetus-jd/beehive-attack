@@ -59,16 +59,13 @@ namespace Bee.Defenses
         [SerializeField]
         public GameObject TargetToReach;
 
-        void Awake()
+        void Start()
         {
             PunctuationController = GameObject.FindGameObjectWithTag(Tags.PunctuationController)
                 .GetComponent<PunctuationController>();
             Hive = GameObject.FindGameObjectWithTag(Tags.Hive);
             Particles = GetComponent<ParticleSystem>();
-        }
 
-        void Start()
-        {
             // When a swarm is created that means that this defense will be used
             // so automatically we use the swarm
             PunctuationController.UseSwarm();

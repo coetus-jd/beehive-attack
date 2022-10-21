@@ -69,15 +69,12 @@ namespace Bee.Enemies
         [SerializeField]
         protected float Life = 1;
 
-        void Awake()
+        void Start()
         {
             DefenseController = GameObject.FindGameObjectWithTag(Tags.DefenseController)
                .GetComponent<DefenseController>();
-        }
-
-        void Start()
-        {
             EnemyAnim = GetComponent<EnemyAnim>();
+
             LoadAllPossiblePaths();
             LoadFakePaths();
             ChoosePath();

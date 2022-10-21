@@ -14,15 +14,12 @@ public class Pin : MonoBehaviour
 
     private float TimeBeingDisplayed = 0;
 
-    void Awake()
+    void Start()
     {
         Animator = GetComponent<Animator>();
 
         Animator.SetBool("Blinking", true);
-    }
 
-    void Start()
-    {
         Destroy(gameObject, TimeToDestroy);
     }
 

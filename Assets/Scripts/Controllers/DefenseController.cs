@@ -50,16 +50,13 @@ namespace Bee.Controllers
         [Header("Controllers")]
         [SerializeField]
         private PunctuationController PunctuationController;
-
-        void Awake()
+        
+        void Start()
         {
             DefenseSpawner = SwarmOfBeesSpawner.GetComponent<SwarmOfBeesSpawner>();
             PunctuationController = GameObject.FindGameObjectWithTag(Tags.PunctuationController)
                 .GetComponent<PunctuationController>();
-        }
 
-        void Start()
-        {
             HiveAnim = GetComponent<Hive>();
         }
 

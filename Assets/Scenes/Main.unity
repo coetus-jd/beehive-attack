@@ -11193,7 +11193,7 @@ GameObject:
   - component: {fileID: 1914797306}
   m_Layer: 0
   m_Name: SceneLoaderController
-  m_TagString: GameController
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

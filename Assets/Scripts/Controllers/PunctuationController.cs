@@ -23,7 +23,7 @@ namespace Bee.Controllers
             }
         }
 
-        void Awake()
+        void Start()
         {
             ChangeBeesCounterText(QuantityOfBees);
         }
