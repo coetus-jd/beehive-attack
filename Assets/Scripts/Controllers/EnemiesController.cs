@@ -46,7 +46,7 @@ namespace Bee.Controllers
 
         [Header("Spawn")]
         [SerializeField]
-        private int LevelToSpawnBeeKeeper = 1;
+        private int LevelToSpawnBeeKeeper = 2;
 
         [SerializeField]
         private float TimeToAwaitToSpawn = 3;
@@ -87,13 +87,14 @@ namespace Bee.Controllers
 
         void Start()
         {
-            OnNextLevel(1);
-            // PunctuationController.SetQuantityOfBeesByEnemies(QuantityOfNormalEnemies);
+            PunctuationController.SetQuantityOfBeesByEnemies(QuantityOfNormalEnemies);
             StartCoroutine(CreateEnemies());
         }
 
         void Update()
         {
+            print($"Total spawned: {TotalNumberOfSpawnedEnemies}");
+            print($"Total enemies: {TotalNumberOfEnemies}");
             CleanDeadEnemies();
 
             if (!AllEnemiesHaveDied())
@@ -157,7 +158,7 @@ namespace Bee.Controllers
                 EnemiesCreated.Add(createdEnemy);
                 NormalEnemiesSpawned++;
             }
-            else if ( 
+            else if (
                 NormalEnemiesSpawned >= QuantityOfNormalEnemies
                 && FakeEnemiesSpawned >= QuantityOfFakeEnemies
                 && BeeKeepersSpawned < QuantityOfBeeKeepers
@@ -171,9 +172,6 @@ namespace Bee.Controllers
             }
 
             yield return new WaitForSeconds(TimeToAwaitToSpawn);
-
-            print($"Total spawned: {TotalNumberOfSpawnedEnemies}");
-            print($"Total enemies: {TotalNumberOfEnemies}");
 
             if (TotalNumberOfSpawnedEnemies < TotalNumberOfEnemies)
             {
