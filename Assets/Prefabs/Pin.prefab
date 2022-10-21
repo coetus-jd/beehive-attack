@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb8020199fe885e40846895d6a832949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeToHide: 3
-  TimeToDestroy: 15
+  TimeToHide: 1.5
+  TimeToDestroy: 12
 --- !u!95 &167961403
 Animator:
   serializedVersion: 4

@@ -46,7 +46,7 @@ namespace Bee.Controllers
 
         [Header("Spawn")]
         [SerializeField]
-        private int LevelToSpawnBeeKeeper = 2;
+        private int LevelToSpawnBeeKeeper = 3;
 
         [SerializeField]
         private float TimeToAwaitToSpawn = 3;
