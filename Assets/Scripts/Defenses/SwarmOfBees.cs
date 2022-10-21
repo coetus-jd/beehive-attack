@@ -190,7 +190,13 @@ namespace Bee.Defenses
         {
             if (!collider.gameObject.CompareTag(Tags.Enemy))
                 return;
+
+            if (Attacking)
+                return;
             
+            print("attacking!");
+
+            TargetToReach = collider.gameObject;
             Attacking = true;
         }
 

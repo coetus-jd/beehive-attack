@@ -28,7 +28,7 @@ namespace Bee.Controllers
         private GameObject SwarmOfBeesSpawner;
 
         [SerializeField]
-        private float TimeToSpawn = 1.5f;
+        private float TimeToSpawn = 0.8f;
 
         private float TimeBetweenSpawn = 0;
 

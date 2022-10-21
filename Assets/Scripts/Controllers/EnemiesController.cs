@@ -93,8 +93,6 @@ namespace Bee.Controllers
 
         void Update()
         {
-            print($"Total spawned: {TotalNumberOfSpawnedEnemies}");
-            print($"Total enemies: {TotalNumberOfEnemies}");
             CleanDeadEnemies();
 
             if (!AllEnemiesHaveDied())
@@ -129,7 +127,7 @@ namespace Bee.Controllers
 
             QuantityOfNormalEnemies++;
             QuantityOfFakeEnemies++;
-            TimeToAwaitToSpawn = TimeToAwaitToSpawn - (TimeToAwaitToSpawn * 0.05f);
+            // TimeToAwaitToSpawn = TimeToAwaitToSpawn - (TimeToAwaitToSpawn * 0.05f);
 
             if (newLevel >= LevelToSpawnBeeKeeper)
                 QuantityOfBeeKeepers++;
