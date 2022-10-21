@@ -2335,6 +2335,9 @@ MonoBehaviour:
   NormalEnemiesSpawned: 0
   QuantityOfFakeEnemies: 0
   FakeEnemiesSpawned: 0
+  QuantityOfBeeKeepers: 0
+  BeeKeepersSpawned: 0
+  LevelToSpawnBeeKeeper: 1
   TimeToAwaitToSpawn: 3
   AllEnemiesSpawner: {fileID: 1696788272698141121, guid: 84eb85e803bc6524b9bb1e4412dd230b, type: 3}
   EnemiesParent: {fileID: 988128639}
@@ -8356,7 +8359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 143824556276313748, guid: 06e05a3847b99c34eb7d82bc47c2a65d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 143824556276313748, guid: 06e05a3847b99c34eb7d82bc47c2a65d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -8368,7 +8371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 143824556276313748, guid: 06e05a3847b99c34eb7d82bc47c2a65d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlayScene
+      value: ReloadCurrentScene
       objectReference: {fileID: 0}
     - target: {fileID: 143824556276313748, guid: 06e05a3847b99c34eb7d82bc47c2a65d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

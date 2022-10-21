@@ -82,7 +82,7 @@ namespace Bee.Controllers
         /// <summary>
         /// Mechanics that have to happen when the player go to the next phase
         /// </summary>
-        public void OnNextLevel()
+        public void OnNextLevel(int newLevel)
         {
             TimeBetweenSpawn = 0;
             TimeToSpawn = TimeToSpawn - (TimeToSpawn * 0.04f);

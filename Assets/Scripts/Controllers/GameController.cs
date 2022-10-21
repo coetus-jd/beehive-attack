@@ -34,6 +34,7 @@ namespace Bee.Controllers
 
         void Awake()
         {
+            Time.timeScale = 1;
             PunctuationController = GameObject.FindGameObjectWithTag(Tags.PunctuationController)
                 .GetComponent<PunctuationController>();
             EnemiesController = GameObject.FindGameObjectWithTag(Tags.EnemiesController)
@@ -58,8 +59,8 @@ namespace Bee.Controllers
         {
             CurrentLevel++;
             LevelText.text = $"Level {CurrentLevel}";
-            EnemiesController.OnNextLevel();
-            DefenseController.OnNextLevel();
+            EnemiesController.OnNextLevel(CurrentLevel);
+            DefenseController.OnNextLevel(CurrentLevel);
 
             StartCoroutine(HandleLevelUp());
         }

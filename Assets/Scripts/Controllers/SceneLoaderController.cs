@@ -56,6 +56,9 @@ namespace Bee.Controllers
             SceneManager.LoadScene(sceneIndex, sceneMode);
         }
 
+        public static void ReloadCurrentScene()
+            => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
         public async void PlaySceneWithLoading(string sceneName)
         {
             if (Background == null)

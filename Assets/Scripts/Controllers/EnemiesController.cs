@@ -14,21 +14,25 @@ namespace Bee.Controllers
         [Header("Enemies quantity control")]
         [SerializeField]
         private int QuantityOfNormalEnemies = 5;
-
         [SerializeField]
         private int NormalEnemiesSpawned = 0;
 
         [SerializeField]
         private int QuantityOfFakeEnemies = 0;
-
         [SerializeField]
         private int FakeEnemiesSpawned = 0;
+
+        [SerializeField]
+        private int QuantityOfBeeKeepers = 0;
+
+        [SerializeField]
+        private int BeeKeepersSpawned = 0;
 
         private int TotalNumberOfEnemies
         {
             get
             {
-                return QuantityOfNormalEnemies + QuantityOfFakeEnemies;
+                return QuantityOfNormalEnemies + QuantityOfFakeEnemies + BeeKeepersSpawned;
             }
         }
 
@@ -36,11 +40,14 @@ namespace Bee.Controllers
         {
             get
             {
-                return NormalEnemiesSpawned + FakeEnemiesSpawned;
+                return NormalEnemiesSpawned + FakeEnemiesSpawned + BeeKeepersSpawned;
             }
         }
 
         [Header("Spawn")]
+        [SerializeField]
+        private int LevelToSpawnBeeKeeper = 1;
+
         [SerializeField]
         private float TimeToAwaitToSpawn = 3;
 
@@ -65,7 +72,7 @@ namespace Bee.Controllers
         [Header("Controllers")]
         [SerializeField]
         private GameController GameController;
-        
+
         private PunctuationController PunctuationController;
 
         void Awake()
@@ -80,7 +87,8 @@ namespace Bee.Controllers
 
         void Start()
         {
-            PunctuationController.SetQuantityOfBeesByEnemies(QuantityOfNormalEnemies);
+            OnNextLevel(1);
+            // PunctuationController.SetQuantityOfBeesByEnemies(QuantityOfNormalEnemies);
             StartCoroutine(CreateEnemies());
         }
 
@@ -112,14 +120,23 @@ namespace Bee.Controllers
         /// <summary>
         /// Mechanics that have to happen when the player go to the next phase
         /// </summary>
-        public void OnNextLevel()
+        public void OnNextLevel(int newLevel)
         {
             NormalEnemiesSpawned = 0;
+            FakeEnemiesSpawned = 0;
+            BeeKeepersSpawned = 0;
+
             QuantityOfNormalEnemies++;
             QuantityOfFakeEnemies++;
             TimeToAwaitToSpawn = TimeToAwaitToSpawn - (TimeToAwaitToSpawn * 0.05f);
 
-            PunctuationController.SetQuantityOfBeesByEnemies(QuantityOfNormalEnemies);
+            if (newLevel >= LevelToSpawnBeeKeeper)
+                QuantityOfBeeKeepers++;
+
+            // BeeKeepers are more stronger, so they will need 2 swarms to be destroyed
+            var totalOfEnemies = QuantityOfNormalEnemies + (QuantityOfBeeKeepers * 2);
+
+            PunctuationController.SetQuantityOfBeesByEnemies(totalOfEnemies);
         }
 
         public IEnumerator CreateEnemies()
@@ -139,6 +156,18 @@ namespace Bee.Controllers
             {
                 EnemiesCreated.Add(createdEnemy);
                 NormalEnemiesSpawned++;
+            }
+            else if ( 
+                NormalEnemiesSpawned >= QuantityOfNormalEnemies
+                && FakeEnemiesSpawned >= QuantityOfFakeEnemies
+                && BeeKeepersSpawned < QuantityOfBeeKeepers
+            )
+            {
+                var spawner = EnemiesSpawner as EnemiesSpawner;
+                var createdBeeKeeper = spawner.SpawnBeeKeeper(EnemiesParent.transform);
+
+                EnemiesCreated.Add(createdBeeKeeper);
+                BeeKeepersSpawned++;
             }
 
             yield return new WaitForSeconds(TimeToAwaitToSpawn);

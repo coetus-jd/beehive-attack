@@ -60,7 +60,7 @@ namespace Bee.Spawners
             );
         }
 
-        public GameObject SpawnBeeKeeper(GameObject target, Transform parent = null)
+        public GameObject SpawnBeeKeeper(Transform parent = null)
         {
             return Instantiate(
                 BeeKeeper,

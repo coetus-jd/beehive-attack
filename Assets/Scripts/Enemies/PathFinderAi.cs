@@ -121,11 +121,11 @@ namespace Bee.Enemies
             }
 
             if (!BeingAttacked)
-                EnemyAnim.WalkAnim(Dir);
+                EnemyAnim?.WalkAnim(Dir);
             else
             {
                 SpeedMove = RunningMove;
-                EnemyAnim.RunningAnim(Dir);
+                EnemyAnim?.RunningAnim(Dir);
             }
 
             // Verify if it doesn't arrive in the final index    

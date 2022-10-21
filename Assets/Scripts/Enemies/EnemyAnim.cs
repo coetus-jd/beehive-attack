@@ -15,14 +15,14 @@ namespace Bee.Enemies
 
         public void WalkAnim(Vector2 direction)
         {
-            anim.SetFloat("DirX", direction.x);
-            anim.SetFloat("DirY", direction.y);
+            anim?.SetFloat("DirX", direction.x);
+            anim?.SetFloat("DirY", direction.y);
         }
         public void RunningAnim(Vector2 direction)
         {
-            anim.SetBool("Run", true);
-            anim.SetFloat("DirX", direction.x);
-            anim.SetFloat("DirY", direction.y);
+            anim?.SetBool("Run", true);
+            anim?.SetFloat("DirX", direction.x);
+            anim?.SetFloat("DirY", direction.y);
         }
     }
 
