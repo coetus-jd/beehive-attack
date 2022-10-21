@@ -25,7 +25,7 @@ namespace Bee.Enemies
         protected float SpeedMove;
         [Tooltip("Enemy Run")]
         [SerializeField]
-        protected float RunnningMove;
+        protected float RunningMove;
 
 
         protected Transform[] PathChosen
@@ -81,22 +81,6 @@ namespace Bee.Enemies
 
         private void Move()
         {
-
-            //if (Retreat == true)
-            //{
-            //    WayIndex = 0;
-
-            //    float randomWay = Random.Range(0, 2);
-            //    if (randomWay == 1)
-            //        ChoosenWay += 1;
-
-            //    else if (randomWay == 2)
-            //        ChoosenWay -= 1;
-
-            //    if (ChoosenWay < 0)
-            //        ChoosenWay = PossiblePaths.Length;
-            //}
-
             var hasReached = transform.position == PathChosen[CurrentWayIndex].transform.position;
 
             if (CurrentWayIndex == 0 && BeingAttacked && hasReached)
@@ -109,13 +93,13 @@ namespace Bee.Enemies
                 EnemyAnim.WalkAnim(Dir);
             else
             {
-                SpeedMove = RunnningMove;
+                SpeedMove = RunningMove;
                 EnemyAnim.RunningAnim(Dir);
             }
 
 
             // Verify if it doesn't arrive in the final index    
-            if (hasReached && CurrentWayIndex >= PathChosen.Length - 1) // && Retreat == false
+            if (hasReached && CurrentWayIndex >= PathChosen.Length - 1)
                 Destroy(gameObject);
 
             transform.position = Vector2.MoveTowards(

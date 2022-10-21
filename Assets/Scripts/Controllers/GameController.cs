@@ -21,6 +21,9 @@ namespace Bee.Controllers
         private TMP_Text LevelText;
 
         [SerializeField]
+        private GameObject LevelUp;
+
+        [SerializeField]
         private GameObject LostPanel;
 
         [Header("Controllers")]
@@ -57,6 +60,8 @@ namespace Bee.Controllers
             LevelText.text = $"Level {CurrentLevel}";
             EnemiesController.OnNextLevel();
             DefenseController.OnNextLevel();
+
+            StartCoroutine(HandleLevelUp());
         }
 
         public void OnLost()
@@ -66,6 +71,17 @@ namespace Bee.Controllers
 
             LostPanel.SetActive(true);
             Time.timeScale = 0;
+        }
+
+        private IEnumerator HandleLevelUp()
+        {
+            LevelUp.SetActive(true);
+            LevelUp.GetComponent<Animator>().SetBool("Start", true);
+
+            yield return new WaitForSeconds(1f);
+
+            LevelUp.GetComponent<Animator>().SetBool("Start", false);
+            LevelUp.SetActive(false);
         }
 
         public static void QuitGame() => Application.Quit();
