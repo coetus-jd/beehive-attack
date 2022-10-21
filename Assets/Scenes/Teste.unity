@@ -372,6 +372,7 @@ GameObject:
   m_Component:
   - component: {fileID: 100315254}
   - component: {fileID: 100315255}
+  - component: {fileID: 100315256}
   m_Layer: 0
   m_Name: 0002
   m_TagString: Untagged
@@ -446,6 +447,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &100315256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100315253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aaa215c120648e45b9e22d7c3a5d321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimTime: 4
+  SizeTransform: 0.3
+  AnimCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &104969977
 GameObject:
   m_ObjectHideFlags: 0
@@ -2119,6 +2167,9 @@ MonoBehaviour:
   NormalEnemiesSpawned: 0
   QuantityOfFakeEnemies: 0
   FakeEnemiesSpawned: 0
+  QuantityOfBeeKeepers: 0
+  BeeKeepersSpawned: 0
+  LevelToSpawnBeeKeeper: 1
   TimeToAwaitToSpawn: 3
   AllEnemiesSpawner: {fileID: 1696788272698141121, guid: 84eb85e803bc6524b9bb1e4412dd230b, type: 3}
   EnemiesParent: {fileID: 988128639}
@@ -4684,6 +4735,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1313454282}
   - component: {fileID: 1313454283}
+  - component: {fileID: 1313454284}
   m_Layer: 0
   m_Name: 0001
   m_TagString: Untagged
@@ -4758,6 +4810,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1313454284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313454281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aaa215c120648e45b9e22d7c3a5d321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimTime: 4
+  SizeTransform: 0.3
+  AnimCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1326974472
 GameObject:
   m_ObjectHideFlags: 0
@@ -5215,6 +5314,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1462566832}
   - component: {fileID: 1462566833}
+  - component: {fileID: 1462566834}
   m_Layer: 0
   m_Name: 0006
   m_TagString: Untagged
@@ -5289,6 +5389,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1462566834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462566831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aaa215c120648e45b9e22d7c3a5d321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimTime: 4
+  SizeTransform: 0.3
+  AnimCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1468127041
 GameObject:
   m_ObjectHideFlags: 0
@@ -5888,6 +6035,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1605662205}
   - component: {fileID: 1605662206}
+  - component: {fileID: 1605662207}
   m_Layer: 0
   m_Name: 0007 (3)
   m_TagString: Untagged
@@ -5962,6 +6110,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1605662207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605662204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aaa215c120648e45b9e22d7c3a5d321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimTime: 4
+  SizeTransform: 0.3
+  AnimCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1615183856
 GameObject:
   m_ObjectHideFlags: 0
@@ -7240,6 +7435,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1867294468}
   - component: {fileID: 1867294469}
+  - component: {fileID: 1867294470}
   m_Layer: 0
   m_Name: 0003
   m_TagString: Untagged
@@ -7314,6 +7510,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1867294470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867294467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aaa215c120648e45b9e22d7c3a5d321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimTime: 4
+  SizeTransform: 0.3
+  AnimCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1877294941
 GameObject:
   m_ObjectHideFlags: 0
@@ -8561,6 +8804,7 @@ MonoBehaviour:
   State: 0
   CurrentLevel: 1
   LevelText: {fileID: 828889587}
+  LevelUp: {fileID: 0}
   LostPanel: {fileID: 0}
 --- !u!1 &2096986035
 GameObject:
