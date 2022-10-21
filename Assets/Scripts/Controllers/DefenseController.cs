@@ -1,6 +1,7 @@
 using Bee.Enums;
 using Bee.Interfaces;
 using Bee.Spawners;
+using Bee.Scenario;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,6 +41,8 @@ namespace Bee.Controllers
         [SerializeField]
         private GameObject DefensesParent;
 
+        private Hive HiveAnim;
+
         [Header("Enemy")]
         [SerializeField]
         private GameObject SelectedEnemy;
@@ -53,6 +56,7 @@ namespace Bee.Controllers
             DefenseSpawner = SwarmOfBeesSpawner.GetComponent<SwarmOfBeesSpawner>();
             PunctuationController = GameObject.FindGameObjectWithTag(Tags.PunctuationController)
                 .GetComponent<PunctuationController>();
+            HiveAnim = GetComponent<Hive>();
         }
 
         void Update()
@@ -93,6 +97,7 @@ namespace Bee.Controllers
                 return;
             }
 
+            HiveAnim.HiveClick();
             CreatePin();
             CreateDefenses();
         }
