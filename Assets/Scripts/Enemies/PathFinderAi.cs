@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using Bee.Enums;
 using UnityEngine;
 using System.Linq;
+using Bee.Controllers;
+using Bee.Defenses;
 
 namespace Bee.Enemies
 {
     [RequireComponent(typeof(EnemyAnim))]
     public class PathFinderAi : MonoBehaviour
     {
-        //[Tooltip("Comb Object")]
-        //[SerializeField]
-        //protected Transform Tartget;
-
         [Tooltip("All the possibles paths for an enemy follow")]
         [SerializeField]
         protected EnemyPath[] PossiblePaths;
@@ -89,6 +87,20 @@ namespace Bee.Enemies
             ChoosePath();
         }
 
+        void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (!collider.gameObject.CompareTag(Tags.Defense))
+                return;
+
+            var defense = collider.gameObject
+                .GetComponent<SwarmOfBees>();
+
+            // If already is attacking something and accidentally collides with another
+            // enemy then we should guarantee that we attacking the same enemy by his ID
+            if (defense.Attacking && defense.TargetToReach.GetInstanceID() == gameObject.GetInstanceID())
+                BeingAttacked = true;
+        }
+
         private void Move()
         {
             var hasReached = transform.position == PathChosen[CurrentWayIndex].transform.position;
@@ -124,7 +136,7 @@ namespace Bee.Enemies
                 UrgentChangePath = true;
                 CurrentWayIndex -= 1;
             }
-            
+
             if (hasReached)
                 CurrentWayIndex += BeingAttacked ? -1 : 1;
         }
