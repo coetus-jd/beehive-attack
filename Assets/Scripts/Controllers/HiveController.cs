@@ -7,39 +7,32 @@ using Bee.Ui;
 
 namespace Bee.Controllers
 {
-    public bool EnemyAttacked { get; private set; }
-
-    [SerializeField]
-    private float Life = 2;
-
-    private float InitialLife;
-
-    [Header("Controllers")]
-    private GameController GameController;
-
-    void Awake()
+    public class HiveController : MonoBehaviour
     {
-        GameController = GameObject.FindGameObjectWithTag(Tags.GameController)
-            .GetComponent<GameController>();
-
-        InitialLife = Life;
-    }
-
-    public void OnNextLevel(int newLevel)
-    {
-        Life = InitialLife;
-    }
+        public bool EnemyAttacked { get; private set; }
 
         [SerializeField]
-        private GameObject LifeUI;
+        private float Life = 2;
+
+        private float InitialLife;
 
         [Header("Controllers")]
         private GameController GameController;
+
+        [SerializeField]
+        private GameObject LifeUI;
 
         void Awake()
         {
             GameController = GameObject.FindGameObjectWithTag(Tags.GameController)
                 .GetComponent<GameController>();
+
+            InitialLife = Life;
+        }
+
+        public void OnNextLevel(int newLevel)
+        {
+            Life = InitialLife;
         }
 
         void OnTriggerEnter2D(Collider2D collider)
@@ -68,7 +61,7 @@ namespace Bee.Controllers
             Destroy(collider.gameObject);
 
             Life--;
-            LifeUI.GetComponent<LifeUI>().HeartControl(Life);
+            LifeUI.GetComponent<LifeUI>().HeartControl((int)Life);
 
             if (Life == 0)
             {
