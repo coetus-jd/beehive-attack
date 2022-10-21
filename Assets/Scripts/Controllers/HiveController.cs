@@ -27,12 +27,14 @@ namespace Bee.Controllers
             GameController = GameObject.FindGameObjectWithTag(Tags.GameController)
                 .GetComponent<GameController>();
 
+
             InitialLife = Life;
         }
 
         public void OnNextLevel(int newLevel)
         {
             Life = InitialLife;
+            LifeUI.GetComponent<LifeUI>().HeartSetUp((int)Life);
         }
 
         void OnTriggerEnter2D(Collider2D collider)

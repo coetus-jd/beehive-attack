@@ -15,11 +15,20 @@ namespace Bee.Ui
         [SerializeField]
         private Sprite FullHeart;
 
+        public void HeartSetUp (int life)
+        {
+            
+            for(int i = 0; i < life; i++)
+            {
+                var Heart = LifeHeart[i].GetComponent<Animator>();
+                Heart.SetBool("Damage", false);
+            }
+        }
+
         public void HeartControl(int life)
         {
                 var Heart = LifeHeart[life].GetComponent<Animator>();
-                Heart.enabled = true;
-
+                Heart.SetBool("Damage", true);
 
         }
 
