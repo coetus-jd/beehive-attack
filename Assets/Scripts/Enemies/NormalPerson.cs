@@ -35,7 +35,7 @@ namespace Bee.Enemies
                 .GetComponent<SwarmOfBees>();
 
             // If already is attacking something and accidentally collides with another
-            // enemy the 
+            // enemy then we should guarantee that we attacking the same enemy by his ID
             if (defense.Attacking && defense.TargetToReach.GetInstanceID() == gameObject.GetInstanceID())
                 BeingAttacked = true;
         }

@@ -59,6 +59,12 @@ namespace Bee.Enemies
 
         private EnemyAnim EnemyAnim;
 
+        /// <summary>
+        /// An auxiliary flag that will tell to change the path immediately when
+        /// the enemy starts being attacked
+        /// </summary>
+        private bool UrgentChangePath = false;
+
         void Start()
         {
             EnemyAnim = GetComponent<EnemyAnim>();
@@ -113,10 +119,14 @@ namespace Bee.Enemies
 
             Dir = ((PathChosen[CurrentWayIndex].transform.position) - transform.position).normalized;
 
+            if (BeingAttacked && !UrgentChangePath)
+            {
+                UrgentChangePath = true;
+                CurrentWayIndex -= 1;
+            }
+            
             if (hasReached)
                 CurrentWayIndex += BeingAttacked ? -1 : 1;
-
-            return;
         }
 
         private void LoadAllPossiblePaths()
