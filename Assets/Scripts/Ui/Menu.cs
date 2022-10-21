@@ -12,6 +12,7 @@ public class Menu : MonoBehaviour
     public GameObject optionsPanel;
     public GameObject startPanel;
     public GameObject PressAnyKeyPanel;
+    public GameObject CreditsPanel;
     public bool PressKeyActive;
 
     // Start is called before the first frame update
@@ -52,7 +53,9 @@ public class Menu : MonoBehaviour
     public void BackToMenu()
     {
         optionsPanel.SetActive(false);
+        CreditsPanel.SetActive(false);
         startPanel.SetActive(true);
+
     }
 
     public void GoToMenu()
@@ -60,6 +63,12 @@ public class Menu : MonoBehaviour
         startPanel.SetActive(true);
         PressAnyKeyPanel.SetActive(false);
         PressKeyActive = false;
+    }
+
+    public void GoToCredits()
+    {
+        CreditsPanel.SetActive(true);
+        startPanel.SetActive(false);
     }
 
     public void SetFullscreen(bool isFullScreen)
