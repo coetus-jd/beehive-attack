@@ -3065,9 +3065,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1422533621}
   m_CullTransparentMesh: 1
-<<<<<<< Updated upstream
---- !u!1 &1447570866
-=======
 --- !u!1 &1332577695
 GameObject:
   m_ObjectHideFlags: 0
@@ -3169,7 +3166,6 @@ Canvas:
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &1359695384
->>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3262,13 +3258,8 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-<<<<<<< Updated upstream
-  m_IsActive: 1
---- !u!224 &1491811685
-=======
   m_IsActive: 0
 --- !u!224 &1422533622
->>>>>>> Stashed changes
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
