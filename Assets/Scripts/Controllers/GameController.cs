@@ -26,6 +26,9 @@ namespace Bee.Controllers
         [SerializeField]
         private GameObject LostPanel;
 
+        [SerializeField]
+        private GameObject PausePanel;
+
         [Header("Controllers")]
         private PunctuationController PunctuationController;
         private EnemiesController EnemiesController;
@@ -52,7 +55,16 @@ namespace Bee.Controllers
 
         void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Escape))
+                TogglePauseGame();
+            
             OnLost();
+        }
+
+        public void TogglePauseGame()
+        {
+            PausePanel.SetActive(!PausePanel.activeSelf);
+            Time.timeScale = PausePanel.activeSelf ? 0 : 1;
         }
 
         public void NextLevel()

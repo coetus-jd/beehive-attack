@@ -34,8 +34,6 @@ namespace Bee.Scenario
             transform.localScale = TreeScale - new Vector2(0.4f, 0.3f) * SizeTransform * AnimCurve.Evaluate(time);
             transform.position = TreePosition - new Vector2(0, 0.05f) * SizeTransform * AnimCurve.Evaluate(time);
 
-            Debug.Log(time);
-
             if(time <= 1)
                 return;
             StartTime = Time.time;
