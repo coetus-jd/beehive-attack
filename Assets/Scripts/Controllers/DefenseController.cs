@@ -56,6 +56,10 @@ namespace Bee.Controllers
             DefenseSpawner = SwarmOfBeesSpawner.GetComponent<SwarmOfBeesSpawner>();
             PunctuationController = GameObject.FindGameObjectWithTag(Tags.PunctuationController)
                 .GetComponent<PunctuationController>();
+        }
+
+        void Start()
+        {
             HiveAnim = GetComponent<Hive>();
         }
 

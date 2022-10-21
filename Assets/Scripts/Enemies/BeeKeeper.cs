@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Bee.Enemies
 {
-    public class NormalPerson : PathFinderAi, IEnemy
+    public class BeeKeeper : PathFinderAi, IEnemy
     {
         public Transform[] GetPaths() => PathChosen;
 

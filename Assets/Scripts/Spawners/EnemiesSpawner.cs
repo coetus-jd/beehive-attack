@@ -11,42 +11,84 @@ namespace Bee.Spawners
     public class EnemiesSpawner : MonoBehaviour, ISpawner
     {
         [SerializeField]
-        private GameObject NormalPerson;
+        private List<GameObject> EnemiesPrefabs;
+
+        // [SerializeField]
+        // private GameObject NormalPerson;
+
+        // [SerializeField]
+        // private GameObject BigPerson;
 
         [SerializeField]
-        private GameObject BigPerson;
+        private GameObject BeeKeeper;
 
-        [SerializeField]
-        private GameObject Beekeeper;
+        private int PastIndex = -1;
 
         public GameObject Spawn(Transform parent = null)
         {
+            var randomEnemy = GetRandomEnemyToSpawn();
+
             return Instantiate(
-                NormalPerson,
+                randomEnemy,
                 position: new Vector3(),
-                rotation: NormalPerson.transform.rotation,
+                rotation: randomEnemy.transform.rotation,
                 parent: parent
             );
         }
 
         public GameObject Spawn(Transform transform, Transform parent = null)
         {
+            var randomEnemy = GetRandomEnemyToSpawn();
+
             return Instantiate(
-                NormalPerson,
+                randomEnemy,
                 position: transform.position,
-                rotation: NormalPerson.transform.rotation,
+                rotation: randomEnemy.transform.rotation,
                 parent: parent
             );
         }
 
         public GameObject Spawn(GameObject target, Transform parent = null)
         {
+            var randomEnemy = GetRandomEnemyToSpawn();
+
             return Instantiate(
-                NormalPerson,
+                GetRandomEnemyToSpawn(),
                 position: new Vector3(),
-                rotation: NormalPerson.transform.rotation,
+                rotation: randomEnemy.transform.rotation,
                 parent: parent
             );
+        }
+
+        public GameObject SpawnBeeKeeper(GameObject target, Transform parent = null)
+        {
+            return Instantiate(
+                BeeKeeper,
+                position: new Vector3(),
+                rotation: BeeKeeper.transform.rotation,
+                parent: parent
+            );
+        }
+
+        private GameObject GetRandomEnemyToSpawn()
+        {
+            return EnemiesPrefabs[GetRandomNumber()];
+        }
+
+        private int GetRandomNumber()
+        {
+            var index = Random.Range(0, EnemiesPrefabs.Count - 1);
+            
+            if (index == PastIndex)
+            {
+                PastIndex = -1;
+                return index == 0
+                    ? EnemiesPrefabs.Count - 1
+                    : index;
+            }
+            
+            PastIndex = index;
+            return index;
         }
     }
 }

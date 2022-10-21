@@ -65,6 +65,7 @@ namespace Bee.Controllers
         [Header("Controllers")]
         [SerializeField]
         private GameController GameController;
+        
         private PunctuationController PunctuationController;
 
         void Awake()

@@ -11,6 +11,9 @@ namespace Bee.Enemies
     [RequireComponent(typeof(EnemyAnim))]
     public abstract class PathFinderAi : MonoBehaviour
     {
+        [Header("Controllers")]
+        protected DefenseController DefenseController;
+
         [Tooltip("All the possibles paths for an enemy follow")]
         [SerializeField]
         protected EnemyPath[] PossiblePaths;
@@ -62,6 +65,12 @@ namespace Bee.Enemies
         /// the enemy starts being attacked
         /// </summary>
         private bool UrgentChangePath = false;
+
+        void Awake()
+        {
+            DefenseController = GameObject.FindGameObjectWithTag(Tags.DefenseController)
+               .GetComponent<DefenseController>();
+        }
 
         void Start()
         {

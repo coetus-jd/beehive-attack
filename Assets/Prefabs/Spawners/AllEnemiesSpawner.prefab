@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ad22bd90dd623d4dad649d57e650289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NormalPerson: {fileID: 4229062412385696051, guid: f4635e5cc46d75f45baf26fda4fbbbac, type: 3}
-  BigPerson: {fileID: 6959785971215783426, guid: 0a63e8156d3885d4d95b238ee849f11c, type: 3}
-  Beekeeper: {fileID: 3996228929965199784, guid: 2809f80791f4678468ad35e6195e594b, type: 3}
+  EnemiesPrefabs:
+  - {fileID: 4229062412385696051, guid: f4635e5cc46d75f45baf26fda4fbbbac, type: 3}
+  - {fileID: 6959785971215783426, guid: 0a63e8156d3885d4d95b238ee849f11c, type: 3}
+  BeeKeeper: {fileID: 3996228929965199784, guid: 2809f80791f4678468ad35e6195e594b, type: 3}

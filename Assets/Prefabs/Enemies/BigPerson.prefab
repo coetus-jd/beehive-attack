@@ -97,6 +97,8 @@ GameObject:
   - component: {fileID: 6959785971215783429}
   - component: {fileID: 6959785971215783481}
   - component: {fileID: 6959785971215783430}
+  - component: {fileID: -8305336020495905759}
+  - component: {fileID: -7239248770898863667}
   m_Layer: 0
   m_Name: BigPerson
   m_TagString: Enemy
@@ -239,3 +241,35 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-8305336020495905759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6959785971215783426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2596605dc087ef34d9f62d6aa7515edc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-7239248770898863667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6959785971215783426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0b20c82baf733a4b940227228a1fcd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PossiblePaths: []
+  FakePaths: []
+  SpeedMove: 0.6
+  RunningMove: 1
+  ChosenWay: 0
+  BeingAttacked: 0
+  CurrentWayIndex: 0
+  IsFakeEnemy: 0
