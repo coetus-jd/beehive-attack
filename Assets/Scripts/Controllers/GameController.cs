@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Bee.Controllers
 {
     public class GameController : MonoBehaviour
-    {   
+    {
         [SerializeField]
         private GameState State;
 
@@ -70,6 +70,7 @@ namespace Bee.Controllers
             if (!HiveController.EnemyAttacked)
                 return;
 
+            CleanGameObjects();
             LostPanel.SetActive(true);
             Time.timeScale = 0;
         }
@@ -83,6 +84,12 @@ namespace Bee.Controllers
 
             LevelUp.GetComponent<Animator>().SetBool("Start", false);
             LevelUp.SetActive(false);
+        }
+
+        private void CleanGameObjects()
+        {
+            foreach (var gameObject in GameObject.FindGameObjectsWithTag(Tags.BeeQueen))
+                Destroy(gameObject);
         }
 
         public static void QuitGame() => Application.Quit();
