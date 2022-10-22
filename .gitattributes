@@ -6,4 +6,4 @@
 *.sln linguist-language=csharpl
 *.md linguist-detectable=true
 *.md linguist-documentation=false
-Assets/TextMesh Pro/* linguist-vendored
+Assets/TextMesh Pro/Shaders* linguist-vendored
