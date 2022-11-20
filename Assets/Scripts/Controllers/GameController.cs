@@ -72,6 +72,7 @@ namespace Bee.Controllers
             SceneLoaderController.ReloadCurrentScene();
         }
 
+        //Function to update the level when the current level is complete and is not ignore.
         public void NextLevel(bool ignoreLevelUp = false)
         {
             if (HiveController.Life <= 0)
@@ -97,6 +98,7 @@ namespace Bee.Controllers
             Time.timeScale = 0;
         }
 
+        //Animation when there is a level up.
         private IEnumerator HandleLevelUp()
         {
             LevelUp.SetActive(true);
