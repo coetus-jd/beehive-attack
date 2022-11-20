@@ -74,8 +74,10 @@ namespace Bee.Controllers
 
         public void NextLevel(bool ignoreLevelUp = false)
         {
+            if (HiveController.Life <= 0)
+                return;
+            
             CurrentLevel++;
-            print($"Level up: {CurrentLevel}");
             LevelText.text = $"Level {CurrentLevel}";
             EnemiesController.OnNextLevel(CurrentLevel);
             DefenseController.OnNextLevel(CurrentLevel);
@@ -115,8 +117,6 @@ namespace Bee.Controllers
         private void HandleLevel()
         {   
             var savedLevel = PlayerPrefs.GetInt(PlayerPrefsKeys.PreviousLevel);
-
-            print($"Save level: {savedLevel}");
 
             if (savedLevel == 0)
             {

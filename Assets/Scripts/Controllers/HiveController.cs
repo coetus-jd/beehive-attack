@@ -11,8 +11,7 @@ namespace Bee.Controllers
     {
         public bool EnemyAttacked { get; private set; }
 
-        [SerializeField]
-        private float Life = 2;
+        public float Life { get; private set; } = 3;
 
         private float InitialLife;
 
@@ -26,7 +25,6 @@ namespace Bee.Controllers
         {
             GameController = GameObject.FindGameObjectWithTag(Tags.GameController)
                 .GetComponent<GameController>();
-
 
             InitialLife = Life;
             LifeUI.GetComponent<LifeUI>().HeartSetUp((int)Life);
@@ -70,11 +68,12 @@ namespace Bee.Controllers
             {
                 StartCoroutine(hurtCooldown(1f));
 
-            IEnumerator hurtCooldown(float t)
-            {
-                yield return new WaitForSeconds(t);
-                EnemyAttacked = true;
-            }
+                IEnumerator hurtCooldown(float t)
+                {
+                    yield return new WaitForSeconds(t);
+                    EnemyAttacked = true;
+                }
+
                 return true;
             }
 

@@ -6,3 +6,5 @@
 *.sln linguist-language=csharpl
 *.md linguist-detectable=true
 *.md linguist-documentation=false
+*.shader linguist-vendored
+*.cginc linguist-vendored

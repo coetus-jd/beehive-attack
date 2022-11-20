@@ -142,10 +142,6 @@ namespace Bee.Controllers
 
         public IEnumerator CreateEnemies()
         {
-            print($"Fake enemies spawned: {FakeEnemiesSpawned}");
-            print($"Normal enemies spawned: {NormalEnemiesSpawned}");
-            print($"BeeKeeper spawned: {BeeKeepersSpawned}");
-
             var spawnFake = Random.Range(0, 2) == 1;
 
             var createdEnemy = EnemiesSpawner.Spawn(PositionToCreate, EnemiesParent.transform);

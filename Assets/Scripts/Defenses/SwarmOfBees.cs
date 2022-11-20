@@ -190,8 +190,6 @@ namespace Bee.Defenses
 
             if (Attacking)
                 return;
-            
-            print("attacking!");
 
             TargetToReach = collider.gameObject;
             Attacking = true;
@@ -201,6 +199,12 @@ namespace Bee.Defenses
         {
             if (Attacking && TargetToReach == null)
                 Destroy(gameObject);
+
+            // if (TargetToReach == null && Vector3.Distance(transform.position, Hive.transform.position) < 0.1f)
+            // {
+            //     PunctuationController.AddSwarm();
+            //     Destroy(gameObject);
+            // }
         }
 
         /// <summary>

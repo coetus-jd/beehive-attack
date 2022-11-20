@@ -50,7 +50,7 @@ namespace Bee.Controllers
         [Header("Controllers")]
         [SerializeField]
         private PunctuationController PunctuationController;
-        
+
         void Start()
         {
             DefenseSpawner = SwarmOfBeesSpawner.GetComponent<SwarmOfBeesSpawner>();
@@ -87,7 +87,7 @@ namespace Bee.Controllers
 
         private void HandleDefense()
         {
-            if (!Input.GetMouseButtonDown(0) || TimeBetweenSpawn < TimeToSpawn)
+            if ((!Input.GetMouseButtonDown(0) && Input.touchCount == 0) || TimeBetweenSpawn < TimeToSpawn)
                 return;
 
             TimeBetweenSpawn = 0;
@@ -109,10 +109,19 @@ namespace Bee.Controllers
             if (SelectedEnemy != null)
                 return;
 
-            Vector3 mousePos = Input.mousePosition;
-            mousePos.z = Camera.main.nearClipPlane;
-            var position = Camera.main.ScreenToWorldPoint(mousePos);
+            var pointerPosition = new Vector3();
 
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+print("desktop");
+            pointerPosition = Input.mousePosition;
+
+#elif UNITY_IOS || UNITY_ANDROID
+print("mobile");
+            pointerPosition = Input.touches[0].position;
+#endif
+
+            pointerPosition.z = Camera.main.nearClipPlane;
+            var position = Camera.main.ScreenToWorldPoint(pointerPosition);
             var createdPin = Instantiate(Pin, PinParent.transform);
 
             createdPin.transform.localPosition = position;
