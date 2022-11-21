@@ -51,7 +51,7 @@ namespace Bee.Controllers
             BeesCounter.text = quantity.ToString().PadLeft(5, '0');
         }
 
-        private int GetCurrentQuantityOfBees()
+        private int GetCurrentQuantityOfBees() //Convert to int
             => int.Parse(BeesCounter.text);
     }
 }
