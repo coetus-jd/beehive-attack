@@ -102,7 +102,8 @@ namespace Bee.Controllers
             CreatePin();
             CreateDefenses();
         }
-
+        
+        // Create a pin to guide the bees to the position
         private void CreatePin()
         {
             // In the case of an enemy already was selected isn't necessary to create the pin
@@ -111,18 +112,18 @@ namespace Bee.Controllers
 
             var pointerPosition = new Vector3();
 
-#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
+#if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR //if it's in the computer
 print("desktop");
             pointerPosition = Input.mousePosition;
 
-#elif UNITY_IOS || UNITY_ANDROID
+#elif UNITY_IOS || UNITY_ANDROID //if it's in the Mobile
 print("mobile");
             pointerPosition = Input.touches[0].position;
 #endif
 
-            pointerPosition.z = Camera.main.nearClipPlane;
-            var position = Camera.main.ScreenToWorldPoint(pointerPosition);
-            var createdPin = Instantiate(Pin, PinParent.transform);
+            pointerPosition.z = Camera.main.nearClipPlane; //Don't really need z position
+            var position = Camera.main.ScreenToWorldPoint(pointerPosition); // get the position on the main camera screen.
+            var createdPin = Instantiate(Pin, PinParent.transform); // Create the pin
 
             createdPin.transform.localPosition = position;
 

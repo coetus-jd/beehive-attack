@@ -267,7 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PossiblePaths: []
   FakePaths: []
-  SpeedMove: 0.4
+  SpeedMove: 0.3
   RunningMove: 1
   ChosenWay: 0
   BeingAttacked: 0

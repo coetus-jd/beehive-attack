@@ -158,17 +158,18 @@ namespace Bee.Enemies
                 CurrentWayIndex += BeingAttacked ? -1 : 1;
         }
 
+        // Loading pré-config paths in the game
         private void LoadAllPossiblePaths()
         {
             // If was already loaded
             if (PossiblePaths.Length > 0)
                 return;
 
-            var allPossiblesPaths = GameObject.FindGameObjectsWithTag(Tags.EnemyPath);
+            var allPossiblesPaths = GameObject.FindGameObjectsWithTag(Tags.EnemyPath); //Find the paths
 
-            PossiblePaths = new EnemyPath[allPossiblesPaths.Length];
+            PossiblePaths = new EnemyPath[allPossiblesPaths.Length]; //Get the paths lenght
 
-            for (int index = 0; index < allPossiblesPaths.Length; index++)
+            for (int index = 0; index < allPossiblesPaths.Length; index++) //Create the array in array.
             {
                 var currentPath = allPossiblesPaths[index];
 
@@ -203,11 +204,12 @@ namespace Bee.Enemies
                 FakePaths[index] = new EnemyPath(allPointsToWalk);
             }
         }
-
+        
+        //Choose the path where the enemy will go.
         private void ChoosePath()
         {
-            var length = IsFakeEnemy ? FakePaths.Length - 1 : PossiblePaths.Length - 1;
-            var chosen = Random.Range(0, length);
+            var length = IsFakeEnemy ? FakePaths.Length - 1 : PossiblePaths.Length - 1; //Define variables to fake and true path.
+            var chosen = Random.Range(0, length); // Choose the path.
 
             ChosenWay = chosen;
             CurrentWayIndex = 0;

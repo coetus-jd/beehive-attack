@@ -140,20 +140,21 @@ namespace Bee.Controllers
             PunctuationController.SetQuantityOfBeesByEnemies(totalOfEnemies);
         }
 
+        //Create random enemy
         public IEnumerator CreateEnemies()
         {
-            var spawnFake = Random.Range(0, 2) == 1;
+            var spawnFake = Random.Range(0, 2) == 1; // Bool that decides if the spawn will be fake or not.
 
-            var createdEnemy = EnemiesSpawner.Spawn(PositionToCreate, EnemiesParent.transform);
+            var createdEnemy = EnemiesSpawner.Spawn(PositionToCreate, EnemiesParent.transform); //Where to create the enemy
 
-            if (spawnFake && FakeEnemiesSpawned < QuantityOfFakeEnemies)
+            if (spawnFake && FakeEnemiesSpawned < QuantityOfFakeEnemies) //Spawn fake enemy
             {
                 var pathFinder = createdEnemy.GetComponent<PathFinderAi>();
                 pathFinder.SetAsFakeEnemy();
 
                 FakeEnemiesSpawned++;
             }
-            else if (NormalEnemiesSpawned < QuantityOfNormalEnemies)
+            else if (NormalEnemiesSpawned < QuantityOfNormalEnemies) //Spawn true enemy (Only normal and big person)
             {
                 EnemiesCreated.Add(createdEnemy);
                 NormalEnemiesSpawned++;
@@ -162,7 +163,7 @@ namespace Bee.Controllers
                 NormalEnemiesSpawned >= QuantityOfNormalEnemies
                 && FakeEnemiesSpawned >= QuantityOfFakeEnemies
                 && BeeKeepersSpawned < QuantityOfBeeKeepers
-            )
+            ) //Spawn BeeKeeper
             {
                 var spawner = EnemiesSpawner as EnemiesSpawner;
                 var createdBeeKeeper = spawner.SpawnBeeKeeper(EnemiesParent.transform);
