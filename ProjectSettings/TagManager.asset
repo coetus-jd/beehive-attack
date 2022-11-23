@@ -19,6 +19,7 @@ TagManager:
   - EnemyFakePath
   - BeeQueen
   - BaseCanvas
+  - Flower
   layers:
   - Default
   - TransparentFX

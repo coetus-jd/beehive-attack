@@ -181,8 +181,26 @@ namespace Bee.Defenses
                 return;
 
             AttackEnemy(collider);
+
+            CollectPollen(collider);
         }
 
+        private void CollectPollen(Collider2D collider)
+        {
+            if (!collider.gameObject.CompareTag(Tags.Flower))
+                return;
+
+            if (Attacking)
+                return;
+            
+            var Particle = collider.gameObject.transform.GetChild(0).gameObject;
+
+            if(!Particle.activeSelf)
+                return;
+
+            TargetToReach = collider.gameObject;
+            Particle.SetActive(false);
+        }
         private void AttackEnemy(Collider2D collider)
         {
             if (!collider.gameObject.CompareTag(Tags.Enemy))
