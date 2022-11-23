@@ -179,21 +179,26 @@ namespace Bee.Defenses
             // an enemy, it still has to reach the hive
             if (IsReturningToHive)
                 return;
-            
-            if(collider.gameObject.CompareTag(Tags.Flower))
-            {
-                CollectPollen(collider);
-                return;
-            }
-
 
             AttackEnemy(collider);
+
+            CollectPollen(collider);
         }
 
         private void CollectPollen(Collider2D collider)
         {
-            TargetToReach = collider.gameObject;
+            if (!collider.gameObject.CompareTag(Tags.Flower))
+                return;
+
+            if (Attacking)
+                return;
+            
             var Particle = collider.gameObject.transform.GetChild(0).gameObject;
+
+            if(!Particle.activeSelf)
+                return;
+
+            TargetToReach = collider.gameObject;
             Particle.SetActive(false);
         }
         private void AttackEnemy(Collider2D collider)
