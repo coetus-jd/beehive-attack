@@ -62,6 +62,7 @@ public class Menu : MonoBehaviour
     {
         startPanel.SetActive(true);
         PressAnyKeyPanel.SetActive(false);
+        optionsPanel.SetActive(false);
         PressKeyActive = false;
     }
 
