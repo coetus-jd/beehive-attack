@@ -25,6 +25,10 @@ namespace Bee.Enemies
         [SerializeField]
         protected float SpeedMove;
 
+        [Tooltip("Enemy damage to the hive")]
+        [SerializeField]
+        protected float AttackDamage;
+
         [Tooltip("Enemy Run")]
         [SerializeField]
         protected float RunningMove;
