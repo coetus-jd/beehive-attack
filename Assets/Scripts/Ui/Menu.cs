@@ -4,29 +4,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class Menu : MonoBehaviour
 {
-    //English Itens
-    public string cena;
+    //items
+    public string cena;    
+    //English Itens    
     public GameObject optionsPanel;
     public GameObject startPanel;
     public GameObject PressAnyKeyPanel;
     public GameObject CreditsPanel;
+    public GameObject LanguagePanel;
     public bool PressKeyActive;
-    //Portuguese Itens
-    public string cena;
-    public GameObject optionsPanelPortuguese;
-    public GameObject startPanelPortuguese;
-    public GameObject PressAnyKeyPanelPortuguese;
-    public GameObject CreditsPanelPortuguese;
-    public bool PressKeyActivePortuguese;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        PressKeyActive = true;
-        
+        PressKeyActive = true;             
     }
 
     // Update is called once per frame
@@ -35,8 +31,10 @@ public class Menu : MonoBehaviour
         if (PressKeyActive && Input.anyKeyDown)
         {
             GoToMenu();
-         }        
+        }        
     }
+
+    
 
     public void StartGame()
     {
@@ -55,7 +53,7 @@ public class Menu : MonoBehaviour
     public void ShowOptions()
     {
         optionsPanel.SetActive(true);
-        startPanel.SetActive(false);
+        startPanel.SetActive(false);       
     }
     
     public void BackToMenu()
@@ -79,9 +77,14 @@ public class Menu : MonoBehaviour
         CreditsPanel.SetActive(true);
         startPanel.SetActive(false);
     }
-
-    public void SetFullscreen(bool isFullScreen)
+    public void GoToLanguage()
     {
-        Screen.fullScreen = isFullScreen;
+        optionsPanel.SetActive(false);
+        LanguagePanel.SetActive(true);
+    } 
+    public void BackToOptions()
+    {
+        optionsPanel.SetActive(true);
+        LanguagePanel.SetActive(false);
     }
 }
