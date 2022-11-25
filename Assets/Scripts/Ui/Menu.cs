@@ -15,7 +15,7 @@ public class Menu : MonoBehaviour
     public GameObject CreditsPanel;
     public bool PressKeyActive;
     //Portuguese Itens
-    public string cena;
+    //public string cena;
     public GameObject optionsPanelPortuguese;
     public GameObject startPanelPortuguese;
     public GameObject PressAnyKeyPanelPortuguese;
