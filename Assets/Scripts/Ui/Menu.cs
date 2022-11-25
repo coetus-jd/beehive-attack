@@ -7,18 +7,26 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-
+    //English Itens
     public string cena;
     public GameObject optionsPanel;
     public GameObject startPanel;
     public GameObject PressAnyKeyPanel;
     public GameObject CreditsPanel;
     public bool PressKeyActive;
+    //Portuguese Itens
+    public string cena;
+    public GameObject optionsPanelPortuguese;
+    public GameObject startPanelPortuguese;
+    public GameObject PressAnyKeyPanelPortuguese;
+    public GameObject CreditsPanelPortuguese;
+    public bool PressKeyActivePortuguese;
 
     // Start is called before the first frame update
     void Start()
     {
         PressKeyActive = true;
+        
     }
 
     // Update is called once per frame
