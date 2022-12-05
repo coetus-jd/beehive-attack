@@ -4,12 +4,15 @@ using Bee.Enums;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using Bee.Scenario;
 
 namespace Bee.Defenses
 {
     public class SwarmOfBees : MonoBehaviour, IDefense
     {
         public bool Attacking { get; private set; }
+
+        private bool IsCollecting;
 
         public string TargetTag
         {
@@ -126,6 +129,12 @@ namespace Bee.Defenses
             {
                 Destroy(gameObject);
 
+                if(IsCollecting)
+                {
+                    PunctuationController.AddSwarm();
+                    IsCollecting = false;
+                }
+
                 // If we came back to the hive we will add again the amount
                 // that wasn't used
                 PunctuationController.AddSwarm();
@@ -180,9 +189,10 @@ namespace Bee.Defenses
             if (IsReturningToHive)
                 return;
 
+            CollectPollen(collider);
+
             AttackEnemy(collider);
 
-            CollectPollen(collider);
         }
 
         private void CollectPollen(Collider2D collider)
@@ -192,14 +202,18 @@ namespace Bee.Defenses
 
             if (Attacking)
                 return;
-            
-            var Particle = collider.gameObject.transform.GetChild(0).gameObject;
 
-            if(!Particle.activeSelf)
+            var FlowerScript = collider.gameObject.GetComponent<Flowers>();
+
+            var Collect = FlowerScript.Collect;
+
+            if(Collect)
                 return;
 
+            IsCollecting = true;
+
             TargetToReach = collider.gameObject;
-            Particle.SetActive(false);
+
         }
         private void AttackEnemy(Collider2D collider)
         {
@@ -215,7 +229,7 @@ namespace Bee.Defenses
 
         private void ReachedEnemy()
         {
-            if (Attacking && TargetToReach == null)
+            if (Attacking && TargetToReach == null && !IsCollecting)
                 Destroy(gameObject);
 
             // if (TargetToReach == null && Vector3.Distance(transform.position, Hive.transform.position) < 0.1f)

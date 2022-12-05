@@ -26,10 +26,13 @@ namespace Bee.Ui
             }
         }
 
-        public void HeartControl(int life)
+        public void HeartControl(int damage, int life)
         {
-            var Heart = LifeHeart[life].GetComponent<Animator>();
-            Heart.SetBool("Damage", true);
+            for (int i = 0; i <= damage; i++)
+            {
+                var Heart = LifeHeart[life + i].GetComponent<Animator>();
+                Heart.SetBool("Damage", true);
+            }
         }
     }
 }

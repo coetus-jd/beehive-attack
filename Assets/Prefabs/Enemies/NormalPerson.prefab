@@ -172,7 +172,7 @@ MonoBehaviour:
   PossiblePaths: []
   FakePaths: []
   SpeedMove: 0.5
-  AttackDamage: 0
+  AttackDamage: 1
   RunningMove: 1
   ChosenWay: 0
   BeingAttacked: 0

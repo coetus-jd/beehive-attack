@@ -4,6 +4,7 @@ using Bee.Controllers;
 using Bee.Enums;
 using UnityEngine;
 using Bee.Ui;
+using Bee.Enemies;
 
 namespace Bee.Controllers
 {
@@ -21,6 +22,8 @@ namespace Bee.Controllers
         [SerializeField]
         private GameObject LifeUI;
 
+        private PathFinderAi EnemiesDamage;
+
         void Start()
         {
             GameController = GameObject.FindGameObjectWithTag(Tags.GameController)
@@ -28,6 +31,7 @@ namespace Bee.Controllers
 
             InitialLife = Life;
             LifeUI.GetComponent<LifeUI>().HeartSetUp((int)Life);
+
         }
 
         public void OnNextLevel(int newLevel)
@@ -59,12 +63,18 @@ namespace Bee.Controllers
             if (!collider.gameObject.CompareTag(Tags.Enemy))
                 return false;
 
+            EnemiesDamage = collider.GetComponent<Bee.Enemies.PathFinderAi>();
+
+            var EnemyDamage = EnemiesDamage.AttackDamage;
+
             Destroy(collider.gameObject);
 
-            Life--;
-            LifeUI.GetComponent<LifeUI>().HeartControl((int)Life);
 
-            if (Life == 0)
+            Debug.Log(EnemyDamage);
+            Life -= EnemyDamage;
+            LifeUI.GetComponent<LifeUI>().HeartControl((int)EnemyDamage,(int)Life);
+
+            if (Life <= 0)
             {
                 StartCoroutine(hurtCooldown(1f));
 
