@@ -16,6 +16,8 @@ namespace Bee.Controllers
         [SerializeField]
         private int CurrentLevel;
 
+        public bool PauseControl = false;
+
         [Header("UI")]
         [SerializeField]
         private TMP_Text LevelText;
@@ -28,6 +30,9 @@ namespace Bee.Controllers
 
         [SerializeField]
         private GameObject PausePanel;
+
+        [SerializeField]
+        private GameObject PauseButton;
 
         [Header("Controllers")]
         private PunctuationController PunctuationController;
@@ -62,6 +67,9 @@ namespace Bee.Controllers
 
         public void TogglePauseGame()
         {
+            DefenseController.StopAction();
+            PauseControl = !PauseControl;
+            PauseButton.SetActive(!PauseButton.activeSelf);
             PausePanel.SetActive(!PausePanel.activeSelf);
             Time.timeScale = PausePanel.activeSelf ? 0 : 1;
         }

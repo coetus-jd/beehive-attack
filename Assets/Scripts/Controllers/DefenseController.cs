@@ -23,6 +23,8 @@ namespace Bee.Controllers
         [SerializeField]
         private GameObject BeeQueen;
 
+        private bool Pause = false;
+
         [Header("Spawner")]
         [SerializeField]
         private GameObject SwarmOfBeesSpawner;
@@ -85,9 +87,17 @@ namespace Bee.Controllers
             TimeToSpawn = TimeToSpawn - (TimeToSpawn * 0.04f);
         }
 
+        public void StopAction()
+        {
+            Pause = !Pause;
+        }
+
         private void HandleDefense()
         {
             if ((!Input.GetMouseButtonDown(0) && Input.touchCount == 0) || TimeBetweenSpawn < TimeToSpawn)
+                return;
+            
+            if(Pause)
                 return;
 
             TimeBetweenSpawn = 0;

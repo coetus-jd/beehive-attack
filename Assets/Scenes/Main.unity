@@ -7007,6 +7007,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 300226791}
     m_Modifications:
+    - target: {fileID: 2010776183220324262, guid: 66105e16f621d90498a760fa109f3cd5, type: 3}
+      propertyPath: ReturnTime
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6346249002374319621, guid: 66105e16f621d90498a760fa109f3cd5, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -7861,6 +7865,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 300226791}
     m_Modifications:
+    - target: {fileID: 2010776183220324262, guid: 66105e16f621d90498a760fa109f3cd5, type: 3}
+      propertyPath: ReturnTime
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6346249002374319621, guid: 66105e16f621d90498a760fa109f3cd5, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -11987,6 +11995,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 300226791}
     m_Modifications:
+    - target: {fileID: 2010776183220324262, guid: 66105e16f621d90498a760fa109f3cd5, type: 3}
+      propertyPath: ReturnTime
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6346249002374319621, guid: 66105e16f621d90498a760fa109f3cd5, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -18017,10 +18029,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   State: 0
   CurrentLevel: 1
+  PauseControl: 0
   LevelText: {fileID: 828889587}
   LevelUp: {fileID: 379749710}
   LostPanel: {fileID: 1108768450}
   PausePanel: {fileID: 1443680463}
+  PauseButton: {fileID: 2112131557}
 --- !u!1 &2096986035
 GameObject:
   m_ObjectHideFlags: 0
@@ -18265,11 +18279,11 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 3
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -18289,7 +18303,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2112131560}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2095372605}
+        m_TargetAssemblyTypeName: Bee.Controllers.GameController, Assembly-CSharp
+        m_MethodName: TogglePauseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2112131560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18562,6 +18588,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 300226791}
     m_Modifications:
+    - target: {fileID: 2010776183220324262, guid: 66105e16f621d90498a760fa109f3cd5, type: 3}
+      propertyPath: ReturnTime
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6346249002374319621, guid: 66105e16f621d90498a760fa109f3cd5, type: 3}
       propertyPath: m_RootOrder
       value: 0

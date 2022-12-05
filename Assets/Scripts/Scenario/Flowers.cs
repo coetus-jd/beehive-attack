@@ -18,7 +18,7 @@ namespace Bee.Scenario
         [Header("Timer")]
 
         [SerializeField]
-        private float ReturnTime = 5f;
+        private float ReturnTime = 20f;
 
         [SerializeField]
         private float StartAnimation = 2f;
@@ -28,6 +28,10 @@ namespace Bee.Scenario
         private void Start()
         {
             FlowersAnim = GetComponentsInChildren<Animator>();
+            for (int i = 0; i < FlowersAnim.Length; i++)
+            {
+                FlowersAnim[i].SetBool("pollen", true);
+            }
             for (int i = 0; i < PetalsEffect.Length; i++)
             {
                 PetalsEffect[i].SetActive(false);
