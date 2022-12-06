@@ -70,6 +70,18 @@ MonoBehaviour:
     m_Localized: Voltar
     m_Metadata:
       m_Items: []
+  - m_Id: 3962435405905920
+    m_Localized: Perdeu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3962663278247936
+    m_Localized: Sair
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3962863971500032
+    m_Localized: Jogar Novamente
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -70,6 +70,18 @@ MonoBehaviour:
     m_Localized: "Back\t"
     m_Metadata:
       m_Items: []
+  - m_Id: 3962435405905920
+    m_Localized: Game Over
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3962663278247936
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3962863971500032
+    m_Localized: Play Again
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
