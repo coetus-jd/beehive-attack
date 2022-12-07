@@ -60,9 +60,16 @@ namespace Bee.Controllers
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
-                TogglePauseGame();
-            
+                StopGame();
+
             OnLost();
+        }
+
+        void StopGame(){
+            Debug.Log("Aqui");
+
+                Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+
         }
 
         public void TogglePauseGame()
