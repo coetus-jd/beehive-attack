@@ -28,9 +28,27 @@ namespace Bee.Ui
 
         public void HeartControl(int damage, int life)
         {
-            for (int i = 0; i <= damage; i++)
+            print($"Dano {damage}");
+
+            if (life <= 0)
             {
-                var Heart = LifeHeart[life + i].GetComponent<Animator>();
+                foreach (var heart in LifeHeart)
+                {
+                    var animator = heart.GetComponent<Animator>();
+
+                    var hasDamage = animator.GetBool("damage");
+
+                    if (hasDamage) continue;
+
+                    animator.SetBool("Damage", true);
+                }
+
+                return;
+            }
+
+            for (int index = 0; index < damage; index++)
+            {
+                var Heart = LifeHeart[life + index].GetComponent<Animator>();
                 Heart.SetBool("Damage", true);
             }
         }

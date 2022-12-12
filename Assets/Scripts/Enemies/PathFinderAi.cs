@@ -33,6 +33,8 @@ namespace Bee.Enemies
         [SerializeField]
         protected float RunningMove;
 
+        protected bool Blinking;
+
         protected Transform[] PathChosen
         {
             get
@@ -112,7 +114,7 @@ namespace Bee.Enemies
             if (defense.Attacking && defense.TargetToReach.GetInstanceID() == gameObject.GetInstanceID())
             {
                 Life--;
-                BeingAttacked = Life == 0;
+                BeingAttacked = Life <= 0;
 
                 // If the enemy have more life then more defenses will be needed
                 // so we clean the current defense in order to not accumulate
@@ -139,6 +141,11 @@ namespace Bee.Enemies
                 EnemyAnim?.RunningAnim(Dir);
             }
 
+            var halfWay = PathChosen.Length / 2;
+
+            if (!IsFakeEnemy && CurrentWayIndex >= halfWay && !Blinking)
+                StartCoroutine(BlinkSprite());
+
             // Verify if it doesn't arrive in the final index    
             if (hasReached && CurrentWayIndex >= PathChosen.Length - 1)
                 Destroy(gameObject);
@@ -162,7 +169,9 @@ namespace Bee.Enemies
                 CurrentWayIndex += BeingAttacked ? -1 : 1;
         }
 
-        // Loading pré-config paths in the game
+        /// <summary>
+        /// Loading pré-config paths in the game
+        /// </summary>
         private void LoadAllPossiblePaths()
         {
             // If was already loaded
@@ -208,8 +217,10 @@ namespace Bee.Enemies
                 FakePaths[index] = new EnemyPath(allPointsToWalk);
             }
         }
-        
-        //Choose the path where the enemy will go.
+
+        /// <summary>
+        /// Choose the path where the enemy will go
+        /// </summary>
         private void ChoosePath()
         {
             var length = IsFakeEnemy ? FakePaths.Length - 1 : PossiblePaths.Length - 1; //Define variables to fake and true path.
@@ -228,6 +239,31 @@ namespace Bee.Enemies
                 return;
 
             transform.position = PossiblePaths[ChosenWay].PointsToWalk[CurrentWayIndex].transform.position;
+        }
+
+        private IEnumerator BlinkSprite()
+        {
+            Blinking = true;
+
+            var spriteRenderer = GetComponent<SpriteRenderer>();
+
+            var defaultColor = spriteRenderer.color;
+
+            for (int index = 0; index < 10; index++)
+            {
+                spriteRenderer.color = new Color(
+                    defaultColor.r,
+                    defaultColor.g,
+                    defaultColor.b,
+                    index % 2 == 0 ? 1 : 0.5f
+                );
+
+                yield return new WaitForSeconds(0.3f);
+            }
+
+            spriteRenderer.color = defaultColor;
+
+            // Blinking = false;
         }
     }
 }
