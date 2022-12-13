@@ -5,6 +5,7 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 using Bee.Scenario;
+using Bee.Enemies;
 
 namespace Bee.Defenses
 {
@@ -81,10 +82,13 @@ namespace Bee.Defenses
 
         public void Attack()
         {
-            ReachedEnemy();
-
             if (TargetToReach == null)
+            {
+                Destroy(gameObject);
                 return;
+            }
+
+            ReachedEnemy();
 
             Move();
         }
@@ -129,7 +133,7 @@ namespace Bee.Defenses
             {
                 Destroy(gameObject);
 
-                if(IsCollecting)
+                if (IsCollecting)
                 {
                     PunctuationController.AddSwarm();
                     IsCollecting = false;
@@ -207,7 +211,7 @@ namespace Bee.Defenses
 
             var Collect = FlowerScript.Collect;
 
-            if(Collect)
+            if (Collect)
                 return;
 
             IsCollecting = true;
@@ -221,6 +225,11 @@ namespace Bee.Defenses
                 return;
 
             if (Attacking)
+                return;
+
+            var alreadyBeingAttacked = collider.gameObject.GetComponent<PathFinderAi>().IsBeingAttacked;
+
+            if (alreadyBeingAttacked)
                 return;
 
             TargetToReach = collider.gameObject;
@@ -245,7 +254,7 @@ namespace Bee.Defenses
         /// <returns></returns>
         private IEnumerator ReturnToHive()
         {
-            TargetToReach = null;
+            // TargetToReach = null;
             MovementTime = 0f;
 
             yield return new WaitForSeconds(SecondsToReturnToHive);

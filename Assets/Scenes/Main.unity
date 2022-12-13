@@ -14351,6 +14351,7 @@ MonoBehaviour:
   AutomaticDefense: 0
   AttackedEnemiesIds: 
   AttackButton: {fileID: 815597084}
+  AttackButtonIcon: {fileID: 1526700933}
   QueenPowerSlider: {fileID: 1515999088}
   DefensesParent: {fileID: 344355265}
   SelectedEnemy: {fileID: 0}
@@ -18829,7 +18830,7 @@ MonoBehaviour:
   State: 0
   CurrentLevel: 1
   PauseControl: 0
-  QueenPower: 0
+  QueenPower: 99
   LevelText: {fileID: 828889587}
   LevelUp: {fileID: 379749710}
   LostPanel: {fileID: 1108768450}

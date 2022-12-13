@@ -47,12 +47,15 @@ namespace Bee.Controllers
         [SerializeField]
         private bool AutomaticDefense = false;
 
-       
+
         [SerializeField]
         private List<int> AttackedEnemiesIds = new List<int>();
 
         [SerializeField]
         private Button AttackButton;
+
+        [SerializeField]
+        private Image AttackButtonIcon;
 
         [SerializeField]
         private Slider QueenPowerSlider;
@@ -214,15 +217,15 @@ namespace Bee.Controllers
         public void EnableAttackButton()
         {
             AttackButton.interactable = true;
-            var defaultColor = AttackButton.GetComponent<Image>().color;
-            AttackButton.GetComponentInChildren<Image>().color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, 1);
+            var defaultColor = AttackButtonIcon.color;
+            AttackButtonIcon.color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, 1);
         }
 
         public void DisableAttackButton()
         {
             AttackButton.interactable = false;
-            var defaultColor = AttackButton.GetComponent<Image>().color;
-            AttackButton.GetComponentInChildren<Image>().color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, 0.5f);
+            var defaultColor = AttackButtonIcon.color;
+            AttackButtonIcon.color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, 0.5f);
         }
     }
 }
