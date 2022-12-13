@@ -13,6 +13,7 @@ namespace Bee.Enemies
     {
         [Header("Controllers")]
         protected DefenseController DefenseController;
+        protected GameController GameController;
 
         [Tooltip("All the possibles paths for an enemy follow")]
         [SerializeField]
@@ -39,7 +40,7 @@ namespace Bee.Enemies
         {
             get
             {
-                if (IsFakeEnemy)
+                if (FakeEnemy)
                     return FakePaths[ChosenWay].PointsToWalk;
 
                 return PossiblePaths[ChosenWay].PointsToWalk;
@@ -51,7 +52,10 @@ namespace Bee.Enemies
         private int ChosenWay = 0;
 
         [SerializeField]
-        protected bool BeingAttacked;
+        private bool BeingAttacked;
+
+        [SerializeField]
+        public bool IsBeingAttacked { get { return BeingAttacked; } }
 
         /// <summary>
         /// Index for the waypoint for Enemy walk
@@ -60,7 +64,10 @@ namespace Bee.Enemies
         private int CurrentWayIndex = 0;
 
         [SerializeField]
-        private bool IsFakeEnemy;
+        public bool FakeEnemy;
+
+        [SerializeField]
+        public bool IsFakeEnemy { get { return FakeEnemy; } }
 
         private Vector2 Dir;
 
@@ -79,6 +86,8 @@ namespace Bee.Enemies
         {
             DefenseController = GameObject.FindGameObjectWithTag(Tags.DefenseController)
                .GetComponent<DefenseController>();
+            GameController = GameObject.FindGameObjectWithTag(Tags.GameController)
+               .GetComponent<GameController>();
             EnemyAnim = GetComponent<EnemyAnim>();
 
             LoadAllPossiblePaths();
@@ -96,7 +105,7 @@ namespace Bee.Enemies
 
         public void SetAsFakeEnemy()
         {
-            IsFakeEnemy = true;
+            FakeEnemy = true;
             CurrentWayIndex = 0;
             LoadFakePaths();
             ChoosePath();
@@ -129,6 +138,7 @@ namespace Bee.Enemies
 
             if (CurrentWayIndex == 0 && BeingAttacked && hasReached)
             {
+                if (!IsFakeEnemy) GameController.AddQueenPower(1);
                 Destroy(gameObject);
                 return;
             }
@@ -143,7 +153,7 @@ namespace Bee.Enemies
 
             var halfWay = PathChosen.Length / 2;
 
-            if (!IsFakeEnemy && CurrentWayIndex >= halfWay && !Blinking)
+            if (!FakeEnemy && CurrentWayIndex >= halfWay && !Blinking)
                 StartCoroutine(BlinkSprite());
 
             // Verify if it doesn't arrive in the final index    
@@ -223,13 +233,13 @@ namespace Bee.Enemies
         /// </summary>
         private void ChoosePath()
         {
-            var length = IsFakeEnemy ? FakePaths.Length - 1 : PossiblePaths.Length - 1; //Define variables to fake and true path.
+            var length = FakeEnemy ? FakePaths.Length - 1 : PossiblePaths.Length - 1; //Define variables to fake and true path.
             var chosen = Random.Range(0, length); // Choose the path.
 
             ChosenWay = chosen;
             CurrentWayIndex = 0;
 
-            if (IsFakeEnemy && FakePaths.Length > 0)
+            if (FakeEnemy && FakePaths.Length > 0)
             {
                 transform.position = FakePaths[ChosenWay].PointsToWalk[CurrentWayIndex].transform.position;
                 return;

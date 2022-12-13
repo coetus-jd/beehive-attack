@@ -5,6 +5,9 @@ using Bee.Scenario;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using Bee.Enemies;
+using UnityEngine.UI;
 
 namespace Bee.Controllers
 {
@@ -40,6 +43,20 @@ namespace Bee.Controllers
         /// </summary>
         private ISpawner DefenseSpawner;
 
+        [Header("Automatic attack control")]
+        [SerializeField]
+        private bool AutomaticDefense = false;
+
+       
+        [SerializeField]
+        private List<int> AttackedEnemiesIds = new List<int>();
+
+        [SerializeField]
+        private Button AttackButton;
+
+        [SerializeField]
+        private Slider QueenPowerSlider;
+
         [SerializeField]
         private GameObject DefensesParent;
 
@@ -53,11 +70,21 @@ namespace Bee.Controllers
         [SerializeField]
         private PunctuationController PunctuationController;
 
+        [SerializeField]
+        private EnemiesController EnemiesController;
+
+        [SerializeField]
+        private GameController GameController;
+
         void Start()
         {
             DefenseSpawner = SwarmOfBeesSpawner.GetComponent<SwarmOfBeesSpawner>();
             PunctuationController = GameObject.FindGameObjectWithTag(Tags.PunctuationController)
                 .GetComponent<PunctuationController>();
+            EnemiesController = GameObject.FindGameObjectWithTag(Tags.EnemiesController)
+                .GetComponent<EnemiesController>();
+            GameController = GameObject.FindGameObjectWithTag(Tags.GameController)
+                .GetComponent<GameController>();
 
             HiveAnim = GetComponent<Hive>();
         }
@@ -65,6 +92,12 @@ namespace Bee.Controllers
         void Update()
         {
             TimeBetweenSpawn += Time.deltaTime;
+
+            if (AutomaticDefense)
+            {
+                AutomaticCreateDefenses();
+                return;
+            }
 
             HandleDefense();
         }
@@ -96,8 +129,8 @@ namespace Bee.Controllers
         {
             if ((!Input.GetMouseButtonDown(0) && Input.touchCount == 0) || TimeBetweenSpawn < TimeToSpawn)
                 return;
-            
-            if(Pause)
+
+            if (Pause)
                 return;
 
             TimeBetweenSpawn = 0;
@@ -112,7 +145,7 @@ namespace Bee.Controllers
             CreatePin();
             CreateDefenses();
         }
-        
+
         // Create a pin to guide the bees to the position
         private void CreatePin()
         {
@@ -123,11 +156,11 @@ namespace Bee.Controllers
             var pointerPosition = new Vector3();
 
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR //if it's in the computer
-print("desktop");
+
             pointerPosition = Input.mousePosition;
 
 #elif UNITY_IOS || UNITY_ANDROID //if it's in the Mobile
-print("mobile");
+
             pointerPosition = Input.touches[0].position;
 #endif
 
@@ -151,6 +184,45 @@ print("mobile");
             DefenseSpawner.Spawn(SelectedEnemy, DefensesParent.transform);
 
             SelectedEnemy = null;
+        }
+
+        private void AutomaticCreateDefenses()
+        {
+            var allEnemies = GameObject.FindGameObjectsWithTag(Tags.Enemy).ToList();
+
+            for (int index = 0; index < allEnemies.Count; index++)
+            {
+                var enemy = allEnemies[index].GetComponent<PathFinderAi>();
+
+                if (enemy.IsFakeEnemy || enemy.IsBeingAttacked || AttackedEnemiesIds.Contains(enemy.GetInstanceID()))
+                    continue;
+
+                DefenseSpawner.Spawn(allEnemies[index], DefensesParent.transform);
+                AttackedEnemiesIds.Add(enemy.GetInstanceID());
+            }
+
+            AutomaticDefense = false;
+        }
+
+        public void AttackByButton()
+        {
+            GameController.ResetQueenPower();
+            AutomaticDefense = true;
+            DisableAttackButton();
+        }
+
+        public void EnableAttackButton()
+        {
+            AttackButton.interactable = true;
+            var defaultColor = AttackButton.GetComponent<Image>().color;
+            AttackButton.GetComponentInChildren<Image>().color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, 1);
+        }
+
+        public void DisableAttackButton()
+        {
+            AttackButton.interactable = false;
+            var defaultColor = AttackButton.GetComponent<Image>().color;
+            AttackButton.GetComponentInChildren<Image>().color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, 0.5f);
         }
     }
 }

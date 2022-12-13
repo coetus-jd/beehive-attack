@@ -20,6 +20,7 @@ TagManager:
   - BeeQueen
   - BaseCanvas
   - Flower
+  - Enemies
   layers:
   - Default
   - TransparentFX

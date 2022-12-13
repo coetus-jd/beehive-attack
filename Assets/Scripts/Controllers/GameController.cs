@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Bee.Controllers
 {
@@ -17,6 +18,9 @@ namespace Bee.Controllers
         private int CurrentLevel;
 
         public bool PauseControl = false;
+
+        [SerializeField]
+        private float QueenPower = 0;
 
         [Header("UI")]
         [SerializeField]
@@ -33,6 +37,9 @@ namespace Bee.Controllers
 
         [SerializeField]
         private GameObject PauseButton;
+
+        [SerializeField]
+        private Slider QueenPowerSlider;
 
         [Header("Controllers")]
         private PunctuationController PunctuationController;
@@ -65,12 +72,7 @@ namespace Bee.Controllers
             OnLost();
         }
 
-        void StopGame(){
-            Debug.Log("Aqui");
-
-                Time.timeScale = Time.timeScale == 0 ? 1 : 0;
-
-        }
+        void StopGame() => Time.timeScale = Time.timeScale == 0 ? 1 : 0;
 
         public void TogglePauseGame()
         {
@@ -92,7 +94,7 @@ namespace Bee.Controllers
         {
             if (HiveController.Life <= 0)
                 return;
-            
+
             CurrentLevel++;
             LevelText.text = $"Level {CurrentLevel}";
             EnemiesController.OnNextLevel(CurrentLevel);
@@ -100,7 +102,28 @@ namespace Bee.Controllers
             HiveController.OnNextLevel(CurrentLevel);
 
             if (!ignoreLevelUp)
-                StartCoroutine(HandleLevelUp());    
+                StartCoroutine(HandleLevelUp());
+
+            AddQueenPower(20);
+        }
+
+        public void AddQueenPower(float quantity)
+        {
+            if (QueenPower >= 100)
+                return;
+
+            QueenPower += quantity;
+
+            QueenPowerSlider.value = QueenPower;
+
+            if (QueenPower >= 100)
+                DefenseController.EnableAttackButton();
+        }
+
+        public void ResetQueenPower()
+        {
+            QueenPower = 0;
+            QueenPowerSlider.value = 0;
         }
 
         public void OnLost()
@@ -132,7 +155,7 @@ namespace Bee.Controllers
         }
 
         private void HandleLevel()
-        {   
+        {
             var savedLevel = PlayerPrefs.GetInt(PlayerPrefsKeys.PreviousLevel);
 
             if (savedLevel == 0)
