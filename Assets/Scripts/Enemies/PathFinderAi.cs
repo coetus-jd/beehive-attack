@@ -120,7 +120,10 @@ namespace Bee.Enemies
 
             // If already is attacking something and accidentally collides with another
             // enemy then we should guarantee that we attacking the same enemy by his ID
-            if (defense.Attacking && defense.TargetToReach.GetInstanceID() == gameObject.GetInstanceID())
+            if (defense.TargetToReach.GetInstanceID() != gameObject.GetInstanceID())
+                return;
+                            
+            if (defense.Attacking)
             {
                 Life--;
                 BeingAttacked = Life <= 0;

@@ -14346,6 +14346,7 @@ MonoBehaviour:
   PinParent: {fileID: 522932997}
   Pin: {fileID: 6181466786408066652, guid: 9867a58d3b5f5924dbebb0773e56ab65, type: 3}
   BeeQueen: {fileID: 7991638749180879978, guid: df66218acc998c146a0ff0505ba63caa, type: 3}
+  Raycaster: {fileID: 1823059137}
   SwarmOfBeesSpawner: {fileID: 3602309750125965033, guid: f81dc5e0f7e12e940974acc35ce11004, type: 3}
   TimeToSpawn: 2
   AutomaticDefense: 0

@@ -196,7 +196,6 @@ namespace Bee.Defenses
             CollectPollen(collider);
 
             AttackEnemy(collider);
-
         }
 
         private void CollectPollen(Collider2D collider)
@@ -204,7 +203,7 @@ namespace Bee.Defenses
             if (!collider.gameObject.CompareTag(Tags.Flower))
                 return;
 
-            if (Attacking)
+            if (Attacking || TargetTag == Tags.Enemy)
                 return;
 
             var FlowerScript = collider.gameObject.GetComponent<Flowers>();
@@ -217,8 +216,8 @@ namespace Bee.Defenses
             IsCollecting = true;
 
             TargetToReach = collider.gameObject;
-
         }
+        
         private void AttackEnemy(Collider2D collider)
         {
             if (!collider.gameObject.CompareTag(Tags.Enemy))
@@ -226,6 +225,12 @@ namespace Bee.Defenses
 
             if (Attacking)
                 return;
+            
+            if (TargetTag == Tags.Enemy)
+            {
+                Attacking = true;
+                return;
+            }
 
             var alreadyBeingAttacked = collider.gameObject.GetComponent<PathFinderAi>().IsBeingAttacked;
 

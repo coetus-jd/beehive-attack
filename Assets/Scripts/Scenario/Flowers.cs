@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Bee.Enums;
+using Bee.Defenses;
 
 namespace Bee.Scenario
 {
@@ -14,7 +15,7 @@ namespace Bee.Scenario
         [Header("Animation")]
         private Animator[] FlowersAnim;
 
-        
+
         [Header("Timer")]
 
         [SerializeField]
@@ -41,19 +42,23 @@ namespace Bee.Scenario
 
         private void Update()
         {
-            
+
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if(!other.gameObject.CompareTag(Tags.Defense))
+            if (!other.gameObject.CompareTag(Tags.Defense))
                 return;
+
+            var swarmOfBess = other.GetComponent<SwarmOfBees>();
             
-            if(other.GetComponent<Bee.Defenses.SwarmOfBees>().Attacking)
+            // If is already attacking or going to attack an enemy, we have to let
+            // the swarm pass
+            if (swarmOfBess.Attacking || swarmOfBess.TargetTag == Tags.Enemy)
                 return;
-                
-            if(!Collect)
-            StartCoroutine(ReturnPollen());
+
+            if (!Collect)
+                StartCoroutine(ReturnPollen());
         }
 
         public IEnumerator ReturnPollen()
@@ -69,7 +74,7 @@ namespace Bee.Scenario
             {
                 PetalsEffect[i].SetActive(true);
             }
-            
+
             yield return new WaitForSeconds(ReturnTime);
 
             for (int i = 0; i < FlowersAnim.Length; i++)

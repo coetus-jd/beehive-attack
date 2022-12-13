@@ -28,8 +28,6 @@ namespace Bee.Ui
 
         public void HeartControl(int damage, int life)
         {
-            print($"Dano {damage}");
-
             if (life <= 0)
             {
                 foreach (var heart in LifeHeart)

@@ -8,6 +8,7 @@ using UnityEngine;
 using System.Linq;
 using Bee.Enemies;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace Bee.Controllers
 {
@@ -25,6 +26,9 @@ namespace Bee.Controllers
 
         [SerializeField]
         private GameObject BeeQueen;
+
+        [SerializeField]
+        private GraphicRaycaster Raycaster;
 
         private bool Pause = false;
 
@@ -136,6 +140,9 @@ namespace Bee.Controllers
             if (Pause)
                 return;
 
+            if (HasClickedOnCanvasElement())
+                return;
+
             TimeBetweenSpawn = 0;
 
             if (PunctuationController.CurrentQuantityOfBees <= 0)
@@ -226,6 +233,22 @@ namespace Bee.Controllers
             AttackButton.interactable = false;
             var defaultColor = AttackButtonIcon.color;
             AttackButtonIcon.color = new Color(defaultColor.r, defaultColor.g, defaultColor.b, 0.5f);
+        }
+
+        private bool HasClickedOnCanvasElement()
+        {
+            PointerEventData pointerData = new PointerEventData(EventSystem.current);
+            List<RaycastResult> results = new List<RaycastResult>();
+
+            pointerData.position = Input.mousePosition;
+            Raycaster.Raycast(pointerData, results);
+
+            return results.Count > 0;
+
+            // foreach (RaycastResult result in results)
+            // {
+            //     Debug.Log("Hit " + result.gameObject.name);
+            // }
         }
     }
 }
