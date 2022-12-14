@@ -174,5 +174,7 @@ namespace Bee.Controllers
         }
 
         public static void QuitGame() => Application.Quit();
+
+        public int GetCurrentLevel() => CurrentLevel;
     }
 }

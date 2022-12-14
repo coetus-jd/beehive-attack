@@ -188,6 +188,14 @@ namespace Bee.Controllers
             if (SelectedEnemy == null)
                 return;
 
+            var enemy = SelectedEnemy.GetComponent<PathFinderAi>();
+
+            if (enemy != null && enemy.IsBeingAttacked)
+            {   
+                SelectedEnemy = null;
+                return;
+            }
+
             if (SelectedEnemy.tag == Tags.Enemy)
                 Instantiate(BeeQueen, parent: Canvas.transform);
 

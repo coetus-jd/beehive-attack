@@ -122,7 +122,7 @@ namespace Bee.Enemies
             // enemy then we should guarantee that we attacking the same enemy by his ID
             if (defense.TargetToReach.GetInstanceID() != gameObject.GetInstanceID())
                 return;
-                            
+
             if (defense.Attacking)
             {
                 Life--;
@@ -141,7 +141,10 @@ namespace Bee.Enemies
 
             if (CurrentWayIndex == 0 && BeingAttacked && hasReached)
             {
-                if (!IsFakeEnemy) GameController.AddQueenPower(1);
+                if (!IsFakeEnemy)
+                {
+                    GameController.AddQueenPower(AttackDamage);
+                }
                 Destroy(gameObject);
                 return;
             }
@@ -182,7 +185,7 @@ namespace Bee.Enemies
                 CurrentWayIndex += BeingAttacked ? -1 : 1;
         }
 
-        /// <summary>
+    /// <summary>
         /// Loading pré-config paths in the game
         /// </summary>
         private void LoadAllPossiblePaths()
